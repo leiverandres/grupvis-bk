@@ -8,23 +8,28 @@ Analisis de los grupos de investigación identificados por colciencias
  * pip
  * Virtualenv
 
-## Clone the repo and enter to the folder
+## Start with the project
+* Create a virtual enviroment
 
-## Download the data and put it in a folder named 'datasets'
-
-## then create a virtual enviroment
-
-'''bash
+```bash
 virtualenv  -p /usr/bin/python3 env/
-'''
+```
 
-## Install the modules
-'''bash
+* Install the modules
+```bash
 pip install -r top-requirements.txt
-'''
+```
 
-## Run jupyter notebook
+## Jupyter notebooks
 
-'''
+* Download the data and save it in `datasets/` folder
+
+* Run jupyter notebook
+
+```bash
 jupyter notebook
-'''
+```
+
+## Run scrapy
+
+* `TODO`
