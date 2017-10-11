@@ -102,3 +102,6 @@ ENV/
 
 # custom
 datasets/
+*.csv
+*.xlsx
+scienti/groups_pages/
