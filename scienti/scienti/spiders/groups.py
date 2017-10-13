@@ -13,26 +13,36 @@ class GroupsUTPSpider(scrapy.Spider):
         """
         query = "table#grupos > tbody > tr[id^='grupos_row']"
         for group in response.css(query):
-            yield {
-                'id': group.css('td::text')[0].extract(),
-                'name': group.css('td > a::text').extract_first(),
-                'leader': group.css('td > a::text')[1].extract(),
-                'category': group.css('td::text')[2].extract(),
-                'clasifiedIn': group.css('td::text')[-1].extract(),
-                'groupLink': group.css('td > a::attr(href)').extract_first()
+            groupData = {
+                'Código del grupo': group.css('td::text')[0].extract(),
+                'Nombre del grupo': group.css('td > a::text').extract_first(),
+                'Líder': group.css('td > a::text')[1].extract(),
+                # 'category': group.css('td::text')[2].extract(), // is in basic info
+                'Clasificado en': group.css('td::text')[-1].extract()
             }
-            groupLink = group.css('td > a::attr(href)').extract_first()
-            for groupLink in group.css('td > a'):
-                yield response.follow(
-                    groupLink, callback=self.parse_single_group)
+            groupLink = group.css(
+                'td > a[href*="visualiza/visualizagr"]::attr(href)'
+            ).extract_first()
+            yield response.follow(
+                groupLink,
+                callback=self.parse_single_group,
+                meta={'groupData': groupData})
 
     def parse_single_group(self, response):
         """ Extract detailed groups information, including research products
         """
-        from urllib.parse import urlparse
-        parsedURL = urlparse(response.url)
-        group = parsedURL.query.split('=')[-1]
-        filename = 'groups_pages/group-%s.html' % group
-        with open(filename, 'wb') as f:
-            f.write(response.body)
-        self.log('Saved file %s' % filename)
+        # tablesNames = response.css('table td.celdaEncabezado::text').extract()
+        basicData = response.css("table")[0]
+        # merging data with the data got in parser
+        data = {'url': response.url}
+        data.update(response.meta['groupData'])
+        for row in basicData.css('tr')[1:]:
+            field = row.css('td.celdasTitulo::text').extract_first()
+            link = row.css('td.celdas2 > a')
+            value = ''
+            if link:
+                value = link.css('::text').extract_first()
+            else:
+                value = row.css('td.celdas2::text').extract_first()
+            data[field] = value.strip()
+        yield data
