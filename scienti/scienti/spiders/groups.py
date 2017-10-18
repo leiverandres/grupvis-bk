@@ -56,7 +56,7 @@ class GroupsUTPSpider(scrapy.Spider):
                 value = link.css('::text').extract_first()
             else:
                 value = row.css('td.celdas2::text').extract_first()
-            data[field] = value.strip()
+            data[field] = value.strip() if value else ''
 
         avoid_header_query = 'tr > td:not([class="celdaEncabezado"])::text'
         instituciones_node = tablesSelector[1]
