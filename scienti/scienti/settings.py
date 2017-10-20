@@ -14,7 +14,6 @@ BOT_NAME = 'scienti'
 SPIDER_MODULES = ['scienti.spiders']
 NEWSPIDER_MODULE = 'scienti.spiders'
 
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'scienti (+http://www.yourdomain.com)'
 
@@ -27,7 +26,8 @@ ROBOTSTXT_OBEY = True
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = .25
+RANDOMIZE_DOWNLOAD_DELAY = True
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -64,9 +64,13 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'scienti.pipelines.ScientiPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'scienti.pipelines.MongoPipeline': 300,
+}
+
+# Mongodb constants
+MONGO_URI = 'mongodb://localhost:27017'
+MONGO_DATABASE = 'scienti-test'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
