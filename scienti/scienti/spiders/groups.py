@@ -35,10 +35,19 @@ class GroupsUTPSpider(scrapy.Spider):
             groupLink = group.css(
                 'td > a[href*="visualiza/visualizagr"]::attr(href)'
             ).extract_first()
+
             yield response.follow(
                 groupLink,
                 callback=self.parse_single_group,
                 meta={'groupData': groupData})
+
+    def extract_with_css(self, initial_selector, query, extract_first=False):
+        if extract_first:
+            return initial_selector.css(query).extract_first().strip()
+        else:
+            return list(
+                map(lambda item: item.strip(),
+                    initial_selector.css(query).extract()))
 
     def parse_single_group(self, response):
         """ Extract detailed groups information, including research products
@@ -60,8 +69,8 @@ class GroupsUTPSpider(scrapy.Spider):
 
         avoid_header_query = 'tr > td:not([class="celdaEncabezado"])::text'
         instituciones_node = tablesSelector[1]
-        data['Instituciones'] = clean_list(
-            instituciones_node.css(avoid_header_query).extract())
+        data['Instituciones'] = '; '.join(
+            clean_list(instituciones_node.css(avoid_header_query).extract()))
         plan = tablesSelector[2]
         data['Plan Estratégico'] = ''.join(
             clean_list(plan.css(avoid_header_query).extract()))
@@ -76,23 +85,46 @@ class GroupsUTPSpider(scrapy.Spider):
         for member_row in members.css('tr')[2:]:
             cur_member = {
                 'Nombre':
-                member_row.css(
-                    ':first_child > a::text').extract_first().strip(),
+                self.extract_with_css(member_row, ':first_child > a::text',
+                                      True),
                 'Link del perfil':
-                member_row.css(
-                    ':first_child > a::attr(href)').extract_first().strip(),
+                self.extract_with_css(member_row,
+                                      ':first_child > a::attr(href)', True),
                 'Vinculación':
-                member_row.css(
-                    'td:nth-of-type(2)::text').extract_first().strip(),
+                self.extract_with_css(member_row, 'td:nth-of-type(2)::text',
+                                      True),
                 'Horas dedicación':
-                member_row.css(
-                    'td:nth-of_type(3)::text').extract_first().strip(),
+                self.extract_with_css(member_row, 'td:nth-of_type(3)::text',
+                                      True),
                 'Inicio - Fin Vinculación':
-                member_row.css('td:nth-of_type(4)::text').extract_first()
-                .strip()
+                self.extract_with_css(member_row, 'td:nth-of_type(4)::text',
+                                      True)
             }
-            data['Integrantes del grupo'].append(cur_member)
+        data['Integrantes del grupo'].append(cur_member)
+        data['Productos'] = self.extract_products(tablesSelector[6:])
         yield data
 
-    def extract_products(tablesList):
-        pass
+    def extract_products(self, tablesList):
+        products = {}
+        for table in tablesList:
+            valid_rows_query = './tr[td[@class != "celdaEncabezado"]]'
+            rows = table.xpath(valid_rows_query)
+            table_title = self.extract_with_css(
+                table, 'tr > td.celdaEncabezado::text', True)
+            # table_title = table.css(
+            #     'tr > td.celdaEncabezado::text').extract_first()
+            products[table_title] = []
+            if rows:
+                for row in rows:
+                    row_data = {}
+                    approved_img = row.xpath(
+                        './td[starts-with(@class, "celdas_")]/img')
+                    row_data['Avalado'] = True if approved_img else False
+                    row_data['Tipo'] = row.xpath(
+                        './td[starts-with(@class, "celdas1")]/strong/text()'
+                    ).extract_first()
+                    info = row.xpath(
+                        './td[starts-with(@class, "celdas1")]/text()').extract(
+                        )[1:]
+                    row_data['Descripción'] = ' '.join(info[1:])
+        return products
