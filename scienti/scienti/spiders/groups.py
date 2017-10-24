@@ -6,6 +6,27 @@ SECTIONS = [
     'ACTIVIDADES DE FORMACIÓN', 'ACTIVIDADES COMO EVALUADOR'
 ]
 
+FIELDS_MAP = {
+    'Año y mes de formación':
+    'foundationDate',
+    'Líder':
+    'leader',
+    '¿La información de este grupo se ha certificado? ':
+    'certified',
+    'Página web':
+    'website',
+    'E-mail':
+    'email',
+    'Clasificación':
+    'clasification',
+    'Área de conocimiento':
+    'knowledgeArea',
+    'Programa nacional de ciencia y tecnología':
+    'nationalProgramOfScienceAndTechnology',
+    'Programa nacional de ciencia y tecnología (secundario)':
+    'secondaryNationalProgramOfScienceAndTechnology'
+}
+
 
 def clean_list(dirty_list):
     ''' Remove spacing characters from every list item
@@ -27,10 +48,10 @@ class GroupsUTPSpider(scrapy.Spider):
         query = "table#grupos > tbody > tr[id^='grupos_row']"
         for group in response.css(query):
             groupData = {
-                'Código del grupo': group.css('td::text')[0].extract(),
-                'Nombre del grupo': group.css('td > a::text').extract_first(),
-                'Líder': group.css('td > a::text')[1].extract(),
-                'Clasificado en': group.css('td::text')[-1].extract()
+                'code': group.css('td::text')[0].extract(),
+                'name': group.css('td > a::text').extract_first(),
+                'leader': group.css('td > a::text')[1].extract(),
+                'classificationDate': group.css('td::text')[-1].extract()
             }
             groupLink = group.css(
                 'td > a[href*="visualiza/visualizagr"]::attr(href)'
@@ -46,14 +67,14 @@ class GroupsUTPSpider(scrapy.Spider):
             return initial_selector.css(query).extract_first().strip()
         else:
             return list(
-                map(lambda item: item.strip(),
+                map(lambda item: item.split('-')[1].strip(),
                     initial_selector.css(query).extract()))
 
     def parse_single_group(self, response):
         """ Extract detailed groups information, including research products
         """
-        data = {'url': response.url}
-        # merging data with the data got in parser
+        data = {'grouplacURL': response.url}
+        # merging data with the data one got in parser
         data.update(response.meta['groupData'])
         tablesSelector = response.css("table")
         basicData = tablesSelector[0]
@@ -65,23 +86,31 @@ class GroupsUTPSpider(scrapy.Spider):
                 value = link.css('::text').extract_first()
             else:
                 value = row.css('td.celdas2::text').extract_first()
-            data[field] = value.strip() if value else ''
+            ## Custom cases
+            if field == "Departamento - Ciudad":
+                departament, city = map(lambda x: x.strip(), value.split('-'))
+                data['departament'] = departament
+                data['city'] = city
+            else:
+                json_name = FIELDS_MAP[field]
+                data[json_name] = value.strip() if value else ''
 
         avoid_header_query = 'tr > td:not([class="celdaEncabezado"])::text'
         instituciones_node = tablesSelector[1]
-        data['Instituciones'] = '; '.join(
-            clean_list(instituciones_node.css(avoid_header_query).extract()))
+        data['Instituciones'] = 
+            extract_with_css(instituciones_node, avoid_header_query)
         plan = tablesSelector[2]
         data['Plan Estratégico'] = ''.join(
             clean_list(plan.css(avoid_header_query).extract()))
         lines = tablesSelector[3]
-        data['Líneas de investigación declaradas por el grupo'] = clean_list(
-            lines.css(avoid_header_query).extract())
+        data[
+            'Líneas de investigación declaradas por el grupo'] = extract_with_css(
+                lines, avoid_header_query)
         sectores = tablesSelector[4]
         data['Sectores de aplicación'] = clean_list(
             sectores.css(avoid_header_query).extract())
         members = tablesSelector[5]
-        data['Integrantes del grupo'] = []
+        data['members'] = []
         for member_row in members.css('tr')[2:]:
             cur_member = {
                 'Nombre':
@@ -100,8 +129,8 @@ class GroupsUTPSpider(scrapy.Spider):
                 self.extract_with_css(member_row, 'td:nth-of_type(4)::text',
                                       True)
             }
-        data['Integrantes del grupo'].append(cur_member)
-        data['Productos'] = self.extract_products(tablesSelector[6:])
+        data['members'].append(cur_member)
+        data['products'] = self.extract_products(tablesSelector[6:])
         yield data
 
     def extract_products(self, tablesList):
@@ -111,10 +140,8 @@ class GroupsUTPSpider(scrapy.Spider):
             rows = table.xpath(valid_rows_query)
             table_title = self.extract_with_css(
                 table, 'tr > td.celdaEncabezado::text', True)
-            # table_title = table.css(
-            #     'tr > td.celdaEncabezado::text').extract_first()
-            products[table_title] = []
             if rows:
+                products[table_title] = []
                 for row in rows:
                     row_data = {}
                     approved_img = row.xpath(
@@ -123,8 +150,11 @@ class GroupsUTPSpider(scrapy.Spider):
                     row_data['Tipo'] = row.xpath(
                         './td[starts-with(@class, "celdas1")]/strong/text()'
                     ).extract_first()
-                    info = row.xpath(
-                        './td[starts-with(@class, "celdas1")]/text()').extract(
-                        )[1:]
-                    row_data['Descripción'] = ' '.join(info[1:])
+                    info = list(
+                        map(lambda item: item.strip(),
+                            row.xpath(
+                                './td[starts-with(@class, "celdas1")]/text()')
+                            .extract()[1:]))
+                    row_data['Descripción'] = ' '.join(info)
+                    products[table_title].append(row_data)
         return products
