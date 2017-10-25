@@ -1,0 +1,31 @@
+{
+  "name": "colciencias_viz",
+  "version": "1.0.0",
+  "description": "Colciencias UTP research groups visualization app",
+  "repository": "http://sirius.utp.edu.co/gitlab/colciencias-vice/grupvis.git",
+  "author": "Leiver Campeón <leiverandres04p@gmail.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start-dev": "nodemon index.js",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,json,css,html}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "apollo-server-express": "^1.2.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "graphql": "^0.11.7",
+    "graphql-server-express": "^1.2.0",
+    "graphql-tools": "^2.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
