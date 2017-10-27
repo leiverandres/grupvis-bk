@@ -158,3 +158,10 @@ class GroupsUTPSpider(scrapy.Spider):
                     row_data['Descripción'] = ' '.join(info)
                     products[table_title].append(row_data)
         return products
+
+'''
+
+p = re.compile(r'^\d+\.- (?P<type>[\wáéíóúñ ]+):(?P<name>[\wáéíóúñ ]+)\n([\w]+),')
+m = p.search(st)
+m.group('type')
+'''
