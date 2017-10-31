@@ -1,15 +1,17 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const { graphqlExpress, graphiqlExpress } = require("apollo-server-express");
+const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const express = require('express');
 
-const { schema } = require("./src/schema");
+const { schema } = require('./src/schema');
 
-const PORT = 3000;
+const PORT = 4000;
+const app = express();
 
-var app = express();
+app.use(cors());
 
 app.use(
-  "/graphql",
+  '/graphql',
   bodyParser.json(),
   graphqlExpress({
     schema
@@ -17,9 +19,9 @@ app.use(
 );
 
 app.use(
-  "/graphiql",
+  '/graphiql',
   graphiqlExpress({
-    endpointURL: "/graphql"
+    endpointURL: '/graphql'
   })
 );
 
