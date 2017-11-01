@@ -72,7 +72,9 @@ class GroupsUTPSpider(scrapy.Spider):
             yield response.follow(
                 groupLink,
                 callback=self.parse_single_group,
-                meta={'groupData': groupData})
+                meta={
+                    'groupData': groupData
+                })
 
     def extract_with_css(self, initial_selector, query, extract_first=False):
         if extract_first:
@@ -85,6 +87,7 @@ class GroupsUTPSpider(scrapy.Spider):
     def parse_single_group(self, response):
         """ Extract detailed groups information, including research products
         """
+
         data = {'grouplacURL': response.url}
         # merging data with the data one got in parser
         data.update(response.meta['groupData'])
@@ -109,14 +112,14 @@ class GroupsUTPSpider(scrapy.Spider):
 
         avoid_header_query = 'tr > td:not([class="celdaEncabezado"])::text'
         instituciones_node = tablesSelector[1]
-        data['Instituciones'] = 
-            extract_with_css(instituciones_node, avoid_header_query)
+        data['Instituciones'] = self.extract_with_css(instituciones_node,
+                                                      avoid_header_query)
         plan = tablesSelector[2]
         data['Plan Estratégico'] = ''.join(
             clean_list(plan.css(avoid_header_query).extract()))
         lines = tablesSelector[3]
         data[
-            'Líneas de investigación declaradas por el grupo'] = extract_with_css(
+            'Líneas de investigación declaradas por el grupo'] = self.extract_with_css(
                 lines, avoid_header_query)
         sectores = tablesSelector[4]
         data['Sectores de aplicación'] = clean_list(
@@ -170,6 +173,7 @@ class GroupsUTPSpider(scrapy.Spider):
                     row_data['Descripción'] = ' '.join(info)
                     products[table_title].append(row_data)
         return products
+
 
 '''
 
