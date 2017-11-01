@@ -40,6 +40,7 @@ MISSING_GROUPS = [
     'http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000017426'
 ]
 
+
 def clean_list(dirty_list):
     ''' Remove spacing characters from every list item
     '''
@@ -72,9 +73,14 @@ class GroupsUTPSpider(scrapy.Spider):
             yield response.follow(
                 groupLink,
                 callback=self.parse_single_group,
-                meta={
-                    'groupData': groupData
-                })
+                meta={'groupData': groupData})
+
+        for group in MISSING_GROUPS:
+            groupData = {'code': group['code']}
+            yield response.follow(
+                group['link'],
+                callback=self.parse_single_group,
+                meta={'groupData': groupData})
 
     def extract_with_css(self, initial_selector, query, extract_first=False):
         if extract_first:
