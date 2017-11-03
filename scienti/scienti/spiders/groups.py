@@ -33,18 +33,14 @@ class GroupsUTPSpider(scrapy.Spider):
             yield response.follow(
                 groupLink,
                 callback=self.parse_single_group,
-                meta={
-                    'groupData': groupData
-                })
+                meta={'groupData': groupData})
 
         for group in MISSING_GROUPS:
             groupData = {'code': group['code']}
             yield response.follow(
                 group['link'],
                 callback=self.parse_single_group,
-                meta={
-                    'groupData': groupData
-                })
+                meta={'groupData': groupData})
 
     def extract_with_css(self, initial_selector, query, extract_first=False):
         if extract_first:
@@ -83,57 +79,63 @@ class GroupsUTPSpider(scrapy.Spider):
 
         avoid_header_query = 'tr > td:not([class="celdaEncabezado"])::text'
         instituciones_node = tablesSelector[1]
-        data['Instituciones'] = ';'.join(
-            self.extract_with_css(instituciones_node, avoid_header_query))
+        data['institutions'] = self.extract_with_css(instituciones_node,
+                                                     avoid_header_query)
         plan = tablesSelector[2]
-        data['Plan Estratégico'] = ''.join(
+        data['strategicPlan'] = ''.join(
             clean_list(plan.css(avoid_header_query).extract()))
         lines = tablesSelector[3]
-        data[
-            'Líneas de investigación declaradas por el grupo'] = self.extract_with_css(
-                lines, avoid_header_query)
+        data['researchLines'] = self.extract_with_css(lines,
+                                                      avoid_header_query)
         sectores = tablesSelector[4]
-        data['Sectores de aplicación'] = clean_list(
+        data['applicationFields'] = clean_list(
             sectores.css(avoid_header_query).extract())
-        members = tablesSelector[5]
-        data['members'] = []
-        for member_row in members.css('tr')[2:]:
-            cur_member = {
-                'Nombre':
-                self.extract_with_css(member_row, ':first_child > a::text',
-                                      True),
-                'Link del perfil':
-                self.extract_with_css(member_row,
-                                      ':first_child > a::attr(href)', True),
-                'Vinculación':
-                self.extract_with_css(member_row, 'td:nth-of-type(2)::text',
-                                      True),
-                'Horas dedicación':
-                self.extract_with_css(member_row, 'td:nth-of_type(3)::text',
-                                      True),
-                'Inicio - Fin Vinculación':
-                self.extract_with_css(member_row, 'td:nth-of_type(4)::text',
-                                      True)
-            }
-            data['members'].append(cur_member)
+        members_selector = tablesSelector[5].css('tr')[2:]
+        data['members'] = self.extract_members(members_selector)
         data['products'] = self.extract_products(tablesSelector[6:])
         yield data
 
+    def extract_members(self, member_list):
+        members = []
+        for member_row in member_list:
+            date = self.extract_with_css(member_row, 'td:nth-of_type(4)::text',
+                                         True)
+            cur_member_data = {
+                'name':
+                self.extract_with_css(member_row, ':first_child > a::text',
+                                      True),
+                'profileURL':
+                self.extract_with_css(member_row,
+                                      ':first_child > a::attr(href)', True),
+                'rol':
+                self.extract_with_css(member_row, 'td:nth-of-type(2)::text',
+                                      True),
+                'dedicatedHours':
+                self.extract_with_css(member_row, 'td:nth-of_type(3)::text',
+                                      True),
+                'startingDate':
+                date.split('-')[0].strip(),
+                'endingDate':
+                date.split('-')[1].strip()
+            }
+            members.append(cur_member_data)
+        return members
+
     def extract_products(self, tablesList):
-        products = {}
+        products = []
         for table in tablesList:
             valid_rows_query = './tr[td[@class != "celdaEncabezado"]]'
             rows = table.xpath(valid_rows_query)
             table_title = self.extract_with_css(
                 table, 'tr > td.celdaEncabezado::text', True)
             if rows:
-                products[table_title] = []
                 for row in rows:
                     row_data = {}
+                    row_data['category'] = table_title
                     approved_img = row.xpath(
                         './td[starts-with(@class, "celdas_")]/img')
-                    row_data['Avalado'] = True if approved_img else False
-                    row_data['Tipo'] = row.xpath(
+                    row_data['isApproved'] = True if approved_img else False
+                    row_data['type'] = row.xpath(
                         './td[starts-with(@class, "celdas1")]/strong/text()'
                     ).extract_first()
                     info = list(
@@ -141,8 +143,8 @@ class GroupsUTPSpider(scrapy.Spider):
                             row.xpath(
                                 './td[starts-with(@class, "celdas1")]/text()')
                             .extract()[1:]))
-                    row_data['Descripción'] = ' '.join(info)
-                    products[table_title].append(row_data)
+                    row_data['description'] = ' '.join(info)
+                    products.append(row_data)
         return products
 
 
