@@ -80,26 +80,25 @@ class GroupsUTPSpider(scrapy.Spider):
                 json_name = FIELDS_MAP[field]
                 data[json_name] = value.strip() if value else ''
 
+        # SELECTORS
         avoid_header_query = 'tr > td:not([class="celdaEncabezado"])::text'
         instituciones_node = tables_selector[1]
+        plan_node = tables_selector[2]
+        lines_node = tables_selector[3]
+        sectores_node = tables_selector[4]
+        members_node = tables_selector[5].css('tr')[2:]
+        product_nodes = tables_selector[6:]
+        # EXTRACTION
         data['institutions'] = self.extract_with_css(
             instituciones_node, avoid_header_query, split_dash=True)
-
-        plan_node = tables_selector[2]
         data['strategicPlan'] = ''.join(
             self.extract_with_css(plan_node, avoid_header_query))
-
-        lines_node = tables_selector[3]
         data['researchLines'] = self.extract_with_css(
             lines_node, avoid_header_query, split_dash=True)
-
-        sectores_node = tables_selector[4]
         data['applicationFields'] = self.extract_with_css(
             sectores_node, avoid_header_query, split_dash=True)
-
-        members_node = tables_selector[5].css('tr')[2:]
         data['members'] = self.extract_members(members_node)
-        data['products'] = self.extract_products(tablesSelector[6:])
+        data['products'] = self.extract_products(product_nodes)
         yield data
 
     def extract_members(self, member_list):
