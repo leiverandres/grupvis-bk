@@ -1,18 +1,26 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient } = require("mongodb");
+const mongoURI = "mongodb://localhost/scienti-test";
 
 const resolvers = {
   Query: {
     groups: async () => {
       try {
-        const DB = await MongoClient.connect(
-          'mongodb://localhost/scienti-test'
-        );
-        const Groups = DB.collection('groups');
+        const DB = await MongoClient.connect(mongoURI);
+        const Groups = DB.collection("groups");
         const groups = await Groups.find({}).toArray();
-        console.log('groups', groups);
         return groups;
       } catch (err) {
-        console.error('Some error: ', err);
+        console.error("Some error: ", err);
+      }
+    },
+    group: async (root, args) => {
+      try {
+        const DB = await MongoClient.connect(mongoURI);
+        const Groups = DB.collection("groups");
+        const group = await Groups.findOne({ code: args.code });
+        return group;
+      } catch (err) {
+        console.error("Some error: ", err);
       }
     }
   }

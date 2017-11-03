@@ -6,7 +6,7 @@ type Member {
   name: String,
   profileURL: String,
   rol: String,
-  dedicatedHours: Int
+  dedicatedHours: String,
   startingDate: String,
   endingDate: String
 }
@@ -45,6 +45,7 @@ type Group {
 
 type Query {
   groups: [Group]
+  group(code: String!): Group
 }
 `;
 
