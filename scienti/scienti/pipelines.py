@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import pymongo
 import logging
+from datetime import datetime
 
 
 class MongoPipeline(object):
@@ -37,6 +38,7 @@ class MongoPipeline(object):
         Handle each item, inserting it in the DB or updating if
         already exist
         '''
+        item['updatedAt'] = datetime.now()
         self.db[self.collection_name].update(
             {
                 'code': item['code']
