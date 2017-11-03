@@ -10,7 +10,7 @@ FIELDS_MAP = {
     'Líder':
     'leader',
     '¿La información de este grupo se ha certificado? ':
-    'certified',
+    'certificationDate',
     'Página web':
     'website',
     'E-mail':
