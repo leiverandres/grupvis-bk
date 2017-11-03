@@ -12,23 +12,34 @@ class MongoPipeline(object):
 
     @classmethod
     def from_crawler(cls, crawler):
-        ## pull in information from settings.py
+        '''
+        pull in information from settings.py
+        '''
         return cls(
             mongo_uri=crawler.settings.get('MONGO_URI'),
             mongo_db=crawler.settings.get('MONGO_DATABASE'))
 
     def open_spider(self, spider):
-        ## initializing spider
-        ## opening db connection
+        '''
+        Open the db connection after the spider started
+        '''
         self.client = pymongo.MongoClient(self.mongo_uri)
         self.db = self.client[self.mongo_db]
 
     def close_spider(self, spider):
-        ## clean up when spider is closed
+        '''
+        Close the DB connection
+        '''
         self.client.close()
 
     def process_item(self, item, spider):
-        ## how to handle each post
-        self.db[self.collection_name].insert(dict(item))
+        ''' 
+        Handle each item, inserting it in the DB or updating if
+        already exist
+        '''
+        self.db[self.collection_name].update(
+            {
+                'code': item['code']
+            }, dict(item), upsert=True)
         logging.debug("{} : Group added to DB".format(item['code']))
         return item
