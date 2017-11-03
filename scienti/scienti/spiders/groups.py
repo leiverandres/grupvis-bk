@@ -2,13 +2,6 @@ import scrapy
 from .constants import FIELDS_MAP, MISSING_GROUPS, SECTIONS
 
 
-def clean_list(dirty_list):
-    ''' Remove spacing characters from every list item
-    '''
-    new_list = list(map(lambda x: x.strip(), dirty_list))
-    return new_list
-
-
 class GroupsUTPSpider(scrapy.Spider):
     name = "utp_research_groups"
     # storing-the-scraped-data
@@ -42,25 +35,35 @@ class GroupsUTPSpider(scrapy.Spider):
                 callback=self.parse_single_group,
                 meta={'groupData': groupData})
 
-    def extract_with_css(self, initial_selector, query, extract_first=False):
+    def extract_with_css(self,
+                         initial_selector,
+                         query,
+                         extract_first=False,
+                         split_dash=False):
         if extract_first:
             return initial_selector.css(query).extract_first().strip()
         else:
-            return list(
-                map(lambda item: item.split('-')[1].strip(),
-                    initial_selector.css(query).extract()))
+            if split_dash:
+                return list(
+                    map(lambda item: item.split('-')[1].strip(),
+                        initial_selector.css(query).extract()))
+            else:
+                return list(
+                    map(lambda item: item.strip(),
+                        initial_selector.css(query).extract()))
 
     def parse_single_group(self, response):
         """ Extract detailed groups information, including research products
         """
-        groupName = response.xpath(
+        group_name = response.xpath(
             '//span[@class="celdaEncabezado"]/text()').extract_first()
-        data = {'grouplacURL': response.url, 'name': groupName}
-        # merging data with the data one got in parser
+        data = {'grouplacURL': response.url, 'name': group_name}
+
+        # merging data with the data got in parser
         data.update(response.meta['groupData'])
-        tablesSelector = response.css("table")
-        basicData = tablesSelector[0]
-        for row in basicData.css('tr')[1:]:
+        tables_selector = response.css("table")
+        basic_data = tables_selector[0]
+        for row in basic_data.css('tr')[1:]:
             field = row.css('td.celdasTitulo::text').extract_first()
             link = row.css('td.celdas2 > a')
             value = ''
@@ -78,20 +81,24 @@ class GroupsUTPSpider(scrapy.Spider):
                 data[json_name] = value.strip() if value else ''
 
         avoid_header_query = 'tr > td:not([class="celdaEncabezado"])::text'
-        instituciones_node = tablesSelector[1]
-        data['institutions'] = self.extract_with_css(instituciones_node,
-                                                     avoid_header_query)
-        plan = tablesSelector[2]
+        instituciones_node = tables_selector[1]
+        data['institutions'] = self.extract_with_css(
+            instituciones_node, avoid_header_query, split_dash=True)
+
+        plan_node = tables_selector[2]
         data['strategicPlan'] = ''.join(
-            clean_list(plan.css(avoid_header_query).extract()))
-        lines = tablesSelector[3]
-        data['researchLines'] = self.extract_with_css(lines,
-                                                      avoid_header_query)
-        sectores = tablesSelector[4]
-        data['applicationFields'] = clean_list(
-            sectores.css(avoid_header_query).extract())
-        members_selector = tablesSelector[5].css('tr')[2:]
-        data['members'] = self.extract_members(members_selector)
+            self.extract_with_css(plan_node, avoid_header_query))
+
+        lines_node = tables_selector[3]
+        data['researchLines'] = self.extract_with_css(
+            lines_node, avoid_header_query, split_dash=True)
+
+        sectores_node = tables_selector[4]
+        data['applicationFields'] = self.extract_with_css(
+            sectores_node, avoid_header_query, split_dash=True)
+
+        members_node = tables_selector[5].css('tr')[2:]
+        data['members'] = self.extract_members(members_node)
         data['products'] = self.extract_products(tablesSelector[6:])
         yield data
 
