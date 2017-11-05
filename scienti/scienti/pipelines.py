@@ -30,6 +30,5 @@ class MongoPipeline(object):
     def process_item(self, item, spider):
         ## how to handle each post
         self.db[self.collection_name].insert(dict(item))
-        logging.debug(
-            "{} : Group added to DB".format(item['Código del grupo']))
+        logging.debug("{} : Group added to DB".format(item['code']))
         return item

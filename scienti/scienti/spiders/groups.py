@@ -1,44 +1,5 @@
 import scrapy
-
-SECTIONS = [
-    'PRODUCCIÓN BIBLIOGRÁFICA', 'PRODUCCIÓN TÉCNICA Y TECNOLÓGICA',
-    'APROPIACIÓN SOCIAL Y CIRCULACIÓN DEL CONOCIMIENTO',
-    'ACTIVIDADES DE FORMACIÓN', 'ACTIVIDADES COMO EVALUADOR'
-]
-
-FIELDS_MAP = {
-    'Año y mes de formación':
-    'foundationDate',
-    'Líder':
-    'leader',
-    '¿La información de este grupo se ha certificado? ':
-    'certified',
-    'Página web':
-    'website',
-    'E-mail':
-    'email',
-    'Clasificación':
-    'clasification',
-    'Área de conocimiento':
-    'knowledgeArea',
-    'Programa nacional de ciencia y tecnología':
-    'nationalProgramOfScienceAndTechnology',
-    'Programa nacional de ciencia y tecnología (secundario)':
-    'secondaryNationalProgramOfScienceAndTechnology'
-}
-
-MISSING_GROUPS = [
-    'http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000643',
-    'http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000007635',
-    'http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000010269',
-    'http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000011966',
-    'http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000014945',
-    'http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000017552',
-    'http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002063',
-    'http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000014220',
-    'http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000016681',
-    'http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000017426'
-]
+from .constants import FIELDS_MAP, MISSING_GROUPS, SECTIONS
 
 
 def clean_list(dirty_list):
@@ -62,7 +23,6 @@ class GroupsUTPSpider(scrapy.Spider):
         for group in response.css(query):
             groupData = {
                 'code': group.css('td::text')[0].extract(),
-                'name': group.css('td > a::text').extract_first(),
                 'leader': group.css('td > a::text')[1].extract(),
                 'classificationDate': group.css('td::text')[-1].extract()
             }
@@ -73,14 +33,18 @@ class GroupsUTPSpider(scrapy.Spider):
             yield response.follow(
                 groupLink,
                 callback=self.parse_single_group,
-                meta={'groupData': groupData})
+                meta={
+                    'groupData': groupData
+                })
 
         for group in MISSING_GROUPS:
             groupData = {'code': group['code']}
             yield response.follow(
                 group['link'],
                 callback=self.parse_single_group,
-                meta={'groupData': groupData})
+                meta={
+                    'groupData': groupData
+                })
 
     def extract_with_css(self, initial_selector, query, extract_first=False):
         if extract_first:
@@ -93,8 +57,9 @@ class GroupsUTPSpider(scrapy.Spider):
     def parse_single_group(self, response):
         """ Extract detailed groups information, including research products
         """
-
-        data = {'grouplacURL': response.url}
+        groupName = response.xpath(
+            '//span[@class="celdaEncabezado"]/text()').extract_first()
+        data = {'grouplacURL': response.url, 'name': groupName}
         # merging data with the data one got in parser
         data.update(response.meta['groupData'])
         tablesSelector = response.css("table")
@@ -118,8 +83,8 @@ class GroupsUTPSpider(scrapy.Spider):
 
         avoid_header_query = 'tr > td:not([class="celdaEncabezado"])::text'
         instituciones_node = tablesSelector[1]
-        data['Instituciones'] = self.extract_with_css(instituciones_node,
-                                                      avoid_header_query)
+        data['Instituciones'] = ';'.join(
+            self.extract_with_css(instituciones_node, avoid_header_query))
         plan = tablesSelector[2]
         data['Plan Estratégico'] = ''.join(
             clean_list(plan.css(avoid_header_query).extract()))
@@ -150,7 +115,7 @@ class GroupsUTPSpider(scrapy.Spider):
                 self.extract_with_css(member_row, 'td:nth-of_type(4)::text',
                                       True)
             }
-        data['members'].append(cur_member)
+            data['members'].append(cur_member)
         data['products'] = self.extract_products(tablesSelector[6:])
         yield data
 
