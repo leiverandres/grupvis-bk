@@ -32,6 +32,7 @@ type Group {
   city: String,
   certificationDate: String,
   clasification: String,
+  bigKnowledgeArea: String,
   knowledgeArea: String,
   nationalProgramOfScienceAndTechnology: String,
   secondaryNationalProgramOfScienceAndTechnology: String,

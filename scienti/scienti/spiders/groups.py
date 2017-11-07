@@ -76,6 +76,10 @@ class GroupsUTPSpider(scrapy.Spider):
                 departament, city = map(lambda x: x.strip(), value.split('-'))
                 data['departament'] = departament
                 data['city'] = city
+            elif field == "Área de conocimiento":
+                bigArea, area = map(lambda x: x.strip(), value.split('--'))
+                data['bigKnowledgeArea'] = bigArea
+                data['knowledgeArea'] = area
             else:
                 json_name = FIELDS_MAP[field]
                 data[json_name] = value.strip() if value else ''
