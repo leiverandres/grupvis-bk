@@ -7,6 +7,7 @@ import gql from "graphql-tag";
 
 import logo from "./logo.svg";
 import "./App.css";
+import BarChart from "./components/BarChart";
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: "http://localhost:4000/graphql" }),
@@ -47,11 +48,8 @@ class App extends Component {
     return (
       <ApolloProvider client={client}>
         <div className="App">
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h1 className="App-title">Welcome to Colciencias viz app</h1>
-          </header>
-          <GroupsListWithData />
+          <h2>Gran area</h2>
+          <BarChart size={[500, 500]} width={500} height={500} />
         </div>
       </ApolloProvider>
     );

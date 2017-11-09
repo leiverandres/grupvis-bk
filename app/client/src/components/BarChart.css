@@ -1,0 +1,11 @@
+.label {
+  text-anchor: end;
+  stroke: black;
+  fill: initial;
+  font-size: 1.5em;
+}
+
+.bar {
+  fill: orange;
+  stroke: black;
+}
