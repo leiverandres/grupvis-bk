@@ -1,5 +1,5 @@
-const { makeExecutableSchema } = require("graphql-tools");
-const { resolvers } = require("./resolvers");
+const { makeExecutableSchema } = require('graphql-tools');
+const { resolvers } = require('./resolvers');
 
 const typeDefs = `
 type Member {
@@ -41,7 +41,9 @@ type Group {
   researchLines: [String],
   applicationFields: [String],
   members: [Member],
-  products: [Product]
+  products: [Product],
+  faculty: String,
+  dependency: String
 }
 
 type Query {
