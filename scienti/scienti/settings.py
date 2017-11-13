@@ -65,7 +65,8 @@ RANDOMIZE_DOWNLOAD_DELAY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'scienti.pipelines.MongoPipeline': 300,
+    'scienti.pipelines.addExtraData.AddExtraDataPipeline': 100,
+    'scienti.pipelines.mongoInsertData.MongoPipeline': 300,
 }
 
 # Mongodb constants
