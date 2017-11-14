@@ -31,7 +31,7 @@ type Group {
   departament: String,
   city: String,
   certificationDate: String,
-  clasification: String,
+  classification: String,
   bigKnowledgeArea: String,
   knowledgeArea: String,
   nationalProgramOfScienceAndTechnology: String,
