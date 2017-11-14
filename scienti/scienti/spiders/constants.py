@@ -16,7 +16,7 @@ FIELDS_MAP = {
     'E-mail':
     'email',
     'Clasificación':
-    'clasification',
+    'classification',
     'Área de conocimiento':
     'knowledgeArea',
     'Programa nacional de ciencia y tecnología':
