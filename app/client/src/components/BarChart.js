@@ -1,113 +1,30 @@
 import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
-import { scaleLinear, scaleBand } from "d3-scale";
+import {
+  scaleLinear,
+  scaleBand,
+  scaleOrdinal,
+  schemeCategory10
+} from "d3-scale";
 import { max } from "d3-array";
 import { select } from "d3-selection";
 import { axisBottom, axisLeft } from "d3-axis";
 import { stack, stackOffsetNone, stackOrderNone } from "d3-shape";
 import "./BarChart.css";
 
-const knowledgeAreaQuery = gql`
-  query KnowledgeAreaQuery {
-    groups {
-      code
-      name
-      bigKnowledgeArea
-      knowledgeArea
-      classification
-      faculty
-      dependency
-    }
-  }
-`;
-
-class BarChartLayout extends Component {
-  render() {
-    const { data: { loading, groups } } = this.props;
-    console.log(this.props);
-    let dataCount = {};
-    if (!loading) {
-      const countByBigArea = {};
-      groups.forEach(groupObj => {
-        const { bigKnowledgeArea, faculty, name } = groupObj;
-        let classification = groupObj.classification || "Reg";
-        if (countByBigArea[bigKnowledgeArea]) {
-          // already exist an big area object
-          if (countByBigArea[bigKnowledgeArea][classification]) {
-            // already exist an counter of area inside this big area
-            if (countByBigArea[bigKnowledgeArea][classification][faculty]) {
-              countByBigArea[bigKnowledgeArea][classification][faculty].push(
-                name
-              );
-            } else {
-              countByBigArea[bigKnowledgeArea][classification][faculty] = [
-                name
-              ];
-            }
-          } else {
-            // no couter of area inside big area object
-            countByBigArea[bigKnowledgeArea][classification] = {
-              [faculty]: [name]
-            };
-          }
-        } else {
-          // no big area object found
-          countByBigArea[bigKnowledgeArea] = {
-            [classification]: {
-              [faculty]: [name]
-            }
-          };
-        }
-      });
-
-      dataCount = Object.entries(countByBigArea).map(item => {
-        return {
-          bigAreaName: item[0],
-          classifications: Object.entries(item[1]).map(subitem => {
-            const counter = {};
-            Object.entries(subitem[1]).forEach(entry => {
-              counter[entry[0]] = entry[1].length;
-            });
-            return {
-              classification: subitem[0],
-              ...counter
-            };
-          })
-        };
-      });
-    }
-    return (
-      <div>
-        {loading ? (
-          <h1>Loading...</h1>
-        ) : (
-          <div>
-            <h3>{`Gran area: ${dataCount[0].bigAreaName}`}</h3>
-            <BarChart
-              dataObj={dataCount[0]}
-              size={[500, 500]}
-              width={700}
-              height={600}
-            />
-          </div>
-        )}
-      </div>
-    );
-  }
-}
-
-class BarChart extends Component {
+export default class BarChart extends Component {
   componentDidMount() {
     this.createBarChart();
   }
 
   componentDidUpdate() {
-    this.createBarChart();
+    this.createBarChart(schemeCategory10);
   }
 
   createBarChart = () => {
     const { dataObj: { classifications }, width, height } = this.props;
+    const classificationLabels = classifications.map(c => c.classification);
 
     const faculties = Array.from(
       classifications.reduce((acumSet, curItem) => {
@@ -143,11 +60,14 @@ class BarChart extends Component {
 
     const xScale = scaleBand()
       .range([0, chartWidth])
-      .domain(classifications.map(c => c.clasification));
+      .domain(classificationLabels);
 
     const yScale = scaleLinear()
       .range([chartHeight, 0])
       .domain([0, 20]);
+
+    // Color
+    const zScale = scaleOrdinal(schemeCategory10);
 
     // AXES
     svg
@@ -184,24 +104,45 @@ class BarChart extends Component {
       .text("Cantidad de grupos");
 
     // BARS
-    svg
-      .select(".graph")
-      .selectAll(".bar")
-      .data(classifications, d => false)
+    const layer = svg
+      .selectAll(".stack")
+      .data(series)
+      .enter()
+      .append("g")
+      .attr("class", "stack");
+
+    layer
+      .selectAll("rect")
+      .data(d => d)
       .enter()
       .append("rect")
       .attr("class", "bar")
-      .attr("x", (d, i) => xScale(classifications[i]) + barMargin)
-      .attr("y", d => yScale(d))
-      .attr("width", xScale.bandwidth() - barMargin)
-      .attr("height", d => chartHeight - yScale(d));
+      .style("fill", (d, i) => {
+        console.log(i, zScale(i));
+        return zScale(i);
+      })
+      .attr(
+        "x",
+        (d, i) => xScale(classificationLabels[i]) + margin.left + barMargin
+      )
+      .attr("y", d => yScale(d[0] + d[1]) + margin.top)
+      .attr("height", d => {
+        const height = yScale(d[0]) - yScale(d[0] + d[1]) || 0;
+        console.log("height for", d, height);
+        console.log("y0", d[0], yScale(d[0]));
+        console.log("y", d[1], yScale(d[1]));
+        console.log("sub", d[0] + d[1]);
+        return height;
+      })
+      .attr("width", d => xScale.bandwidth() - barMargin);
   };
 
   render() {
-    const { width, height } = this.props;
+    const { width, height, dataObj: { bigAreaName } } = this.props;
 
     return (
       <div>
+        <h3>{`Gran area: ${bigAreaName}`}</h3>
         <svg
           ref={svgNode => (this.nodeRef = svgNode)}
           width={width}
@@ -212,6 +153,3 @@ class BarChart extends Component {
     );
   }
 }
-
-const BarChartWithData = graphql(knowledgeAreaQuery)(BarChartLayout);
-export default BarChartWithData;
