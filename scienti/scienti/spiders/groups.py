@@ -146,12 +146,12 @@ class GroupsUTPSpider(scrapy.Spider):
                         './td[starts-with(@class, "celdas_")]/img')
                     row_data['isApproved'] = True if approved_img else False
                     row_data['type'] = row.xpath(
-                        './td[starts-with(@class, "celdas1")]/strong/text()'
+                        './td[starts-with(@class, "celdas")]/strong/text()'
                     ).extract_first()
                     info = list(
                         map(lambda item: item.strip(),
                             row.xpath(
-                                './td[starts-with(@class, "celdas1")]/text()')
+                                './td[starts-with(@class, "celdas")]/text()')
                             .extract()[1:]))
                     row_data['description'] = ' '.join(info)
                     products.append(row_data)
