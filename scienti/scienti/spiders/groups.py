@@ -1,4 +1,5 @@
 import scrapy
+import re
 from .constants import FIELDS_MAP, MISSING_GROUPS, SECTIONS
 
 
@@ -26,14 +27,18 @@ class GroupsUTPSpider(scrapy.Spider):
             yield response.follow(
                 groupLink,
                 callback=self.parse_single_group,
-                meta={'groupData': groupData})
+                meta={
+                    'groupData': groupData
+                })
 
         for group in MISSING_GROUPS:
             groupData = {'code': group['code']}
             yield response.follow(
                 group['link'],
                 callback=self.parse_single_group,
-                meta={'groupData': groupData})
+                meta={
+                    'groupData': groupData
+                })
 
     def extract_with_css(self,
                          initial_selector,
@@ -133,11 +138,14 @@ class GroupsUTPSpider(scrapy.Spider):
 
     def extract_products(self, tablesList):
         products = []
+        extra_patter = re.compile(
+            '^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+),[ ]*(?P<publisher>[\wáéíóúñÁÉÍÓÚÑ:.\-_ ]+)[ ]*ISSN: (?P<issn>\d{4}-\d{3}[\dx00X]), (?P<year>\d{4})?[ ]*vol:(?P<vol>(\d+|N/A|n/a))?[ ]*fasc: (?P<fasc>(\d+|N/A|n/a))?[ ]*págs: (?P<pags>(\d+|N/A|n/a)[- ]*(\d+|N/A|n/a)?)?,'
+        )
         for table in tablesList:
             valid_rows_query = './tr[td[@class != "celdaEncabezado"]]'
             rows = table.xpath(valid_rows_query)
-            table_title = self.extract_with_css(
-                table, 'tr > td.celdaEncabezado::text', True)
+            title_query = './tr/td[@class = "celdaEncabezado"]/text()'
+            table_title = table.xpath(title_query).extract_first()
             if rows:
                 for row in rows:
                     row_data = {}
@@ -146,21 +154,37 @@ class GroupsUTPSpider(scrapy.Spider):
                         './td[starts-with(@class, "celdas_")]/img')
                     row_data['isApproved'] = True if approved_img else False
                     row_data['type'] = row.xpath(
-                        './td[starts-with(@class, "celdas")]/strong/text()'
+                        './td[@class = "celdas1" or @class = "celdas0"]/strong/text()'
                     ).extract_first()
-                    info = list(
-                        map(lambda item: item.strip(),
-                            row.xpath(
-                                './td[starts-with(@class, "celdas")]/text()')
-                            .extract()[1:]))
-                    row_data['description'] = ' '.join(info)
+                    info = row.xpath(
+                        './td[@class = "celdas0" or @class = "celdas1"]/text() | ./td/strong/text()'
+                    ).extract()
+                    row_data['rawData'] = ' '.join(
+                        map(lambda x: x.strip(), info))
+
+                    if table_title == "Artículos publicados":
+                        row_data['type'] = info[1].strip(': ')
+                        row_data['title'] = info[2].strip()
+                        extra = info[3].strip()
+                        row_data['doi'] = info[5].strip()
+                        row_data['autores'] = info[6].strip()
+
+                        ## get extra data
+                        m = extra_patter.match(extra)
+                        if m:
+                            row_data['country'] = m.group('country')
+                            row_data['publisher'] = m.group('publisher')
+                            row_data['issn'] = m.group('issn')
+                            row_data['year'] = m.group('year')
+                            row_data['vol'] = m.group('vol')
+                            row_data['fasc'] = m.group('fasc')
+                            row_data['pags'] = m.group('pags')
                     products.append(row_data)
         return products
 
 
-'''
-
-p = re.compile(r'^\d+\.- (?P<type>[\wáéíóúñ ]+):(?P<name>[\wáéíóúñ ]+)\n([\w]+),')
-m = p.search(st)
-m.group('type')
-'''
+# patter = re.compile(
+#     '^\d.- (?P<type>[\wáéíóúñÁÉÍÓÚÑ ]+):(?P<name>[\wáéíóúñÁÉÍÓÚÑ ]+),(?P<publisher>[\wáéíóúñÁÉÍÓÚÑ ]+)(?P<issn>ISSN:[\d-]+), (?P<year>\d{4}).*DOI: (?P<doi>10.\d{4,}/[\w^\s"/.<>]+) Autores:(?P<autores>[\wáéíóúñÁÉÍÓÚ ,]*)$'
+# )
+# m = patter.search(row_data['description'])
+# print(m.group('type'))

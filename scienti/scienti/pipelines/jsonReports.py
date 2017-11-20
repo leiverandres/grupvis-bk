@@ -13,11 +13,10 @@ class JSONResporterPipeline(object):
         self.file.close()
 
     def process_item(self, item, spider):
-        newItem = {
-            'products': item['products']
-        }
-        for cur in item['products']:
-            cur['code'] = item['code']
+        item_to_save = item.copy()
+
+        for cur in item_to_save['products']:
+            cur['code'] = item_to_save['code']
             line = json.dumps(dict(cur)) + ",\n"
             self.file.write(line)
         return item
