@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import Spinner from 'react-spinkit';
+import { Header, Icon } from 'semantic-ui-react';
 
 import BarChart from './BarChart';
 import './BarChart.css';
@@ -85,6 +86,10 @@ class BarChartLayout extends Component {
           <Spinner name="cube-grid" style={styles.spinner} />
         ) : (
           <div>
+            <Header size="huge">
+              Grupos de investigación por gran area
+              <Header.Subheader>Clasificación 2015 vs 2017</Header.Subheader>
+            </Header>
             <BarChart
               dataArray={dataCount}
               size={[500, 500]}

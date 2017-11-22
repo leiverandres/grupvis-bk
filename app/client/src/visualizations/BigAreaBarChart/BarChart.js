@@ -68,6 +68,7 @@ export default class BarChart extends Component {
       right: 20
     };
     const barMargin = 5;
+    const groupedChartPadding = 0.02;
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
     const stackData = stack()
@@ -85,7 +86,8 @@ export default class BarChart extends Component {
     // Scales ================================================================
     const x0Scale = scaleBand()
       .range([0, chartWidth])
-      .domain(bigAreasLabels);
+      .domain(bigAreasLabels)
+      .padding(groupedChartPadding);
 
     const x1Scale = scaleBand()
       .range([0, x0Scale.bandwidth()])
@@ -167,6 +169,37 @@ export default class BarChart extends Component {
       )
       .call(axisBottom(x1Scale));
     // STACKED BAR CHARTS ================================================
+
+    // LEGEND ============================================================
+    const legendSquareSize = 19;
+    const xLegendPos = width - legendSquareSize;
+    const yLegendPos = margin.top + legendSquareSize;
+    const legend = svg
+      .append('g')
+      .attr('font-family', 'sans-serif')
+      .attr('font-size', 10)
+      .attr('text-anchor', 'end')
+      .selectAll('g')
+      .data(faculties)
+      .enter()
+      .append('g')
+      .attr('transform', (d, i) => `translate(0, ${i * legendSquareSize + 2})`);
+
+    legend
+      .append('rect')
+      .attr('x', xLegendPos)
+      .attr('y', yLegendPos) // it forms like a top padding
+      .attr('width', legendSquareSize)
+      .attr('height', legendSquareSize)
+      .attr('fill', colorScale);
+
+    legend
+      .append('text')
+      .attr('x', xLegendPos - legendSquareSize)
+      .attr('y', yLegendPos + legendSquareSize / 2)
+      .attr('dy', '0.32em')
+      .text(d => d);
+    // LEGEND ============================================================
   };
 
   render() {
@@ -174,7 +207,6 @@ export default class BarChart extends Component {
 
     return (
       <div>
-        <h3>Gran area</h3>
         <svg
           ref={svgNode => (this.nodeRef = svgNode)}
           width={width}
