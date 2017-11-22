@@ -9,10 +9,11 @@ const logoWithText = '/logo_sirius_text.svg';
 const bannerStyle = {
   backgroundImage: `url(${background})`,
   width: '100%',
-  height: '250px'
+  height: '25%',
+  marginBottom: '5%'
 };
 
-const containerStyle = { paddingTop: '100px' };
+const containerStyle = { paddingTop: '2em' };
 
 class Header extends Component {
   render() {
