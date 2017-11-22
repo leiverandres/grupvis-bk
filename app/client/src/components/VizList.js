@@ -43,7 +43,7 @@ class VizList extends Component {
   render() {
     const { hoverdCard } = this.state;
     return (
-      <div style={{ width: '80%', margin: '0 auto', paddingTop: '10%' }}>
+      <div style={{ width: '80%', margin: '0 auto', paddingTop: '5%' }}>
         <Card.Group itemsPerRow="2" stackable>
           {cardsArray.map((card, idx) => {
             return (

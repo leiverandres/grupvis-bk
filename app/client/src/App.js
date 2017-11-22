@@ -6,6 +6,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import './App.css';
+import Header from './components/Header';
 import VizList from './components/VizList';
 import BarChartLayout from './visualizations/BigAreaBarChart/BarChartLayout';
 
@@ -20,6 +21,7 @@ class App extends Component {
       <ApolloProvider client={client}>
         <BrowserRouter>
           <div className="App">
+            <Header />
             <Route exact path="/" component={VizList} />
             <Route
               path="/big-area-viz"
