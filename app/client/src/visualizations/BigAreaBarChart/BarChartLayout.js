@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
+import React, { Component } from 'react';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import Spinner from 'react-spinkit';
 
-import BarChart from "./BarChart";
-import "./BarChart.css";
+import BarChart from './BarChart';
+import './BarChart.css';
 
 const knowledgeAreaQuery = gql`
   query KnowledgeAreaQuery {
@@ -22,13 +23,13 @@ const knowledgeAreaQuery = gql`
 class BarChartLayout extends Component {
   render() {
     const { data: { loading, groups } } = this.props;
-    console.log(this.props);
+
     let dataCount = {};
     if (!loading) {
       const countByBigArea = {};
       groups.forEach(groupObj => {
         const { bigKnowledgeArea, faculty, name } = groupObj;
-        let classification = groupObj.classification || "Reg";
+        let classification = groupObj.classification || 'Reg';
         if (countByBigArea[bigKnowledgeArea]) {
           // already exist an big area object
           if (countByBigArea[bigKnowledgeArea][classification]) {
@@ -63,28 +64,32 @@ class BarChartLayout extends Component {
           bigAreaName: item[0],
           classifications: Object.entries(item[1]).map(subitem => {
             const counter = {};
+            let total = 0;
             Object.entries(subitem[1]).forEach(entry => {
               counter[entry[0]] = entry[1].length;
+              total += entry[1].length;
             });
             return {
               classification: subitem[0],
+              total: total,
               ...counter
             };
           })
         };
       });
     }
+
     return (
       <div>
         {loading ? (
-          <h1>Loading...</h1>
+          <Spinner name="cube-grid" style={styles.spinner} />
         ) : (
           <div>
             <BarChart
-              dataObj={dataCount[4]}
+              dataArray={dataCount}
               size={[500, 500]}
-              width={700}
-              height={600}
+              width={1200}
+              height={500}
             />
           </div>
         )}
@@ -92,6 +97,17 @@ class BarChartLayout extends Component {
     );
   }
 }
+
+const styles = {
+  spinner: {
+    height: '4em',
+    width: '4em',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    margin: '-2em 0 0 -2em'
+  }
+};
 
 const BarChartWithData = graphql(knowledgeAreaQuery)(BarChartLayout);
 export default BarChartWithData;
