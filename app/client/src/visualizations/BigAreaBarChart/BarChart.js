@@ -203,10 +203,10 @@ export default class BarChart extends Component {
   };
 
   render() {
-    const { width, height } = this.props;
+    const { width, height, style } = this.props;
 
     return (
-      <div>
+      <div className="chart-container" style={style}>
         <svg
           ref={svgNode => (this.nodeRef = svgNode)}
           width={width}
