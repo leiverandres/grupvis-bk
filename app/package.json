@@ -9,6 +9,8 @@
   "scripts": {
     "start": "node index.js",
     "start-dev": "nodemon index.js",
+    "start-prod": "node index.js",
+    "build": "cd ./client && yarn build",
     "precommit": "lint-staged"
   },
   "lint-staged": {
