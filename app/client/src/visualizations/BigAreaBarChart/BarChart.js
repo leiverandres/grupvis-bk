@@ -4,6 +4,9 @@ import { max } from 'd3-array';
 import { select } from 'd3-selection';
 import { axisBottom, axisLeft, axisTop } from 'd3-axis';
 import { stack, stackOffsetNone, stackOrderNone } from 'd3-shape';
+import { transition } from 'd3-transition';
+import { easeLinear } from 'd3-ease';
+
 import './BarChart.css';
 
 const constants = {
@@ -144,6 +147,9 @@ export default class BarChart extends Component {
     // GROUPS ============================================================
 
     // STACKED BAR CHARTS ================================================
+    const t = transition()
+      .duration(1000)
+      .ease(easeLinear);
 
     group
       .selectAll('g')
@@ -156,9 +162,12 @@ export default class BarChart extends Component {
       .enter()
       .append('rect')
       .attr('x', d => x1Scale(d.data.classification) + margin.left + barMargin)
+      .attr('width', d => x1Scale.bandwidth() - barMargin)
+      .attr('height', 0) // setting 0 height for the transition
+      .attr('y', yScale(0)) // setting to the botton for the transition
+      .transition(t)
       .attr('y', d => yScale(d[1]) + margin.top)
-      .attr('height', d => yScale([d[0]]) - yScale(d[1]))
-      .attr('width', d => x1Scale.bandwidth() - barMargin);
+      .attr('height', d => yScale([d[0]]) - yScale(d[1]));
 
     group
       .append('g')
