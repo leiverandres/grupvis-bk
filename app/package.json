@@ -14,7 +14,10 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "./*.{js,jsx,json,css,html}": ["prettier --single-quote --write", "git add"]
+    "./*.{js,jsx,json,css,html}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "apollo-server-express": "^1.2.0",
@@ -27,9 +30,9 @@
     "mongodb": "^2.2.33"
   },
   "devDependencies": {
-    "nodemon": "^1.12.1",
     "husky": "^0.14.3",
     "lint-staged": "^5.0.0",
+    "nodemon": "^1.12.1",
     "prettier": "^1.8.2"
   }
 }
