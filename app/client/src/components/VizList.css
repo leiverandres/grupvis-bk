@@ -1,0 +1,19 @@
+.gist.gist-thumbnail {
+  width: 320px;
+  height: 160px;
+  background-repeat: no-repeat;
+  background-size: 120% 120%;
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  border-radius: 0.3em;
+}
+
+.gist-thumbnail:hover {
+  transition: background-position 0.5s ease-in;
+  background-position: center bottom;
+}
+
+.gist-name {
+  text-shadow: 1px 1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+    -1px -1px 0 #fff;
+  padding: 10px;
+}
