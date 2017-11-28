@@ -139,7 +139,7 @@ class GroupsUTPSpider(scrapy.Spider):
     def extract_products(self, tablesList):
         products = []
         extra_patter = re.compile(
-            '^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+),[ ]*(?P<publisher>[\wáéíóúñÁÉÍÓÚÑ:.\-_ ]+)[ ]*ISSN: (?P<issn>\d{4}-\d{3}[\dx00X]), (?P<year>\d{4})?[ ]*vol:(?P<vol>(\d+|N/A|n/a))?[ ]*fasc: (?P<fasc>(\d+|N/A|n/a))?[ ]*págs: (?P<pags>(\d+|N/A|n/a)[- ]*(\d+|N/A|n/a)?)?,'
+            '^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+),[ ]*(?P<publisher>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)[ ]*ISSN: (?P<issn>\d{4}-\d{3}[\dx00X]), (?P<year>\d{4})?[ ]*vol: ?(?P<vol>([aA][Ññ][oO] ?)?(\d+|N/A|n/a|[CMDIXLV]+))?[ ]*fasc: (?P<fasc>(\d+|[Nn]/?7?[Aa]))?[ ]*págs: (?P<pags>([\d\w]+|N/A|n/a)?[- ]*([\d\w]+|N/A|n/a)?)?,'
         )
         for table in tablesList:
             valid_rows_query = './tr[td[@class != "celdaEncabezado"]]'
