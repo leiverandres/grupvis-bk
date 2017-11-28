@@ -3,8 +3,7 @@ import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
-import { Sidebar, Menu, Icon } from 'semantic-ui-react';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 import './App.css';
 import Header from './components/Header';

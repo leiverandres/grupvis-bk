@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { Container, Grid, Image, Icon } from 'semantic-ui-react';
 
-// import background from '../../public/particles.png';
-// import logoWithText from '../../public/logo_sirius_text.svg';
 const background = '/particles.png';
 const logoWithText = '/logo_sirius_text.svg';
+const utpLogo = 'UTP-logo.svg';
 
 const bannerStyle = {
   backgroundImage: `url(${background})`,
   width: '100%',
-  height: '25%',
+  height: '20%',
   marginBottom: '5%'
 };
 
@@ -21,23 +20,34 @@ class Header extends Component {
     return (
       <div style={bannerStyle}>
         <Container style={containerStyle}>
-          <Grid>
-            <Grid.Column width={1}>
-              <Icon
-                name="bars"
-                onClick={handleToggleVisibility}
-                size="large"
-                color="grey"
-                style={{ marginLeft: '25px', left: '25px' }}
-              />
-            </Grid.Column>
-            <Grid.Column mobile={16} tablet={16} computer={8}>
-              <Image
-                src={logoWithText}
-                alt="Grupo de Investigación Sirius"
-                size="medium"
-              />
-            </Grid.Column>
+          <Grid columns={3}>
+            <Grid.Row>
+              <Grid.Column width={2} textAlign="left">
+                <Icon
+                  name="bars"
+                  onClick={handleToggleVisibility}
+                  size="large"
+                  color="grey"
+                  style={{
+                    marginLeft: '25px',
+                    left: '25px',
+                    cursor: 'pointer'
+                  }}
+                />
+              </Grid.Column>
+              <Grid.Column width={7}>
+                <Image
+                  src={logoWithText}
+                  alt="Logo Grupo de Investigación Sirius"
+                  size="medium"
+                  href="/"
+                  centered
+                />
+              </Grid.Column>
+              <Grid.Column width={7}>
+                <Image src={utpLogo} alt="Logo UTP" size="small" centered />
+              </Grid.Column>
+            </Grid.Row>
           </Grid>
         </Container>
       </div>
