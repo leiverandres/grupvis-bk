@@ -8,3 +8,23 @@
   fill: orange;
   stroke: black;
 }
+
+.tooltip {
+  position: absolute;
+  background: #1b1b1b;
+  border-radius: 0.4em;
+}
+
+.speech-bubble:after {
+  content: '';
+  position: relative;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: 0.438em solid transparent;
+  border-top-color: #1b1b1b;
+  border-bottom: 0;
+  margin-left: -0.437em;
+  margin-bottom: -0.437em;
+}

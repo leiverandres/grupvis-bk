@@ -100,7 +100,7 @@ class BarChartLayout extends Component {
     }
 
     return (
-      <div>
+      <div style={{ minHeight: '100vh' }}>
         {loading ? (
           <Spinner name="cube-grid" style={styles.spinner} />
         ) : (

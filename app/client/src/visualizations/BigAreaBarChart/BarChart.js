@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { scaleLinear, scaleBand, scaleOrdinal } from 'd3-scale';
 import { max } from 'd3-array';
-import { select } from 'd3-selection';
+import { select, event } from 'd3-selection';
 import { axisBottom, axisLeft, axisTop } from 'd3-axis';
 import { stack, stackOffsetNone, stackOrderNone } from 'd3-shape';
 import { transition } from 'd3-transition';
-import { easeLinear } from 'd3-ease';
+import { easeExpIn } from 'd3-ease';
 
 import './BarChart.css';
 
@@ -102,12 +102,24 @@ export default class BarChart extends Component {
 
     const colorScale = scaleOrdinal(colors).domain(faculties);
     // Scales ================================================================
+    // TOOTIP ============================================================
+    const tooltip = select('body')
+      .append('div')
+      .attr('class', 'tooltip')
+      .style('display', 'none')
+      .style('max-width', '300px')
+      .style('height', 'auto')
+      .style('color', '#fff')
+      .style('text-align', 'center')
+      .style('padding', '7px')
+      .style('opacity', 0.9);
 
+    // TOOTIP ============================================================
     // AXES ==============================================================
     svg
       .append('g')
       .attr('class', 'axis--x0')
-      .attr('transform', `translate(${margin.left}, ${margin.top})`)
+      .attr('transform', `translate(${margin.left}, ${margin.top - 10})`)
       .call(axisTop(x0Scale));
 
     svg
@@ -144,12 +156,13 @@ export default class BarChart extends Component {
       .append('g')
       .attr('class', 'group-chart')
       .attr('transform', d => `translate(${x0Scale(d.bigAreaName)}, 0)`);
+
     // GROUPS ============================================================
 
     // STACKED BAR CHARTS ================================================
     const t = transition()
-      .duration(1000)
-      .ease(easeLinear);
+      .duration(1700)
+      .ease(easeExpIn);
 
     group
       .selectAll('g')
@@ -157,14 +170,36 @@ export default class BarChart extends Component {
       .enter()
       .append('g')
       .attr('fill', d => colorScale(d.key))
+      .attr('class', d => d.key)
       .selectAll('rect')
-      .data(d => d)
+      .data(d => {
+        // Avoid losing faculty of every bar in the next step
+        const faculty = d.key;
+        const newData = d.map(di => {
+          di.faculty = faculty;
+          return di;
+        });
+        return newData;
+      })
       .enter()
       .append('rect')
       .attr('x', d => x1Scale(d.data.classification) + margin.left + barMargin)
       .attr('width', d => x1Scale.bandwidth() - barMargin)
       .attr('height', 0) // setting 0 height for the transition
-      .attr('y', yScale(0)) // setting to the botton for the transition
+      .attr('y', yScale(0) + margin.top) // setting to the botton for the transition
+      .on('mouseout', () => tooltip.style('display', 'none'))
+      .on('mouseover', () => tooltip.style('display', 'inline-block'))
+      .on('mousemove', function(d, i) {
+        const quantity = d[1] - d[0];
+        tooltip
+          .style('left', `${event.pageX - margin.left}px`)
+          .style('top', `${event.pageY - 150}px`)
+          .style('display', 'inline-block').html(`<div>
+                <P><strong>Facultad</strong>: ${d.faculty}</p>
+                <p><strong>Categoria</strong>: ${d.data.classification}</p>
+                <p>${quantity} ${quantity > 1 ? 'Grupos' : 'Grupo'}</p>
+               </div>`);
+      })
       .transition(t)
       .attr('y', d => yScale(d[1]) + margin.top)
       .attr('height', d => yScale([d[0]]) - yScale(d[1]));
