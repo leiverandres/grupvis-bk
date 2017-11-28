@@ -6,7 +6,7 @@ class SidebarWrapper extends Component {
   render() {
     const { visible } = this.props;
     return (
-      <Sidebar.Pushable>
+      <Sidebar.Pushable style={{ minHeight: '100vh' }}>
         <Sidebar
           as={Menu}
           animation="push"

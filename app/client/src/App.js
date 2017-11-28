@@ -30,7 +30,7 @@ class App extends Component {
       <ApolloProvider client={client}>
         <BrowserRouter>
           <SidebarWrapper visible={visible}>
-            <div className="App" style={{ heigth: '100%' }}>
+            <div className="App">
               <Header handleToggleVisibility={this.toggleVisibility} />
               <Route exact path="/" component={VizList} />
               <Route
