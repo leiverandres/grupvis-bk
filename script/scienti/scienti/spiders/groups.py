@@ -1,6 +1,7 @@
 import scrapy
 import re
 from .constants import FIELDS_MAP, MISSING_GROUPS, SECTIONS
+from .handlers import HANDLERS
 
 
 class GroupsUTPSpider(scrapy.Spider):
@@ -145,7 +146,7 @@ class GroupsUTPSpider(scrapy.Spider):
             valid_rows_query = './tr[td[@class != "celdaEncabezado"]]'
             rows = table.xpath(valid_rows_query)
             title_query = './tr/td[@class = "celdaEncabezado"]/text()'
-            table_title = table.xpath(title_query).extract_first()
+            table_title = table.xpath(title_query).extract_first().strip()
             if rows:
                 for row in rows:
                     row_data = {}
@@ -161,24 +162,30 @@ class GroupsUTPSpider(scrapy.Spider):
                     ).extract()
                     row_data['rawData'] = ' '.join(
                         map(lambda x: x.strip(), info))
+                    ## Extra data
+                    try:
+                        extractor = HANDLERS[table_title]
+                        result = extractor(info)
+                        row_data.update(result)
+                    except KeyError:
+                        pass
+                    # if table_title == "Artículos publicados":
+                    #     row_data['type'] = info[1].strip(': ')
+                    #     row_data['title'] = info[2].strip()
+                    #     extra = info[3].strip()
+                    #     row_data['doi'] = info[5].strip()
+                    #     row_data['autores'] = info[6].strip()
 
-                    if table_title == "Artículos publicados":
-                        row_data['type'] = info[1].strip(': ')
-                        row_data['title'] = info[2].strip()
-                        extra = info[3].strip()
-                        row_data['doi'] = info[5].strip()
-                        row_data['autores'] = info[6].strip()
-
-                        ## get extra data
-                        m = extra_patter.match(extra)
-                        if m:
-                            row_data['country'] = m.group('country')
-                            row_data['publisher'] = m.group('publisher')
-                            row_data['issn'] = m.group('issn')
-                            row_data['year'] = m.group('year')
-                            row_data['vol'] = m.group('vol')
-                            row_data['fasc'] = m.group('fasc')
-                            row_data['pags'] = m.group('pags')
+                    #     ## get extra data
+                    #     m = extra_patter.match(extra)
+                    #     if m:
+                    #         row_data['country'] = m.group('country')
+                    #         row_data['publisher'] = m.group('publisher')
+                    #         row_data['issn'] = m.group('issn')
+                    #         row_data['year'] = m.group('year')
+                    #         row_data['vol'] = m.group('vol')
+                    #         row_data['fasc'] = m.group('fasc')
+                    #         row_data['pags'] = m.group('pags')
                     products.append(row_data)
         return products
 
