@@ -8,3 +8,4 @@ shub
 pymongo
 scrapy
 yapf
+pylint
