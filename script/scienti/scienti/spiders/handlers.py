@@ -68,8 +68,30 @@ def capitulos_libro_publicado(data_extracted):
     return row_data
 
 
+def documentos_trabajo(data_extracted):
+    extra_patter = re.compile(
+        '^(?P<year>\d{4}), Nro. Paginas: ?(?P<nro_pags>\d+)?, Instituciones participantes: ?(?P<institutions>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_,; ]+)?, URL: ?(?P<url>[\w:/.?=#$%-_]+)?, DOI: ?(?P<doi>[\w:/.?=#$%-]+)?'
+    )
+    row_data = {}
+    row_data['type'] = data_extracted[1].strip()
+    row_data['title'] = data_extracted[2].strip(': ')
+    row_data['authors'] = data_extracted[4].strip().split(':')[1]
+    extra = data_extracted[3].strip()
+    extra = re.sub("[ \n]+", " ", extra)
+
+    match = extra_patter.match(extra)
+    if match:
+        row_data['url'] = match.group('url')
+        row_data['nroPags'] = match.group('nro_pags')
+        row_data['doi'] = match.group('doi')
+        row_data['institutions'] = match.group('institutions')
+        row_data['year'] = match.group('year')
+    return row_data
+
+
 HANDLERS = {
     'Artículos publicados': articulos_publicados,
     'Libros publicados': libros_publicados,
-    'Capítulos de libro publicados': capitulos_libro_publicado
+    'Capítulos de libro publicados': capitulos_libro_publicado,
+    'Documentos de trabajo': documentos_trabajo
 }
