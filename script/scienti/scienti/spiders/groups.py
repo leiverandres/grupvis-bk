@@ -16,29 +16,29 @@ class GroupsUTPSpider(scrapy.Spider):
         """
         query = "table#grupos > tbody > tr[id^='grupos_row']"
         for group in response.css(query):
-            groupData = {
+            group_data = {
                 'code': group.css('td::text')[0].extract(),
                 'leader': group.css('td > a::text')[1].extract(),
                 'classificationDate': group.css('td::text')[-1].extract()
             }
-            groupLink = group.css(
+            group_link = group.css(
                 'td > a[href*="visualiza/visualizagr"]::attr(href)'
             ).extract_first()
 
             yield response.follow(
-                groupLink,
+                group_link,
                 callback=self.parse_single_group,
                 meta={
-                    'groupData': groupData
+                    'groupData': group_data
                 })
 
         for group in MISSING_GROUPS:
-            groupData = {'code': group['code']}
+            group_data = {'code': group['code']}
             yield response.follow(
                 group['link'],
                 callback=self.parse_single_group,
                 meta={
-                    'groupData': groupData
+                    'groupData': group_data
                 })
 
     def extract_with_css(self,
@@ -139,9 +139,6 @@ class GroupsUTPSpider(scrapy.Spider):
 
     def extract_products(self, tablesList):
         products = []
-        extra_patter = re.compile(
-            '^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+),[ ]*(?P<publisher>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)[ ]*ISSN: (?P<issn>\d{4}-\d{3}[\dx00X]), (?P<year>\d{4})?[ ]*vol: ?(?P<vol>([aA][Ññ][oO] ?)?(\d+|N/A|n/a|[CMDIXLV]+))?[ ]*fasc: (?P<fasc>(\d+|[Nn]/?7?[Aa]))?[ ]*págs: (?P<pags>([\d\w]+|N/A|n/a)?[- ]*([\d\w]+|N/A|n/a)?)?,'
-        )
         for table in tablesList:
             valid_rows_query = './tr[td[@class != "celdaEncabezado"]]'
             rows = table.xpath(valid_rows_query)
@@ -169,29 +166,5 @@ class GroupsUTPSpider(scrapy.Spider):
                         row_data.update(result)
                     except KeyError:
                         pass
-                    # if table_title == "Artículos publicados":
-                    #     row_data['type'] = info[1].strip(': ')
-                    #     row_data['title'] = info[2].strip()
-                    #     extra = info[3].strip()
-                    #     row_data['doi'] = info[5].strip()
-                    #     row_data['autores'] = info[6].strip()
-
-                    #     ## get extra data
-                    #     m = extra_patter.match(extra)
-                    #     if m:
-                    #         row_data['country'] = m.group('country')
-                    #         row_data['publisher'] = m.group('publisher')
-                    #         row_data['issn'] = m.group('issn')
-                    #         row_data['year'] = m.group('year')
-                    #         row_data['vol'] = m.group('vol')
-                    #         row_data['fasc'] = m.group('fasc')
-                    #         row_data['pags'] = m.group('pags')
                     products.append(row_data)
         return products
-
-
-# patter = re.compile(
-#     '^\d.- (?P<type>[\wáéíóúñÁÉÍÓÚÑ ]+):(?P<name>[\wáéíóúñÁÉÍÓÚÑ ]+),(?P<publisher>[\wáéíóúñÁÉÍÓÚÑ ]+)(?P<issn>ISSN:[\d-]+), (?P<year>\d{4}).*DOI: (?P<doi>10.\d{4,}/[\w^\s"/.<>]+) Autores:(?P<autores>[\wáéíóúñÁÉÍÓÚ ,]*)$'
-# )
-# m = patter.search(row_data['description'])
-# print(m.group('type'))
