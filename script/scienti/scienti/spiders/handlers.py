@@ -388,8 +388,28 @@ def redes_conocimiento(data_extracted):
     match = extra_patter.match(extra)
     if match:
         row_data['city'] = match.group('city')
-        row_data['start_date'] = match.group('start_date')
-        row_data['end_date'] = match.group('end_date')
+        row_data['startDate'] = match.group('start_date')
+        row_data['endDate'] = match.group('end_date')
+    return row_data
+
+
+def contenido_impreso(data_extracted):
+    extra_patter = re.compile(
+        r'^(?P<date>[\d:\-. ]+)?, ?Ambito: ?(?P<ambit>[\wáéíóúñÁÉÍÓÚÑ ]+)?, ?Medio de circulación: ?(?P<media>[\wáéíóúñÁÉÍÓÚÑ ]+)?'
+    )
+    row_data = {}
+    row_data['type'] = data_extracted[1].strip()
+    row_data['title'] = data_extracted[2].strip(': ')
+    extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
+    second_extra = data_extracted[4].split(',')
+    row_data['publishPlace'] = second_extra[0].split(':')[1].strip()
+    row_data['web'] = second_extra[1].split(':')[1].strip()
+    row_data['authors'] = data_extracted[5].split(':')[1].strip(',\n ')
+    match = extra_patter.match(extra)
+    if match:
+        row_data['date'] = match.group('date')
+        row_data['ambit'] = match.group('ambit')
+        row_data['media'] = match.group('media')
     return row_data
 
 
@@ -416,5 +436,6 @@ HANDLERS = {
     'Ediciones': ediciones,
     'Eventos Científicos': eventos_cientificos,
     'Informes de investigación': informes_investigacion,
-    'Redes de Conocimiento Especializado': redes_conocimiento
+    'Redes de Conocimiento Especializado': redes_conocimiento,
+    'Generación de Contenido Impreso': contenido_impreso
 }
