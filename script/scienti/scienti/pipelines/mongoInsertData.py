@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import pymongo
-import logging
 from datetime import datetime
 
 
@@ -43,5 +42,4 @@ class MongoPipeline(object):
             {
                 'code': item['code']
             }, dict(item), upsert=True)
-        logging.debug("{} : Group added to DB".format(item['code']))
         return item
