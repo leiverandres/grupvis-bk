@@ -1,5 +1,5 @@
-const { makeExecutableSchema } = require('graphql-tools');
-const { resolvers } = require('./resolvers');
+const { makeExecutableSchema } = require("graphql-tools");
+const { resolvers } = require("./resolvers");
 
 const typeDefs = `
 type Member {
@@ -15,7 +15,8 @@ type Product {
   category: String,
   type: String,
   description: String,
-  isApproved: Boolean
+  isApproved: Boolean,
+  code: String
 }
 
 type Group {
@@ -49,7 +50,9 @@ type Group {
 
 type Query {
   groups: [Group]
-  group(code: String!): Group
+  group(code: String!): Group,
+  products: [Product],
+  product(category: String): [Product]
 }
 `;
 
