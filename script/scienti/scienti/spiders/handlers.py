@@ -413,6 +413,34 @@ def contenido_impreso(data_extracted):
     return row_data
 
 
+def contenido_multimedia(data_extracted):
+    extra_patter = re.compile(
+        r'^(?P<year>\d{4})?, ?(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+)?, ?Idioma: ?(?P<language>[\wáéíóúñÁÉÍÓÚÑ ]+)?'
+    )
+    third_extra_patter = re.compile(
+        r'^ Emisora: ?(?P<emitter>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)?, ?Instituciones participantes: (?P<institutions>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_,; ]+)?'
+    )
+    row_data = {}
+    row_data['type'] = data_extracted[1].strip()
+    row_data['title'] = data_extracted[2].strip(': ')
+    extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
+    second_extra = data_extracted[4].split(',')
+    row_data['media'] = second_extra[0].split(':')[1].strip()
+    row_data['web'] = second_extra[1].split(':')[1].strip()
+    third_extra = re.sub("[ \n]+", " ", data_extracted[5]).strip()
+    row_data['authors'] = data_extracted[6].split(':')[1].strip(',\n ')
+    match = extra_patter.match(extra)
+    third_match = third_extra_patter.match(third_extra)
+    if match:
+        row_data['year'] = match.group('year')
+        row_data['country'] = match.group('country')
+        row_data['language'] = match.group('language')
+    if third_match:
+        row_data['emitter'] = match.group('emitter')
+        row_data['institutions'] = match.group('institutions')
+    return row_data
+
+
 HANDLERS = {
     'Artículos publicados': articulos_publicados,
     'Libros publicados': libros_publicados,
@@ -437,5 +465,6 @@ HANDLERS = {
     'Eventos Científicos': eventos_cientificos,
     'Informes de investigación': informes_investigacion,
     'Redes de Conocimiento Especializado': redes_conocimiento,
-    'Generación de Contenido Impreso': contenido_impreso
+    'Generación de Contenido Impreso': contenido_impreso,
+    'Generación de Contenido Multimedia': contenido_multimedia
 }
