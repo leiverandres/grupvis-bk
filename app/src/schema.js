@@ -16,7 +16,10 @@ type Product {
   type: String,
   description: String,
   isApproved: Boolean,
-  code: String
+  code: String,
+  title: String,
+  type: String,
+  year: String
 }
 
 type Group {
