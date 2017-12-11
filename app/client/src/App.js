@@ -11,6 +11,7 @@ import SidebarWrapper from "./components/SidebarWrapper";
 import VizList from "./components/VizList";
 import UnderConstruction from "./components/UnderConstruction";
 import BarChartLayout from "./visualizations/BigAreaBarChart/BarChartLayout";
+import ScatterChartLayout from "./visualizations/ClassificationByGroup/ScatterChartLayout";
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: "http://192.168.1.193:4000/graphql" }),
@@ -44,6 +45,11 @@ class App extends Component {
                 render={() => (
                   <BarChartLayout size={[500, 500]} width={500} height={500} />
                 )}
+              />
+              <Route
+                exact
+                path="/classification-group"
+                component={ScatterChartLayout}
               />
             </div>
           </SidebarWrapper>
