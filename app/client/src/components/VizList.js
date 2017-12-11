@@ -13,9 +13,9 @@ const cardsArray = [
   },
   {
     img: 'https://static.pexels.com/photos/672802/pexels-photo-672802.jpeg',
-    header: 'Grupos mostrados por Gran Area de investigación',
+    header: 'Grupos de investigación con su calificación en 2015 y 2017',
     description: 'Descripción corta',
-    linkPath: '/big-area-viz'
+    linkPath: '/classification-group'
   },
   {
     img: 'https://static.pexels.com/photos/672802/pexels-photo-672802.jpeg',
