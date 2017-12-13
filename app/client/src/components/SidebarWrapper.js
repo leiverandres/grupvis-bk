@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Sidebar, Menu, Icon } from "semantic-ui-react";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Sidebar, Menu, Icon } from 'semantic-ui-react';
 
 class SidebarWrapper extends Component {
   render() {
     const { visible } = this.props;
     return (
-      <Sidebar.Pushable style={{ minHeight: "100vh" }}>
+      <Sidebar.Pushable style={{ minHeight: '100vh' }}>
         <Sidebar
           as={Menu}
           animation="push"
@@ -20,7 +20,7 @@ class SidebarWrapper extends Component {
             <Icon name="grid layout" />
             Inicio
           </Menu.Item>
-          <Menu.Item name="reports" as={Link} to="/under-construction">
+          <Menu.Item name="reports" as={Link} to="/groups-table">
             <Icon name="table" />
             Reportes
           </Menu.Item>
