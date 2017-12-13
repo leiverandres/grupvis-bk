@@ -21,10 +21,11 @@ class BarChartLayout extends Component {
   state = {
     selected: {}
   };
+
   handleOptionChange = (ev, { value }) => {
     this.setState({ selected: value });
-    console.log('selected', value);
   };
+
   render() {
     const { data: { loading, groups } } = this.props;
     const { selected } = this.state;
@@ -42,29 +43,35 @@ class BarChartLayout extends Component {
         selectedData = groups.find(item => selected === item.code);
       }
     }
-    console.log('selectedData', selectedData);
+
     return (
       <div style={{ minHeight: '100vh', width: '80%', margin: '0 auto' }}>
-        <Header size="huge">
-          Grupos de investigación con su calificación en 2015 y 2017
-        </Header>
-        <Dropdown
-          placeholder="Seleccionar un grupo"
-          search
-          selection
-          options={options}
-          fluid
-          onChange={this.handleOptionChange}
-          loading={loading}
-        />
-        {loading && <Spinner name="cube-grid" style={styles.spinner} />}
-        {selectedData && (
-          <Scatterplot
-            data={selectedData}
-            width={1000}
-            height={500}
-            style={styles.chartContainer}
-          />
+        {loading ? (
+          <Spinner name="cube-grid" style={styles.spinner} />
+        ) : (
+          <div>
+            <Header size="huge">
+              Comparación entre convocatorias 737 y 781 por grupo de
+              investigación.
+            </Header>
+            <Dropdown
+              placeholder="Seleccionar un grupo"
+              search
+              selection
+              options={options}
+              fluid
+              onChange={this.handleOptionChange}
+              loading={loading}
+            />
+            {selectedData && (
+              <Scatterplot
+                data={selectedData}
+                width={1000}
+                height={500}
+                style={styles.chartContainer}
+              />
+            )}
+          </div>
         )}
       </div>
     );

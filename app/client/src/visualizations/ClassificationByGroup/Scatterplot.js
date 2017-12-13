@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { select } from 'd3-selection';
 import { scaleBand, scalePoint, scaleOrdinal } from 'd3-scale';
-import { axisBottom, axisLeft } from 'd3-axis';
+import { area } from 'd3-shape';
+
+import { circleColors } from './fixtures.json';
 
 export default class BarChart extends Component {
   componentDidMount() {
@@ -9,7 +11,6 @@ export default class BarChart extends Component {
   }
 
   componentDidUpdate() {
-    console.log('update');
     const svg = select(this.nodeRef);
     svg.selectAll('*').remove();
     this.renderBarChart();
@@ -56,18 +57,7 @@ export default class BarChart extends Component {
       .domain(classifications)
       .range([60, 5]);
 
-    const color = scaleOrdinal(['#4dd0e1', '#81c784']).domain(['2015', '2017']);
-    svg
-      .append('g')
-      .attr('class', 'axis--x')
-      .attr('transform', `translate(0, ${margin.top + chartHeight})`)
-      .call(axisBottom(xScale));
-
-    svg
-      .append('g')
-      .attr('class', 'axis--y')
-      .attr('transform', `translate(${margin.left}, ${margin.top})`)
-      .call(axisLeft(yScale));
+    const color = scaleOrdinal(circleColors).domain(['2015', '2017']);
 
     svg
       .selectAll('.circle')
@@ -79,6 +69,78 @@ export default class BarChart extends Component {
       .attr('cx', d => xScale(d.year) + xScale.padding())
       .attr('cy', d => yScale(d.classification) + yScale.bandwidth())
       .attr('fill', d => color(d.year));
+
+    svg
+      .selectAll('.classification-text')
+      .data(dataArray)
+      .enter()
+      .append('text')
+      .attr('class', 'classification-text')
+      .attr('x', d => xScale(d.year) + xScale.padding())
+      .attr(
+        'y',
+        d =>
+          yScale(d.classification) +
+          yScale.bandwidth() -
+          radius(d.classification) -
+          20
+      )
+      .text(d => d.classification);
+
+    svg
+      .selectAll('.year-text')
+      .data(dataArray)
+      .enter()
+      .append('text')
+      .attr('class', 'year-text')
+      .attr('font-weight', 'bold')
+      .attr('x', d => xScale(d.year) + xScale.padding())
+      .attr(
+        'y',
+        d =>
+          yScale(d.classification) +
+          yScale.bandwidth() +
+          radius(d.classification) +
+          20
+      )
+      .text(d => d.year);
+
+    const joiningLine = area()
+      .x(d => {
+        return xScale(d.year) + xScale.padding();
+      })
+      .y1(
+        d =>
+          yScale(d.classification) +
+          yScale.bandwidth() +
+          radius(d.classification)
+      )
+      .y0(
+        d =>
+          yScale(d.classification) +
+          yScale.bandwidth() -
+          radius(d.classification)
+      );
+
+    const svgDefs = svg.append('defs');
+    svgDefs
+      .append('linearGradient')
+      .attr('id', 'pathGradient')
+      .selectAll('stop')
+      .data([
+        { color: circleColors[0], offset: '0%' },
+        { color: circleColors[1], offset: '100%' }
+      ])
+      .enter()
+      .append('stop')
+      .attr('offset', d => d.offset)
+      .attr('stop-color', d => d.color);
+
+    svg
+      .append('path')
+      .datum(dataArray)
+      .attr('fill', `url(#pathGradient)`)
+      .attr('d', joiningLine);
   };
 
   render() {
