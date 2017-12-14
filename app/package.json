@@ -9,19 +9,17 @@
   "scripts": {
     "start": "node index.js",
     "start-dev": "nodemon index.js",
-    "start-prod": "pm2 start index.js",
+    "start-prod": "export NODE_ENV=production PORT=4000 && pm2 start index.js",
     "build": "cd ./client && yarn build",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "./*.{js,jsx,json,css,html}": [
-      "prettier --single-quote --write",
-      "git add"
-    ]
+    "./*.{js,jsx,json,css,html}": ["prettier --single-quote --write", "git add"]
   },
   "dependencies": {
     "apollo-server-express": "^1.2.0",
     "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "graphql": "^0.11.7",

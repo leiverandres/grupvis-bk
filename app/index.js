@@ -4,13 +4,15 @@ const cors = require('cors');
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
+const compression = require('compression');
 
 const { schema } = require('./src/schema');
 
-const PORT = 4000;
+const PORT = process.env.PORT || 8080;
 const app = express();
 
 app.use(morgan('tiny'));
+app.use(compression());
 app.use(cors());
 app.use(express.static(path.resolve(__dirname, 'client', 'build')));
 
