@@ -68,7 +68,6 @@ class GroupsTableLayout extends Component {
                     accessor: 'classification2015'
                   }
                 ]}
-                pivotBy={['code']}
                 nextText="Siguiente"
                 previousText="Anterior"
                 pageText="Página"
