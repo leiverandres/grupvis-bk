@@ -3,7 +3,9 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import ReactTable from 'react-table';
 import Spinner from 'react-spinkit';
+import { Button, Icon, Grid, Header } from 'semantic-ui-react';
 import 'react-table/react-table.css';
+import axios from 'axios';
 
 const groupsQuery = gql`
   query GroupsInfo {
@@ -24,36 +26,72 @@ class GroupsTableLayout extends Component {
   render() {
     const { data: { loading, groups } } = this.props;
     return (
-      <div>
-        <h1>Grupos de investigación UTP</h1>
-        <div>
+      <Grid>
+        <Grid.Row centered>
+          <Header style={{ fontSize: '3em' }}>
+            Grupos de investigación UTP
+          </Header>
+        </Grid.Row>
+        <Grid.Row style={{ justifyContent: 'right' }}>
+          <Button
+            style={{ marginRight: '5%' }}
+            floated="right"
+            labelPosition="left"
+            icon
+            href="http://localhost:4000/download-report"
+            onClick={() => {
+              console.log('hello');
+              axios
+                .get('/download-report')
+                .then(response => {
+                  const url = window.URL.createObjectURL(
+                    new Blob([response.data])
+                  );
+                  const link = document.createElement('a');
+                  link.href = url;
+                  link.setAttribute('download', 'report.csv');
+                  document.body.appendChild(link);
+                  link.click();
+                })
+                .catch(err => {
+                  console.error(err);
+                });
+            }}
+          >
+            <Icon name="download" />
+            Descargar csv con información de los grupos
+          </Button>
+        </Grid.Row>
+        <Grid.Row>
           {loading ? (
             <Spinner />
           ) : (
-            <ReactTable
-              data={groups}
-              columns={[
-                { Header: 'Código', accessor: 'code' },
-                { Header: 'Nombre', accessor: 'name' },
-                { Header: 'Líder', accessor: 'leader' },
-                { Header: 'Area de conocimiento', accessor: 'knowledgeArea' },
-                { Header: 'Facultad', accessor: 'faculty' },
-                { Header: 'Departamento', accessor: 'dependency' },
-                {
-                  Header: 'Clasificación (737)',
-                  accessor: 'classification2015'
-                }
-              ]}
-              pivotBy={['code']}
-              nextText="Siguiente"
-              previousText="Anterior"
-              pageText="Página"
-              rowsText="Filas"
-              ofText="De"
-            />
+            <Grid.Column width={16}>
+              <ReactTable
+                data={groups}
+                columns={[
+                  { Header: 'Código', accessor: 'code' },
+                  { Header: 'Nombre', accessor: 'name' },
+                  { Header: 'Líder', accessor: 'leader' },
+                  { Header: 'Area de conocimiento', accessor: 'knowledgeArea' },
+                  { Header: 'Facultad', accessor: 'faculty' },
+                  { Header: 'Departamento', accessor: 'dependency' },
+                  {
+                    Header: 'Clasificación (737)',
+                    accessor: 'classification2015'
+                  }
+                ]}
+                pivotBy={['code']}
+                nextText="Siguiente"
+                previousText="Anterior"
+                pageText="Página"
+                rowsText="Filas"
+                ofText="De"
+              />
+            </Grid.Column>
           )}
-        </div>
-      </div>
+        </Grid.Row>
+      </Grid>
     );
   }
 }
