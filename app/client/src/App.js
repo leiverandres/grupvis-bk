@@ -13,9 +13,10 @@ import UnderConstruction from './components/UnderConstruction';
 import BarChartLayout from './visualizations/BigAreaBarChart/BarChartLayout';
 import ScatterChartLayout from './visualizations/ClassificationByGroup/ScatterChartLayout';
 import GroupsTable from './groupsTable/groupsTableLayout';
+import { serverURL } from './config.json';
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: 'http://10.253.51.52:4000/graphql' }),
+  link: new HttpLink({ uri: `${serverURL}/graphql` }),
   cache: new InMemoryCache().restore(window.__APOLLO_STATE__ || {})
 });
 

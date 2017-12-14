@@ -7,6 +7,8 @@ import { Button, Icon, Grid, Header } from 'semantic-ui-react';
 import 'react-table/react-table.css';
 import axios from 'axios';
 
+import { serverURL } from '../config.json';
+
 const groupsQuery = gql`
   query GroupsInfo {
     groups {
@@ -38,7 +40,7 @@ class GroupsTableLayout extends Component {
             floated="right"
             labelPosition="left"
             icon
-            href="http://localhost:4000/download-report"
+            href={`${serverURL}/download-report`}
             onClick={() => {
               console.log('hello');
               axios
