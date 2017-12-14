@@ -5,7 +5,6 @@ import ReactTable from 'react-table';
 import Spinner from 'react-spinkit';
 import { Button, Icon, Grid, Header } from 'semantic-ui-react';
 import 'react-table/react-table.css';
-import axios from 'axios';
 
 import { serverURL } from '../config.json';
 
@@ -34,35 +33,21 @@ class GroupsTableLayout extends Component {
             Grupos de investigación UTP
           </Header>
         </Grid.Row>
-        <Grid.Row style={{ justifyContent: 'right' }}>
-          <Button
-            style={{ marginRight: '5%' }}
-            floated="right"
-            labelPosition="left"
-            icon
-            href={`${serverURL}/download-report`}
-            onClick={() => {
-              console.log('hello');
-              axios
-                .get('/download-report')
-                .then(response => {
-                  const url = window.URL.createObjectURL(
-                    new Blob([response.data])
-                  );
-                  const link = document.createElement('a');
-                  link.href = url;
-                  link.setAttribute('download', 'report.csv');
-                  document.body.appendChild(link);
-                  link.click();
-                })
-                .catch(err => {
-                  console.error(err);
-                });
-            }}
-          >
-            <Icon name="download" />
-            Descargar csv con información de los grupos
-          </Button>
+        <Grid.Row style={{ justifyContent: 'right', marginRight: '2%' }}>
+          <Button.Group>
+            <Button
+              labelPosition="left"
+              icon
+              href={`${serverURL}/download-report`}
+            >
+              <Icon name="download" />
+              Descargar información general
+            </Button>
+            <Button.Or text="o" />
+            <Button href={`${serverURL}/download-products`}>
+              Descargar productos de los grupos
+            </Button>
+          </Button.Group>
         </Grid.Row>
         <Grid.Row>
           {loading ? (

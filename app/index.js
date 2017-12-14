@@ -30,8 +30,13 @@ app.use(
 );
 
 app.get('/download-report', (req, res) => {
-  const filePath = './files/cleaned_up.csv';
-  res.download(filePath, 'report.csv');
+  const filePath = './files/general_report.csv';
+  res.download(filePath, 'reporte_general.csv');
+});
+
+app.get('/download-products', (req, res) => {
+  const filePath = './files/products_report.csv';
+  res.download(filePath, 'reporte_productos.csv');
 });
 
 app.get('/*', (req, res) => {

@@ -1,0 +1,2046 @@
+[
+  {
+    "code": "COL0009752",
+    "name": "Grupo de Investigación en Farmacogenética",
+    "leader": "CARLOS ALBERTO ISAZA MEJIA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002554",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1998 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website":
+      "http://utp.edu.co/institu/cie2/plantilla/grupos/farmacogenetica/farmaco.htm",
+    "email": "caisaza@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Médicas y de la Salud",
+    "knowledgeArea": "Medicina Clínica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "secondaryNationalProgramOfScienceAndTechnology": "Biotecnología",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Departamento de Ciencias Básicas de Medicina"
+  },
+  {
+    "code": "COL0000283",
+    "name": "Administración Económica y Financiera",
+    "leader": "EDUARDO ARTURO CRUZ TREJOS",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002556",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1998 - 8",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://",
+    "email": "ecruz@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ciencias Sociales",
+    "knowledgeArea": "Economía y Negocios",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ingeniería Industrial",
+    "dependency": "Facultad de Ingeniería Industrial"
+  },
+  {
+    "code": "COL0021523",
+    "name": "Estudios del Lenguaje y la Educación",
+    "leader": "MIREYA CISNEROS ESTUPINAN",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002575",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2001 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "www.lenguajeyeducacion.wordpress.com",
+    "email": "mireyace@yahoo.com",
+    "classification2015": "A",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Humanidades",
+    "knowledgeArea": "Idiomas y Literatura",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  de la Educación",
+    "dependency": "Escuela de Español y Comunicacón A.V."
+  },
+  {
+    "code": "COL0000719",
+    "name": "BIODIVERSIDAD Y BIOTECNOLOGÍA",
+    "leader": "ANA MARIA LOPEZ GUTIERREZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002514",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1993 - 2",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://www.utp.edu.co",
+    "email": "ubioteve@utp.edu.co",
+    "classification2015": "A",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias Biológicas",
+    "nationalProgramOfScienceAndTechnology": "Biotecnología",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e innovación en Ambiente, Biodiversidad y Hábitat",
+    "faculty": "Facultad de Ciencias Ambientales",
+    "dependency": "Facultad de Ciencias Ambientales"
+  },
+  {
+    "code": "COL0004264",
+    "name": "Electrofisiología",
+    "leader": "LUIS ENRIQUE LLAMOSA RINCON",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002545",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1994 - 8",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://www.utp.edu.co",
+    "email": "lellamo@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ciencias Médicas y de la Salud",
+    "knowledgeArea": "Ciencias de la Salud",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "secondaryNationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "faculty": "Facultad de Ciencias  Básicas",
+    "dependency": "Departamento de Física"
+  },
+  {
+    "code": "COL0004907",
+    "name": "Filosofía Posmetafísica",
+    "leader": "JULIAN SERNA ARANGO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002563",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1994 - 7",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://",
+    "email": "julserna@utp.edu.co",
+    "classification2015": "A",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Humanidades",
+    "knowledgeArea": "Otras Humanidades",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Bellas Artes y Humanidades",
+    "dependency": "Escuela de Filosofía"
+  },
+  {
+    "code": "COL0006919",
+    "name": "Gestión de Calidad y Normalización Técnica",
+    "leader": "ENIS PAOLA GARCIA GARCIA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002542",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1999 - 2",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://",
+    "email": "qlct@utp.edu.co",
+    "classification2015": "D",
+    "classification2017": "",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Otras Ingenierías y Tecnologías",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "faculty": "Facultad de Ingeniería Industrial",
+    "dependency": "Facultad de Ingeniería Industrial"
+  },
+  {
+    "code": "COL0006948",
+    "name": "Gestión en Agroecosistemas Tropicales Andinos",
+    "leader": "JUAN CARLOS CAMARGO GARCIA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002555",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2000 - 10",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://",
+    "email": "jupipe@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "A1",
+    "bigKnowledgeArea": "Ciencias Agrícolas",
+    "knowledgeArea": "Agricultura, Silvicultura y Pesca",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e innovación en Ambiente, Biodiversidad y Hábitat",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Agropecuarias",
+    "faculty": "Facultad de Ciencias Ambientales",
+    "dependency": "Facultad de Ciencias Ambientales"
+  },
+  {
+    "code": "COL0020393",
+    "name": "Gestión en Cultura y Educación Ambiental",
+    "leader": "CARLOS EDUARDO LOPEZ CASTANO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002584",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2001 - 6",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://culturaymedioambiente.blogspot.com",
+    "email": "cel@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "",
+    "bigKnowledgeArea": "Humanidades",
+    "knowledgeArea": "Otras Humanidades",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e innovación en Ambiente, Biodiversidad y Hábitat",
+    "faculty": "Facultad de Ciencias Ambientales",
+    "dependency": "Facultad de Ciencias Ambientales"
+  },
+  {
+    "code": "COL0035289",
+    "name": "TECNOLOGÍA MECÁNICA",
+    "leader": "EDGAR SALAZAR MARIN",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000001769",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2003 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "edgarsalazar@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingeniería Mecánica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "secondaryNationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "faculty": "Facultad de Tecnología",
+    "dependency": "Escuela Tecnología Mecánica"
+  },
+  {
+    "code": "COL0055361",
+    "name": "Grupo de Investigación en Telecomunicaciones NYQUIST",
+    "leader": "ANA MARIA LOPEZ ECHEVERRY",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000003790",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2006 - 2",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "anamayi@utp.edu.co",
+    "classification2015": "D",
+    "classification2017": "Reconocido",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingenierías Eléctrica, Electrónica e Informática",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Tecnologías de la Información y las Comunicaciones",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "faculty":
+      "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación",
+    "dependency": "Ingeniería de Sistemas y Computación"
+  },
+  {
+    "code": "COL0032581",
+    "name": "Grupo de Investigación en Gestión Energética (GENERGÉTICA)",
+    "leader": "ALVARO HERNAN RESTREPO VICTORIA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000001428",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2004 - 4",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "arestrep@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingeniería Mecánica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ingeniería Mecánica",
+    "dependency": "Facultad de Ingeniería Mecánica"
+  },
+  {
+    "code": "COL0023116",
+    "name": "Grupo Polifenoles",
+    "leader": "LUZ ANGELA VELOZA CASTIBLANCO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000127",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2001 - 2",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://www.utp.edu.co",
+    "email": "lveloza@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias Químicas",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Agropecuarias",
+    "faculty": "Facultad de Tecnología",
+    "dependency": "Escuela de Tecnología Química"
+  },
+  {
+    "code": "COL0014707",
+    "name": "Planeamiento en Sistemas Eléctricos",
+    "leader": "RAMON ALFONSO GALLEGO RENDON",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002525",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1999 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://www.utp.edu.co/~planeamiento",
+    "email": "ragr@utp.edu.co",
+    "classification2015": "A1",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingenierías Eléctrica, Electrónica e Informática",
+    "nationalProgramOfScienceAndTechnology":
+      "Investigaciones en Energía y Minería",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "faculty":
+      "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación",
+    "dependency": "Ingeniería Eléctrica"
+  },
+  {
+    "code": "COL0025925",
+    "name":
+      "Laboratorio de investigación en desarrollo eléctrico y electrónico - LIDER",
+    "leader": "OSCAR GOMEZ CARMONA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000711",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1999 - 6",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "jr@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingenierías Eléctrica, Electrónica e Informática",
+    "nationalProgramOfScienceAndTechnology": "No Aplica",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Investigaciones en Energía y Minería",
+    "faculty": "Facultad de Tecnología",
+    "dependency": "Escuela Tecnología Eléctrica"
+  },
+  {
+    "code": "COL0172223",
+    "name":
+      "Poliglosia-Grupo de investigación en lingüística aplicada a la enseñanza de las lenguas ",
+    "leader": "DOLLY RAMOS GALLEGO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000017426",
+    "classificationDate": null,
+    "foundationDate": "2015 - 6",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://dollytam.wixsite.com/poliglosialbi",
+    "email": "dollytam@utp.edu.co",
+    "classification2015": "",
+    "classification2017": "Reconocido",
+    "bigKnowledgeArea": "Humanidades",
+    "knowledgeArea": "Idiomas y Literatura",
+    "nationalProgramOfScienceAndTechnology": "No Aplica",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Bellas Artes y Humanidades",
+    "dependency": "Facultad de Bellas Artes y Humanidades"
+  },
+  {
+    "code": "COL0164778",
+    "name": "Grupo de Investigación Biomolecular y Pecuaria (BIOPEC)",
+    "leader": "JUAN CARLOS GONZALEZ CORRALES",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000016681",
+    "classificationDate": null,
+    "foundationDate": "2015 - 6",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://blog.utp.edu.co/rinconjuan/",
+    "email": "juancorrales@utp.edu.co",
+    "classification2015": "",
+    "classification2017": "Reconocido",
+    "bigKnowledgeArea": "Ciencias Agrícolas",
+    "knowledgeArea": "Ciencias Veterinarias",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Agropecuarias",
+    "secondaryNationalProgramOfScienceAndTechnology": "Biotecnología",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Facultad de Ciencias de la Salud"
+  },
+  {
+    "code": "COL0140168",
+    "name": "Grupo de Investigacion en reanimacion,urgencias y simulacion",
+    "leader": "GIOVANNI GARCIA CASTRO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000014220",
+    "classificationDate": null,
+    "foundationDate": "2013 - 3",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "giovalinore@utp.edu.co",
+    "classification2015": "",
+    "classification2017": "Reconocido",
+    "bigKnowledgeArea": "Ciencias Médicas y de la Salud",
+    "knowledgeArea": "Medicina Clínica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Facultad de Ciencias de la Salud"
+  },
+  {
+    "code": "COL0006302",
+    "name": "GRUPO DE INVESTIGACIONES ESTADISTICAS Y EPIDEMIOLOGICAS (GIEE)",
+    "leader": "JOSE GERARDO CARDONA TORO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000155",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2002 - 7",
+    "departament": "BOGOTÁ, D. C.",
+    "city": "BOGOTÁ, D.C.",
+    "website": "http://",
+    "email": "jgo7@yahoo.es",
+    "classification2015": "C",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Matemática",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "faculty": "Facultad de Ciencias  Básicas",
+    "dependency": "Facultad de Ciencias  Básicas"
+  },
+  {
+    "code": "COL0038039",
+    "name":
+      "Estudios Metodológicos para la Enseñanza de la Matemática y el uso de las Nuevas Tecnologías de la Información y la Comunicación",
+    "leader": "VIVIAN LIBETH UZURIAGA LOPEZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002063",
+    "classificationDate": null,
+    "foundationDate": "2005 - 5",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "vuzuriaga@utp.edu.co",
+    "classification2015": "",
+    "classification2017": "Reconocido",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Matemática",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  Básicas",
+    "dependency": "Departamento de Matemáticas"
+  },
+  {
+    "code": "COL0173481",
+    "name": "GRUPO  INVESTIGACIÓN  ENFERMEDADES INFECCIOSAS GRIENI",
+    "leader": "JOSE IGNACIO MONCAYO ORTIZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000017552",
+    "classificationDate": null,
+    "foundationDate": "2010 - 2",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "jimo@utp.edu.co",
+    "classification2015": "",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias Biológicas",
+    "nationalProgramOfScienceAndTechnology": "No Aplica",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Departamento de Ciencias Básicas de Medicina"
+  },
+  {
+    "code": "COL0147392",
+    "name": "Crítica y Creación",
+    "leader": "WILLIAM MARIN OSORIO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000014945",
+    "classificationDate": null,
+    "foundationDate": "2011 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "william@utp.edu.co",
+    "classification2015": "",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Humanidades",
+    "knowledgeArea": "Idiomas y Literatura",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  de la Educación",
+    "dependency": "Facultad de Ciencias  de la Educación"
+  },
+  {
+    "code": "COL0118505",
+    "name": "Cultura visual",
+    "leader": "JOHANA GUARIN MEDINA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000011966",
+    "classificationDate": null,
+    "foundationDate": "2011 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "johaguarin@utp.edu.co",
+    "classification2015": "",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Humanidades",
+    "knowledgeArea": "Otras Humanidades",
+    "nationalProgramOfScienceAndTechnology": "No Aplica",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  de la Educación",
+    "dependency": "Facultad de Ciencias  de la Educación"
+  },
+  {
+    "code": "COL0102111",
+    "name": "MECABOT",
+    "leader": "MARIA ELENA LEYES SANCHEZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000010269",
+    "classificationDate": null,
+    "foundationDate": "2010 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://blog.utp.edu.co/members/mecabot",
+    "email": "mecabot@utp.edu.co",
+    "classification2015": "",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingeniería Mecánica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Tecnología",
+    "dependency": "Escuela Tecnología Mecánica"
+  },
+  {
+    "code": "COL0083535",
+    "name": "Filosofía y Escepticismo",
+    "leader": "ALFREDO ABAD",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000007635",
+    "classificationDate": null,
+    "foundationDate": "2008 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "alfredoabad@utp.edu.co",
+    "classification2015": "",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Humanidades",
+    "knowledgeArea": "Otras Humanidades",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Bellas Artes y Humanidades",
+    "dependency": "Escuela de Filosofía"
+  },
+  {
+    "code": "COL0025246",
+    "name": "Gravitación y Teorías Unificadas",
+    "leader": "JOHN QUIROGA HURTADO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000643",
+    "classificationDate": null,
+    "foundationDate": "2000 - 5",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "jquiroga@utp.edu.co",
+    "classification2015": "",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias Físicas",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  Básicas",
+    "dependency": "Facultad de Ciencias  Básicas"
+  },
+  {
+    "code": "COL0113302",
+    "name": "GRUPO DE INVESTIGACIÓN EN MEDICINA INTERNA",
+    "leader": "TATIANA ALVAREZ VERA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000011433",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2010 - 8",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website":
+      "http://www.utp.edu.co/vicerrectoria/investigaciones/investigaciones/integrantes/263/grupo",
+    "email": "merivera@utp.edu.co",
+    "classification2015": "D",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Médicas y de la Salud",
+    "knowledgeArea": "Medicina Clínica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Facultad de Ciencias de la Salud"
+  },
+  {
+    "code": "COL0077242",
+    "name": "FILOSOFIA Y MEMORIA",
+    "leader": "ALBERTO ANTONIO BERON OSPINA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000006929",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2008 - 4",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "alveos@gmail.com",
+    "classification2015": "C",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Humanidades",
+    "knowledgeArea": "Otras Humanidades",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  de la Educación",
+    "dependency": "Escuela de Ciencias Sociales"
+  },
+  {
+    "code": "COL0055709",
+    "name": "GEDNOL",
+    "leader": "PEDRO PABLO CARDENAS ALZATE",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000003812",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2005 - 8",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "www.ppablo.com",
+    "email": "ppablo@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Matemática",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  Básicas",
+    "dependency": "Departamento de Matemáticas"
+  },
+  {
+    "code": "COL0053643",
+    "name": "Investigación en Conceptos Emergentes de Energía Eléctrica - ICE3",
+    "leader": "JUAN JOSE MORA FLOREZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000003681",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2003 - 3",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "jjmora@utp.edu.co",
+    "classification2015": "A",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingenierías Eléctrica, Electrónica e Informática",
+    "nationalProgramOfScienceAndTechnology":
+      "Investigaciones en Energía y Minería",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "faculty":
+      "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación",
+    "dependency": "Ingeniería Eléctrica"
+  },
+  {
+    "code": "COL0025649",
+    "name": "Grupo de Fisiología Celular y Aplicada",
+    "leader": "JULIO CESAR SANCHEZ NARANJO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000683",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2004 - 4",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "jcsanchez@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ciencias Médicas y de la Salud",
+    "knowledgeArea": "Medicina Básica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "secondaryNationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Departamento de Ciencias Básicas de Medicina"
+  },
+  {
+    "code": "COL0055405",
+    "name": "GIMAV - UTP (Grupo de Investigación en Materiales Avanzados)",
+    "leader": "JOSE LUIS TRISTANCHO REYES",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000003794",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2004 - 8",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "josetris@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingeniería Mecánica",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Investigaciones en Energía y Minería",
+    "faculty": "Facultad de Ingeniería Mecánica",
+    "dependency": "Facultad de Ingeniería Mecánica"
+  },
+  {
+    "code": "COL0021809",
+    "name":
+      "ESTUDIO Y APLICACIÓN DE HERRAMIENTAS ESTADISTICAS MODERNAS EN LA SOLUCIÓN DE PROBLEMAS DEL ENTORNO",
+    "leader": "ALVARO ANTONIO TREJOS CARPINTERO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000285",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2003 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "utpgiem@gmail.com",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Matemática",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ingeniería Industrial",
+    "dependency": "Facultad de Ingeniería Industrial"
+  },
+  {
+    "code": "COL0008094",
+    "name": "GEIO Grupo en la Enseñanza de la Investigación de Operaciones",
+    "leader": "WILSON ARENAS VALENCIA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002574",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1999 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "industrial.utp.edu.co/laboratorios/investigacion-operaciones",
+    "email": "geio@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingeniería Civil",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "faculty": "Facultad de Ingeniería Industrial",
+    "dependency": "Facultad de Ingeniería Industrial"
+  },
+  {
+    "code": "COL0028219",
+    "name": "Arte y Cultura",
+    "leader": "AURA MARGARITA CALLE GUERRA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000982",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1999 - 2",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://utp.edu.co",
+    "email": "aumar@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Humanidades",
+    "knowledgeArea": "Otras Humanidades",
+    "nationalProgramOfScienceAndTechnology": "No Aplica",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "faculty": "Facultad de Bellas Artes y Humanidades",
+    "dependency": "Escuela de Artes Plásticas"
+  },
+  {
+    "code": "COL0026029",
+    "name": "Plasma, Láser y Aplicaciones",
+    "leader": "HENRY RIASCOS LANDAZURI",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000721",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2002 - 5",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "hriascos@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias Físicas",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  Básicas",
+    "dependency": "Departamento de Física"
+  },
+  {
+    "code": "COL0154127",
+    "name": "TransFórmate",
+    "leader": "CESAR AUGUSTO MARIN MORENO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000015616",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2003 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "cmarin@integra.com.co",
+    "classification2015": "B",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Otras Ingenierías y Tecnologías",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Tecnologías de la Información y las Comunicaciones",
+    "faculty": "Vicerrectoría de Investigaciones innovación y Extensión",
+    "dependency": "Vicerrectoría de Investigaciones innovación y Extensión"
+  },
+  {
+    "code": "COL0113572",
+    "name": "Grupo de Investigación en Pensamiento Matemático y Comunicación",
+    "leader": "OSCAR FERNANDEZ SANCHEZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000011460",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2009 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "oscarf@utp.edu.co",
+    "classification2015": "D",
+    "classification2017": "Reconocido",
+    "bigKnowledgeArea": "Ciencias Sociales",
+    "knowledgeArea": "Ciencias de la Educación",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  Básicas",
+    "dependency": "Departamento de Matemáticas"
+  },
+  {
+    "code": "COL0111451",
+    "name": "Producción Pecuaria Sostenible ",
+    "leader": "JUAN CARLOS RINCON FLOREZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000011246",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2010 - 12",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "rincon.juan@utp.edu.co",
+    "classification2015": "D",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Agrícolas",
+    "knowledgeArea": "Ciencias Animales y Lechería",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Agropecuarias",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Facultad de Ciencias de la Salud"
+  },
+  {
+    "code": "COL0006886",
+    "name": "Gestión Ambiental Territorial -GAT-",
+    "leader": "TITO MORALES PINZON",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002576",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2000 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://blog.utp.edu.co/gatutp/",
+    "email": "gat@utp.edu.co",
+    "classification2015": "A",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias de la Tierra y Medioambientales",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e innovación en Ambiente, Biodiversidad y Hábitat",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias Ambientales",
+    "dependency": "Facultad de Ciencias Ambientales"
+  },
+  {
+    "code": "COL0002859",
+    "name": "Automática",
+    "leader": "ALVARO ANGEL OROZCO GUTIERREZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002515",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1999 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://ohm.utp.edu.co/gci/",
+    "email": "aaog@utp.edu.co",
+    "classification2015": "A1",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingenierías Eléctrica, Electrónica e Informática",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Tecnologías de la Información y las Comunicaciones",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "faculty":
+      "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación",
+    "dependency": "Ingeniería Eléctrica"
+  },
+  {
+    "code": "COL0026609",
+    "name": "Grupo de Investigación en Astroingeniería Alfa Orión",
+    "leader": "EDWIN ANDRES QUINTERO SALAZAR",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000008800",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2008 - 6",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://observatorioastronomico.utp.edu.co/",
+    "email": "equintero@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias Físicas",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Tecnologías de la Información y las Comunicaciones",
+    "secondaryNationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "faculty": "Facultad de Ciencias  Básicas",
+    "dependency": "Departamento de Física"
+  },
+  {
+    "code": "COL0067012",
+    "name": "ROBÓTICA APLICADA",
+    "leader": "JOSE ANDRES CHAVES OSORIO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000006684",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2007 - 11",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "https://sites.google.com/site/gruporoboticaaplicada/",
+    "email": "jachaves@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingenierías Eléctrica, Electrónica e Informática",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Tecnologías de la Información y las Comunicaciones",
+    "faculty": "Facultad de Ciencias  Básicas",
+    "dependency": "Departamento de Física"
+  },
+  {
+    "code": "COL0017379",
+    "name": "OLEOQUIMICA",
+    "leader": "GLORIA EDITH GUERRERO ALVAREZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000611",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2003 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://academia.utp.edu.co/oleoquimica/",
+    "email": "gguerrero@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias Químicas",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Agropecuarias",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Tecnología",
+    "dependency": "Escuela de Tecnología Química"
+  },
+  {
+    "code": "COL0020357",
+    "name": "Investigación y Desarrollo en Cultura de la Salud ",
+    "leader": "JOSE CARLOS GIRALDO TRUJILLO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000515",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2002 - 4",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "vesalius.utp.edu.co/culturadelasalud",
+    "email": "jocagirt@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Médicas y de la Salud",
+    "knowledgeArea": "Ciencias de la Salud",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Facultad de Ciencias de la Salud"
+  },
+  {
+    "code": "COL0031477",
+    "name": "CONTROL AUTOMÁTICO",
+    "leader": "DIDIER GIRALDO BUITRAGO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000005134",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2005 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "https://sites.google.com/utp.edu.co/controlautomatico",
+    "email": "egiraldos@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingenierías Eléctrica, Electrónica e Informática",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Investigaciones en Energía y Minería",
+    "faculty":
+      "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación",
+    "dependency": "Ingeniería Eléctrica"
+  },
+  {
+    "code": "COL0025783",
+    "name": "POLÍTICAS, SOCIABILIDADES Y REPRESENTACIONES HISTÓRICO-EDUCATIVAS",
+    "leader": "ALVARO ACEVEDO TARAZONA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000703",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2000 - 6",
+    "departament": "SANTANDER",
+    "city": "BUCARAMANGA",
+    "website": "",
+    "email": "tarazona20@gmail.com",
+    "classification2015": "A",
+    "classification2017": "A1",
+    "bigKnowledgeArea": "Ciencias Sociales",
+    "knowledgeArea": "Ciencias de la Educación",
+    "nationalProgramOfScienceAndTechnology": "No Aplica",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "faculty": "Facultad de Ciencias  de la Educación",
+    "dependency": "Escuela de Ciencias Sociales"
+  },
+  {
+    "code": "COL0027008",
+    "name":
+      "Diseño y construccion de prototipos para experimentos de demostracion",
+    "leader": "HUGO ARMANDO GALLEGO BECERRA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000819",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2002 - 7",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "ugo@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias Físicas",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  Básicas",
+    "dependency": "Departamento de Física"
+  },
+  {
+    "code": "COL0019777",
+    "name": "Grupo de Estudio del Recurso Hidrico",
+    "leader": "CARLOS HUMBERTO MONTOYA NAVARRETE",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000411",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1989 - 2",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "camontoy@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias Químicas",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e innovación en Ambiente, Biodiversidad y Hábitat",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "faculty": "Facultad de Tecnología",
+    "dependency": "Escuela de Tecnología Química"
+  },
+  {
+    "code": "COL0003383",
+    "name": "Desarrollo Humano y Organizacional",
+    "leader": "SANDRA ESTRADA MEJIA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002560",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1995 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://utp.edu.co/~fii/i_desa_hum.htm",
+    "email": "desahu@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ciencias Sociales",
+    "knowledgeArea": "Economía y Negocios",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "faculty": "Facultad de Ingeniería Industrial",
+    "dependency": "Facultad de Ingeniería Industrial"
+  },
+  {
+    "code": "COL0084569",
+    "name": "GAOPE",
+    "leader": "ELIANA MIRLEDY TORO OCAMPO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000007744",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2004 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "elianam@utp.edu.co",
+    "classification2015": "A1",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Otras Ingenierías y Tecnologías",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ingeniería Industrial",
+    "dependency": "Facultad de Ingeniería Industrial"
+  },
+  {
+    "code": "COL0021597",
+    "name": "BASICO-CLINICA Y APLICADAS",
+    "leader": "CARLOS EDUARDO NIETO GARCIA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002552",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2000 - 6",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://www.utp.edu.co",
+    "email": "centromedicinadeportiva@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Médicas y de la Salud",
+    "knowledgeArea": "Medicina Clínica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Escuela de Medicina"
+  },
+  {
+    "code": "COL0001638",
+    "name": "COMUNICACION EDUCATIVA",
+    "leader": "OLGA LUCIA BEDOYA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002562",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1997 - 8",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://comunicacioneducativa.edu.co",
+    "email": "olbedoya@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ciencias Sociales",
+    "knowledgeArea": "Ciencias de la Educación",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  de la Educación",
+    "dependency": "Facultad de Ciencias  de la Educación"
+  },
+  {
+    "code": "COL0145289",
+    "name": "CONFORMAT",
+    "leader": "OSCAR FABIAN HIGUERA COBOS",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000014731",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2013 - 10",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "oscarhiguera@mail.uniatlantico.edu.co",
+    "classification2015": "D",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingeniería de los Materiales",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Investigaciones en Energía y Minería",
+    "faculty": "Facultad de Ingeniería Mecánica",
+    "dependency": "Facultad de Ingeniería Mecánica"
+  },
+  {
+    "code": "COL0033542",
+    "name": "Materiales de Ingeniería (GIMI)",
+    "leader": "DAIRO HERNAN MESA GRAJALES",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000001576",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2003 - 3",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://academia.utp.edu.co/materiales-de-ingenieria/",
+    "email": "dhmesa@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingeniería de los Materiales",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "faculty": "Facultad de Tecnología",
+    "dependency": "Escuela Tecnología Mecánica"
+  },
+  {
+    "code": "COL0156444",
+    "name":
+      "Química de Coordinación y organometálica en Materiales Moleculares y Sistemas Biológicos. (QCOMMMB).",
+    "leader": "YENNY PATRICIA AVILA TORRES",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000015848",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2013 - 2",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://blog.utp.edu.co/qcommsb/",
+    "email": "yennypatricia.avila@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias Químicas",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Seguridad y Defensa",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Tecnología",
+    "dependency": "Escuela de Tecnología Química"
+  },
+  {
+    "code": "COL0079917",
+    "name": "Ecología, Ingeniería y Sociedad",
+    "leader": "JUAN MAURICIO CASTANO ROJAS",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000007272",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2008 - 5",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "jmc@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias de la Tierra y Medioambientales",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e innovación en Ambiente, Biodiversidad y Hábitat",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias Ambientales",
+    "dependency": "Facultad de Ciencias Ambientales"
+  },
+  {
+    "code": "COL0024249",
+    "name": "Grupo de Investigacion en Ciencias Quirurgicas",
+    "leader": "JULIANA BUITRAGO JARAMILLO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000468",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2004 - 3",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "blog.utp.edu.co/cirugia",
+    "email": "julianab@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Médicas y de la Salud",
+    "knowledgeArea": "Medicina Clínica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Departamento de Ciencias Clínicas"
+  },
+  {
+    "code": "COL0070081",
+    "name": "Vulnerabilidad y Salud Publica",
+    "leader": "GERMAN ALBERTO MORENO GOMEZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000006785",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2006 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "gamor@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Médicas y de la Salud",
+    "knowledgeArea": "Ciencias de la Salud",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Departamento de Ciencias Clínicas"
+  },
+  {
+    "code": "COL0068216",
+    "name": "Procesos de Manufactura y Diseño de máquinas",
+    "leader": "HECTOR FABIO QUINTERO RIAZA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000004320",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2004 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "hquinte@utp.edu.co",
+    "classification2015": "A",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingeniería Mecánica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Agropecuarias",
+    "faculty": "Facultad de Ingeniería Mecánica",
+    "dependency": "Facultad de Ingeniería Mecánica"
+  },
+  {
+    "code": "COL0037523",
+    "name": "ADA",
+    "leader": "JOSE GILBERTO VARGAS CANO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002012",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2005 - 4",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "gilberto@utp.edu.co",
+    "classification2015": "D",
+    "classification2017": "",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingenierías Eléctrica, Electrónica e Informática",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Tecnologías de la Información y las Comunicaciones",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "faculty":
+      "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación",
+    "dependency": "Ingeniería de Sistemas y Computación"
+  },
+  {
+    "code": "COL0048169",
+    "name": "GIA - GRUPO DE INVESTIGACION EN INTELIGENCIA ARTIFICIAL",
+    "leader": "JULIO CESAR CHAVARRO PORRAS",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000003105",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2005 - 7",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "gia@utp.edu.co",
+    "email": "jchavar@utp.edu.co",
+    "classification2015": "D",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Computación y Ciencias de la Información",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Tecnologías de la Información y las Comunicaciones",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty":
+      "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación",
+    "dependency": "Ingeniería de Sistemas y Computación"
+  },
+  {
+    "code": "COL0060361",
+    "name": "SALUD PÚBLICA E INFECCIÓN",
+    "leader": "GUILLERMO LAGOS GRISALES",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000003999",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2006 - 4",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://www.utp.edu.co/",
+    "email": "glagos@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "A1",
+    "bigKnowledgeArea": "Ciencias Médicas y de la Salud",
+    "knowledgeArea": "Medicina Clínica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "secondaryNationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Facultad de Ciencias de la Salud"
+  },
+  {
+    "code": "COL0140462",
+    "name": "Estudios políticos y jurídicos",
+    "leader": "ALVARO DIAZ GOMEZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000014250",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2013 - 2",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "adiaz@utp.edu.co",
+    "classification2015": "D",
+    "classification2017": "Reconocido",
+    "bigKnowledgeArea": "Ciencias Sociales",
+    "knowledgeArea": "Ciencias Políticas",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Bellas Artes y Humanidades",
+    "dependency": "Departamento de Humanidades e Idiomas"
+  },
+  {
+    "code": "COL0020348",
+    "name": "Análisis Envolvente de Datos / Data Envelopment Analysis",
+    "leader": "JOSE ADALBERTO SOTO MEJIA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000322",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2003 - 5",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "jomejia@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Matemática",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ingeniería Industrial",
+    "dependency": "Facultad de Ingeniería Industrial"
+  },
+  {
+    "code": "COL0069563",
+    "name": "Grupo de Investigación en Geometría y Algebra GIGA",
+    "leader": "YURI ALEXANDER POVEDA QUINONES",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000006762",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2008 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "yapoveda@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Matemática",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  Básicas",
+    "dependency": "Departamento de Matemáticas"
+  },
+  {
+    "code": "COL0072961",
+    "name": "Grupo de Investigación en Movilidad Humana",
+    "leader": "MARIA DEL PILAR TRIANA GIRALDO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000004653",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2003 - 8",
+    "departament": "RISARALDA",
+    "city": "DOSQUEBRADAS",
+    "website": "http://www.cemhco.org",
+    "email": "maria.triana@unad.edu.co",
+    "classification2015": "D",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Sociales",
+    "knowledgeArea": "Sociología",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Bellas Artes y Humanidades",
+    "dependency": "Escuela de Filosofía"
+  },
+  {
+    "code": "COL0119208",
+    "name": "Gerencia en sistemas de salud",
+    "leader": "DIOMEDES TABIMA GARCIA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000012043",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2010 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "dtabima@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ciencias Médicas y de la Salud",
+    "knowledgeArea": "Ciencias de la Salud",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Facultad de Ciencias de la Salud"
+  },
+  {
+    "code": "COL0056387",
+    "name": "L'H",
+    "leader": "OSCAR SALAMANCA ANGARITA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000003852",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2006 - 3",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "salamanca@utp.edu.co",
+    "classification2015": "D",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Humanidades",
+    "knowledgeArea": "Idiomas y Literatura",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Bellas Artes y Humanidades",
+    "dependency": "Facultad de Bellas Artes y Humanidades"
+  },
+  {
+    "code": "COL0041992",
+    "name": "Desarrollo en Investigación Operativa (DINOP)",
+    "leader": "MAURICIO GRANADA ECHEVERRI",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002504",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2000 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "www.utp.edu.co/~dino",
+    "email": "magra@utp.edu.co",
+    "classification2015": "A1",
+    "classification2017": "A1",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Otras Ingenierías y Tecnologías",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Investigaciones en Energía y Minería",
+    "faculty":
+      "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación",
+    "dependency": "Ingeniería Eléctrica"
+  },
+  {
+    "code": "COL0037256",
+    "name":
+      "GRUPO DE INVESTIGACIÓN DE FARMACOEPIDEMIOLOGIA Y FARMACOVIGILANCIA",
+    "leader": "JORGE ENRIQUE MACHADO ALBA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000001985",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2002 - 2",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "machado@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ciencias Médicas y de la Salud",
+    "knowledgeArea": "Medicina Clínica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Departamento de Ciencias Básicas de Medicina"
+  },
+  {
+    "code": "COL0027071",
+    "name":
+      "Grupo de investigación para la productividad y la competitividad en las organizaciones",
+    "leader": "JOHN JAIRO SANCHEZ CASTRO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000826",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2000 - 9",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "jasaca@utp.edu.co",
+    "classification2015": "D",
+    "classification2017": "",
+    "bigKnowledgeArea": "Ciencias Sociales",
+    "knowledgeArea": "Geografía Social y Económica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "faculty": "Facultad de Tecnología",
+    "dependency": "Escuela Tecnología Industrial"
+  },
+  {
+    "code": "COL0100037",
+    "name": "Grupo de Investigación en Fotocatálisis y Estado Sólido (GIFES)",
+    "leader": "HOOVER ALBEIRO VALENCIA SANCHEZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000010059",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2010 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "hvalencia@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias Químicas",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Investigaciones en Energía y Minería",
+    "faculty": "Facultad de Tecnología",
+    "dependency": "Escuela de Tecnología Química"
+  },
+  {
+    "code": "COL0014995",
+    "name": "Producción más Limpia",
+    "leader": "JORGE AUGUSTO MONTOYA ARANGO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002579",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1999 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://www.produccionmaslimpia.org",
+    "email": "jorgemontoya@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias de la Tierra y Medioambientales",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e innovación en Ambiente, Biodiversidad y Hábitat",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "faculty": "Facultad de Ciencias Ambientales",
+    "dependency": "Facultad de Ciencias Ambientales"
+  },
+  {
+    "code": "COL0080865",
+    "name": "Estadística e Investigación Social (ISE)",
+    "leader": "JOSE RUBIEL BEDOYA SANCHEZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000007368",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2005 - 1",
+    "departament": "BOGOTÁ, D. C.",
+    "city": "BOGOTÁ, D.C.",
+    "website": "",
+    "email": "null",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Matemática",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "faculty": "Facultad de Ciencias  Básicas",
+    "dependency": "Departamento de Matemáticas"
+  },
+  {
+    "code": "COL0072255",
+    "name": "GRANDE. (GRUPO DE AVANZADA EN DESARROLLO DE SOFTWARE)",
+    "leader": "LUZ ESTELA VALENCIA AYALA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000008488",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2008 - 10",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "www.grande.com.co",
+    "email": "grande@utp.edu.co",
+    "classification2015": "D",
+    "classification2017": "Reconocido",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingenierías Eléctrica, Electrónica e Informática",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Tecnologías de la Información y las Comunicaciones",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "faculty":
+      "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación",
+    "dependency": "Ingeniería de Sistemas y Computación"
+  },
+  {
+    "code": "COL0020339",
+    "name": "Agua y Saneamiento",
+    "leader": "DIEGO PAREDES CUERVO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002540",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1999 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://www.aguaysaneamientoutp.info",
+    "email": "aguaysaneamiento@utp.edu.co",
+    "classification2015": "A",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingeniería Ambiental",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e innovación en Ambiente, Biodiversidad y Hábitat",
+    "secondaryNationalProgramOfScienceAndTechnology": "Biotecnología",
+    "faculty": "Facultad de Ciencias Ambientales",
+    "dependency": "Facultad de Ciencias Ambientales"
+  },
+  {
+    "code": "COL0056939",
+    "name": "Gestión de Sistemas Eléctricos, Electrónicos y Automáticos",
+    "leader": "MAURICIO HOLGUIN LONDONO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000003877",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2006 - 4",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website":
+      "https://sites.google.com/a/utp.edu.co/mauricioholguin/GrupoInvest",
+    "email": "mau.hol@utp.edu.co",
+    "classification2015": "",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingenierías Eléctrica, Electrónica e Informática",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Tecnologías de la Información y las Comunicaciones",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "faculty":
+      "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación",
+    "dependency":
+      "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación"
+  },
+  {
+    "code": "COL0061304",
+    "name": "LOGISTICA: ESTRATEGIA DE LA CADENA DE SUMINISTRO",
+    "leader": "PEDRO PABLO BALLESTEROS SILVA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000006299",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2007 - 10",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "ppbs@utp.edu.co",
+    "classification2015": "D",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Otras Ingenierías y Tecnologías",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Tecnología",
+    "dependency": "Escuela Tecnología Industrial"
+  },
+  {
+    "code": "COL0073412",
+    "name": "Campos Electromagnéticos y Fenómenos Energéticos",
+    "leader": "DIEGO GONZALES OCAMPO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000004682",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2006 - 9",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "www.elcondensador.net",
+    "email": "almo@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingenierías Eléctrica, Electrónica e Informática",
+    "nationalProgramOfScienceAndTechnology":
+      "Investigaciones en Energía y Minería",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "faculty":
+      "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación",
+    "dependency": "Ingeniería Eléctrica"
+  },
+  {
+    "code": "COL0026726",
+    "name": "EPIDEMIOLOGÍA SALUD Y VIOLENCIA",
+    "leader": "JOSE WILLIAM MARTINEZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000791",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2004 - 5",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "jose01william@gmail.com",
+    "classification2015": "A",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Ciencias Médicas y de la Salud",
+    "knowledgeArea": "Medicina Clínica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Departamento de Medicina Comunitaria"
+  },
+  {
+    "code": "COL0025291",
+    "name":
+      "Investigación en propiedades magnéticas y magneto-ópticas de nuevos materiales",
+    "leader": "BEATRIZ CRUZ MUNOZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000648",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2003 - 10",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "bcruz@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "B",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias Físicas",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  Básicas",
+    "dependency": "Departamento de Física"
+  },
+  {
+    "code": "COL0007829",
+    "name": "Grupo de Biotecnología-Productos Naturales",
+    "leader": "OSCAR MARINO MOSQUERA MARTINEZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002506",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1996 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "academia.utp.edu.co/bpn/",
+    "email": "omosquer@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Ciencias Químicas",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology": "Biotecnología",
+    "faculty": "Facultad de Tecnología",
+    "dependency": "Escuela de Tecnología Química"
+  },
+  {
+    "code": "COL0135954",
+    "name": "Grupo de Ecuaciones Diferenciales y Aplicaciones (Gredya)",
+    "leader": "ALEXANDER GUTIERREZ GUTIERREZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000013798",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2011 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "alexguti@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Matemática",
+    "nationalProgramOfScienceAndTechnology": "Ciencias Básicas",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  Básicas",
+    "dependency": "Departamento de Matemáticas"
+  },
+  {
+    "code": "COL0012749",
+    "name": "Investigación en educación y pedagogía",
+    "leader": "MARIA VICTORIA ALZATE PIEDRAHITA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002568",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1996 - 3",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://educacion.utp.edu.co",
+    "email": "mgomez@utp.edu.co",
+    "classification2015": "A",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Ciencias Sociales",
+    "knowledgeArea": "Psicología",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  de la Educación",
+    "dependency": "Departamento de Psicopedagogía"
+  },
+  {
+    "code": "COL0056199",
+    "name": "INFECCIÓN E INMUNIDAD",
+    "leader": "JUAN CARLOS SEPULVEDA ARIAS",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000003842",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2006 - 3",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "jcsepulv@utp.edu.co",
+    "classification2015": "A1",
+    "classification2017": "A1",
+    "bigKnowledgeArea": "Ciencias Médicas y de la Salud",
+    "knowledgeArea": "Medicina Clínica",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Salud",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias de la Salud",
+    "dependency": "Facultad de Ciencias de la Salud"
+  },
+  {
+    "code": "COL0034915",
+    "name": "Estudios Regionales sobre Literatura y Cultura",
+    "leader": "RIGOBERTO GIL MONTOYA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000001732",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2000 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "rigoroso@utp.edu.co",
+    "classification2015": "C",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Humanidades",
+    "knowledgeArea": "Idiomas y Literatura",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  de la Educación",
+    "dependency": "Escuela de Español y Comunicacón A.V."
+  },
+  {
+    "code": "COL0035995",
+    "name": "Grupo Sirius",
+    "leader": "JUAN DAVID HINCAPIE ZEA",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000001840",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2004 - 11",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://sirius.utp.edu.co",
+    "email": "info@sirius.utp.edu.co",
+    "classification2015": "A",
+    "classification2017": "A1",
+    "bigKnowledgeArea": "Ciencias Naturales",
+    "knowledgeArea": "Computación y Ciencias de la Información",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Tecnologías de la Información y las Comunicaciones",
+    "secondaryNationalProgramOfScienceAndTechnology": "Biotecnología",
+    "faculty":
+      "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación",
+    "dependency": "Ingeniería de Sistemas y Computación"
+  },
+  {
+    "code": "COL0008432",
+    "name": "Grupo de Fenomenología y Teoría Crítica de la Sociedad",
+    "leader": "PEDRO JUAN ARISTIZABAL HOYOS",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000002564",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2000 - 10",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "http://",
+    "email": "juansipaso@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "C",
+    "bigKnowledgeArea": "Humanidades",
+    "knowledgeArea": "Otras Humanidades",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Bellas Artes y Humanidades",
+    "dependency": "Escuela de Filosofía"
+  },
+  {
+    "code": "COL0027198",
+    "name": "Educación y Desarrollo Humano",
+    "leader": "MARTHA CECILIA GUTIERREZ GIRALDO",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000838",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "2002 - 7",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "www.utp.edu.co",
+    "email": "mgutierrez@utp.edu.co",
+    "classification2015": "A",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Ciencias Sociales",
+    "knowledgeArea": "Ciencias de la Educación",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ciencias Humanas, Sociales y  Educación",
+    "secondaryNationalProgramOfScienceAndTechnology": "No Aplica",
+    "faculty": "Facultad de Ciencias  de la Educación",
+    "dependency": "Departamento de Psicopedagogía"
+  },
+  {
+    "code": "COL0025979",
+    "name": "Electrónica de Potencia",
+    "leader": "ALFONSO ALZATE GOMEZ",
+    "grouplacURL":
+      "http://scienti.colciencias.gov.co:8080/gruplac/jsp/visualiza/visualizagr.jsp?nro=00000000000716",
+    "classificationDate": "Convocatoria 781 de 2017",
+    "foundationDate": "1996 - 1",
+    "departament": "RISARALDA",
+    "city": "PEREIRA",
+    "website": "",
+    "email": "alalzate@utp.edu.co",
+    "classification2015": "B",
+    "classification2017": "A",
+    "bigKnowledgeArea": "Ingeniería y Tecnología",
+    "knowledgeArea": "Ingenierías Eléctrica, Electrónica e Informática",
+    "nationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Ingeniería",
+    "secondaryNationalProgramOfScienceAndTechnology":
+      "Ciencia, Tecnología e Innovación en Tecnologías de la Información y las Comunicaciones",
+    "faculty":
+      "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación",
+    "dependency": "Ingeniería Eléctrica"
+  }
+]
