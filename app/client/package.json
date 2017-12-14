@@ -7,6 +7,7 @@
     "apollo-client": "^2.0.3",
     "apollo-link": "^1.0.3",
     "apollo-link-http": "^1.0.0",
+    "axios": "^0.17.1",
     "d3-array": "^1.2.1",
     "d3-axis": "^1.0.8",
     "d3-brush": "^1.0.4",
@@ -37,5 +38,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "192.168.1.193:4000/"
+  "homepage": "192.168.0.102:4000/"
 }
