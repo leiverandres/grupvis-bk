@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import Spinner from 'react-spinkit';
-import { Header } from 'semantic-ui-react';
+import { Header, List } from 'semantic-ui-react';
 
 import BarChart from './BarChart';
 import './BarChart.css';
@@ -111,22 +111,43 @@ class BarChartLayout extends Component {
               Grupos de investigación por gran area
               <Header.Subheader>Clasificación 2015 vs 2017</Header.Subheader>
             </Header>
-
-            <BarChart
-              dataArray={dataCount2015}
-              classificationLabels={['A1', 'A', 'B', 'C', 'D', 'Reg']}
-              size={[500, 500]}
-              width={1200}
-              height={500}
-              style={styles.chartContainer}
-            />
-            <BarChart
-              dataArray={dataCount2017}
-              classificationLabels={['A1', 'A', 'B', 'C', 'SC', 'NP']}
-              size={[500, 500]}
-              width={1200}
-              height={500}
-            />
+            <div style={{ marginLeft: '5%', textAlign: 'left', width: '50%' }}>
+              <Header size="medium">Convenciones de siglas</Header>
+              <List>
+                <List.Item>
+                  <List.Header>Reg</List.Header>
+                  Grupos registrados en Colciencias, pero sin clasificación para
+                  la convocatoria 737.
+                </List.Item>
+                <List.Item>
+                  <List.Header>SC</List.Header>
+                  Grupos reconocidos, pero sin clasificación.
+                </List.Item>
+                <List.Item>
+                  <List.Header>NP</List.Header>
+                  Grupos que no participaron en la convocatoria 781.
+                </List.Item>
+              </List>
+            </div>
+            <div style={{ marginTop: '4em' }}>
+              <Header size="Huge">Convocatoria 737 (2015)</Header>
+              <BarChart
+                dataArray={dataCount2015}
+                classificationLabels={['A1', 'A', 'B', 'C', 'D', 'Reg']}
+                size={[500, 500]}
+                width={1200}
+                height={500}
+                style={styles.chartContainer}
+              />
+              <Header size="Huge">Convocatoria 781 (2017)</Header>
+              <BarChart
+                dataArray={dataCount2017}
+                classificationLabels={['A1', 'A', 'B', 'C', 'SC', 'NP']}
+                size={[500, 500]}
+                width={1200}
+                height={500}
+              />
+            </div>
           </div>
         )}
       </div>
