@@ -8,36 +8,7 @@ import { transition } from 'd3-transition';
 import { easeExpIn } from 'd3-ease';
 
 import './BarChart.css';
-
-const constants = {
-  classificationLabels: ['A1', 'A', 'B', 'C', 'D', 'Reg'],
-  faculties: [
-    'Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación',
-    'Facultad de Ingeniería Industrial',
-    'Facultad de Ciencias Ambientales',
-    'Facultad de Bellas Artes y Humanidades',
-    'Facultad de Ciencias de la Salud',
-    'Facultad de Ciencias  de la Educación',
-    'Facultad de Ingeniería Mecánica',
-    'Facultad de Ciencias  Básicas',
-    'Facultad de Tecnología',
-    'Vicerrectoría de Investigaciones innovación y Extensión'
-  ],
-  colors: [
-    '#8dd3c7',
-    '#ffffb3',
-    '#bebada',
-    '#fb8072',
-    '#80b1d3',
-    '#fdb462',
-    '#b3de69',
-    '#fccde5',
-    '#d9d9d9',
-    '#bc80bd',
-    '#ccebc5',
-    '#ffed6f'
-  ]
-};
+import { faculties, colors } from './fixtures.json';
 
 export default class BarChart extends Component {
   componentDidMount() {
@@ -49,8 +20,7 @@ export default class BarChart extends Component {
   }
 
   renderBarChart = () => {
-    const { dataArray, width, height } = this.props;
-    const { faculties, classificationLabels, colors } = constants;
+    const { dataArray, width, height, classificationLabels } = this.props;
     const bigAreasLabels = dataArray.map(item => item.bigAreaName);
 
     // Fill missing faculties in each big Area
@@ -83,7 +53,7 @@ export default class BarChart extends Component {
 
     svg
       .append('g')
-      .attr('class', 'graph')
+      .attr('class', 'chart')
       .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
     // Scales ================================================================

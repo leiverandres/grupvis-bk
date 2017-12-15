@@ -1,0 +1,28 @@
+{
+  "faculties": [
+    "Facultad de Ingenierías Eléctrica, Electrónica, Física y Ciencias de la Computación",
+    "Facultad de Ingeniería Industrial",
+    "Facultad de Ciencias Ambientales",
+    "Facultad de Bellas Artes y Humanidades",
+    "Facultad de Ciencias de la Salud",
+    "Facultad de Ciencias  de la Educación",
+    "Facultad de Ingeniería Mecánica",
+    "Facultad de Ciencias  Básicas",
+    "Facultad de Tecnología",
+    "Vicerrectoría de Investigaciones innovación y Extensión"
+  ],
+  "colors": [
+    "#8dd3c7",
+    "#ffffb3",
+    "#bebada",
+    "#fb8072",
+    "#80b1d3",
+    "#fdb462",
+    "#b3de69",
+    "#fccde5",
+    "#d9d9d9",
+    "#bc80bd",
+    "#ccebc5",
+    "#ffed6f"
+  ]
+}

@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import Spinner from "react-spinkit";
-import { Header } from "semantic-ui-react";
+import React, { Component } from 'react';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import Spinner from 'react-spinkit';
+import { Header } from 'semantic-ui-react';
 
-import BarChart from "./BarChart";
-import "./BarChart.css";
+import BarChart from './BarChart';
+import './BarChart.css';
 
 const knowledgeAreaQuery = gql`
   query KnowledgeAreaQuery {
@@ -34,15 +34,15 @@ function summarizeClassifications(groups, year) {
   let dataCount = [];
   groups.forEach(groupObj => {
     const { bigKnowledgeArea, faculty, name } = groupObj;
-    let classification = "";
-    if (year === "2017") {
-      // TODO: handle in a better way reconocido.
-      classification =
-        groupObj.classification2017 === "Reconocido"
-          ? "Reg"
-          : groupObj.classification2017 || "Reg";
+    let classification = '';
+    if (year === '2017') {
+      classification = groupObj.classification2017
+        ? groupObj.classification2017 === 'Reconocido'
+          ? 'SC'
+          : groupObj.classification2017
+        : 'NP';
     } else {
-      classification = groupObj.classification2015 || "Reg";
+      classification = groupObj.classification2015 || 'Reg';
     }
     if (countByBigArea[bigKnowledgeArea]) {
       // already exist an big area object
@@ -97,23 +97,24 @@ class BarChartLayout extends Component {
     let dataCount2015 = [];
     let dataCount2017 = [];
     if (!loading) {
-      dataCount2015 = summarizeClassifications(groups, "2015");
-      dataCount2017 = summarizeClassifications(groups, "2017");
+      dataCount2015 = summarizeClassifications(groups, '2015');
+      dataCount2017 = summarizeClassifications(groups, '2017');
     }
 
     return (
-      <div style={{ minHeight: "100vh" }}>
+      <div style={{ minHeight: '100vh' }}>
         {loading ? (
           <Spinner name="cube-grid" style={styles.spinner} />
         ) : (
           <div>
-            <Header size="huge">
+            <Header style={{ fontSize: '3em' }}>
               Grupos de investigación por gran area
               <Header.Subheader>Clasificación 2015 vs 2017</Header.Subheader>
             </Header>
 
             <BarChart
               dataArray={dataCount2015}
+              classificationLabels={['A1', 'A', 'B', 'C', 'D', 'Reg']}
               size={[500, 500]}
               width={1200}
               height={500}
@@ -121,6 +122,7 @@ class BarChartLayout extends Component {
             />
             <BarChart
               dataArray={dataCount2017}
+              classificationLabels={['A1', 'A', 'B', 'C', 'SC', 'NP']}
               size={[500, 500]}
               width={1200}
               height={500}
@@ -134,15 +136,15 @@ class BarChartLayout extends Component {
 
 const styles = {
   spinner: {
-    height: "4em",
-    width: "4em",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    margin: "-2em 0 0 -2em"
+    height: '4em',
+    width: '4em',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    margin: '-2em 0 0 -2em'
   },
   chartContainer: {
-    marginBottom: "50px"
+    marginBottom: '50px'
   }
 };
 
