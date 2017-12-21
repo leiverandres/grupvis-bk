@@ -3,12 +3,15 @@ services:
   grupviz-app:
     build: ./app
     ports:
-    - "3000:8080"
+    - "4000:4000"
     volumes:
      - ./app:/usr/src/app
-    link:
+    links:
       - mongo
     restart: always
   mongo:
     image: mongo
+    container_name: mongo
     restart: always
+    volumes:
+       - /tmp/mongorestore:/usr/mongobackup
