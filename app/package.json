@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node index.js",
     "start-dev": "nodemon index.js",
-    "start-prod": "export NODE_ENV=production PORT=4000 && pm2 start index.js",
+    "start-prod": "export NODE_ENV=production PORT=4000 && node index.js",
     "build": "cd ./client && yarn build",
     "precommit": "lint-staged"
   },
