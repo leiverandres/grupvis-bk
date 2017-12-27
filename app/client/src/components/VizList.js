@@ -20,9 +20,9 @@ const cardsArray = [
   },
   {
     img: 'https://static.pexels.com/photos/672802/pexels-photo-672802.jpeg',
-    header: 'Grupos de investigación por gran área de conocimiento',
+    header: 'Cantidad de grupos de investigación agrupados por clasificación',
     description: 'Descripción corta',
-    linkPath: '/big-area-viz'
+    linkPath: '/aggregated-groups'
   },
   {
     img: 'https://static.pexels.com/photos/672802/pexels-photo-672802.jpeg',

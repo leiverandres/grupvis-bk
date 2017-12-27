@@ -12,6 +12,7 @@ import VizList from './components/VizList';
 import UnderConstruction from './components/UnderConstruction';
 import BarChartLayout from './visualizations/BigAreaBarChart/BarChartLayout';
 import ScatterChartLayout from './visualizations/ClassificationByGroup/ScatterChartLayout';
+import AggregatedChartLayout from './visualizations/AggregatedGroupsClassification/AggregatedChartLayout';
 import GroupsTable from './groupsTable/groupsTableLayout';
 import { serverURL } from './config.json';
 
@@ -52,6 +53,11 @@ class App extends Component {
                 exact
                 path="/classification-group"
                 component={ScatterChartLayout}
+              />
+              <Route
+                exact
+                path="/aggregated-groups"
+                component={AggregatedChartLayout}
               />
               <Route path="/groups-table" component={GroupsTable} />
             </div>
