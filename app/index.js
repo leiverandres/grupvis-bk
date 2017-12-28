@@ -17,7 +17,7 @@ app.use(cors());
 app.use('/grupviz', express.static(path.resolve(__dirname, 'client', 'build')));
 
 app.use(
-  '/graphql',
+  '/grupviz/graphql',
   bodyParser.json(),
   graphqlExpress({
     schema
@@ -25,23 +25,23 @@ app.use(
 );
 
 app.use(
-  '/graphiql',
+  '/grupviz/graphiql',
   graphiqlExpress({
     endpointURL: '/graphql'
   })
 );
 
-app.get('/download-report', (req, res) => {
+app.get('/grupviz/download-report', (req, res) => {
   const filePath = './files/general_report.csv';
   res.download(filePath, 'reporte_general.csv');
 });
 
-app.get('/download-products', (req, res) => {
+app.get('/grupviz/download-products', (req, res) => {
   const filePath = './files/products_report.csv';
   res.download(filePath, 'reporte_productos.csv');
 });
 
-app.get('/*', (req, res) => {
+app.get('/grupviz/*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
 

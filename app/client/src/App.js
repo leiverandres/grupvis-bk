@@ -37,29 +37,29 @@ class App extends Component {
           <SidebarWrapper visible={visible}>
             <div className="App">
               <Header handleToggleVisibility={this.toggleVisibility} />
-              <Route exact path="/" component={VizList} />
+              <Route exact path="/grupviz" component={VizList} />
               <Route
                 exact
-                path="/under-construction"
+                path="/grupviz/under-construction"
                 component={UnderConstruction}
               />
               <Route
-                path="/big-area-viz"
+                path="/grupviz/big-area-viz"
                 render={() => (
                   <BarChartLayout size={[500, 500]} width={500} height={500} />
                 )}
               />
               <Route
                 exact
-                path="/classification-group"
+                path="/grupviz/classification-group"
                 component={ScatterChartLayout}
               />
               <Route
                 exact
-                path="/aggregated-groups"
+                path="/grupviz/aggregated-groups"
                 component={AggregatedChartLayout}
               />
-              <Route path="/groups-table" component={GroupsTable} />
+              <Route path="/grupviz/groups-table" component={GroupsTable} />
             </div>
           </SidebarWrapper>
         </BrowserRouter>

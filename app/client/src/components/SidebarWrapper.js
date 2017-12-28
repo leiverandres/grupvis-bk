@@ -16,15 +16,15 @@ class SidebarWrapper extends Component {
           vertical
           inverted
         >
-          <Menu.Item name="home" as={Link} to="/">
+          <Menu.Item name="home" as={Link} to="/grupviz">
             <Icon name="grid layout" />
             Inicio
           </Menu.Item>
-          <Menu.Item name="reports" as={Link} to="/groups-table">
+          <Menu.Item name="reports" as={Link} to="/grupviz/groups-table">
             <Icon name="table" />
             Reportes
           </Menu.Item>
-          <Menu.Item name="analisys" as={Link} to="/under-construction">
+          <Menu.Item name="analisys" as={Link} to="/grupviz/under-construction">
             <Icon name="cubes" />
             Analisis
           </Menu.Item>
