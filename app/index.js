@@ -8,13 +8,13 @@ const compression = require('compression');
 
 const { schema } = require('./src/schema');
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 4000;
 const app = express();
 
 app.use(morgan('tiny'));
 app.use(compression());
 app.use(cors());
-app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+app.use('/grupviz', express.static(path.resolve(__dirname, 'client', 'build')));
 
 app.use(
   '/graphql',

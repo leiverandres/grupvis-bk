@@ -3,7 +3,7 @@ const { MongoClient } = require('mongodb');
 const ENV = process.env.NODE_ENV || 'development';
 const mongoHost = ENV === 'production' ? 'mongo' : 'localhost';
 const mongoDBName = ENV === 'production' ? 'scienti' : 'scienti-test';
-const mongoURI = `mongodb://${mongoHost}:27017/${mongoDBName}`;
+const mongoURI = `mongodb://mongo:27017/scienti`;
 
 const resolvers = {
   Query: {
