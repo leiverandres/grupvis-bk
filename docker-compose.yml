@@ -13,5 +13,3 @@ services:
     image: mongo
     container_name: mongo
     restart: always
-    volumes:
-       - /tmp/mongorestore:/usr/mongobackup
