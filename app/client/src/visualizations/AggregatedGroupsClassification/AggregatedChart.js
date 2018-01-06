@@ -15,7 +15,7 @@ export default class AggregatedChart extends Component {
   }
 
   renderChart = () => {
-    const { width, height } = this.props;
+    const { width, height, dataArray } = this.props;
     const margin = { top: 40, right: 20, bottom: 20, left: 40 };
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
@@ -75,63 +75,9 @@ export default class AggregatedChart extends Component {
       .style('font-weight', 'bold')
       .text('Cantidad de Grupos');
 
-    const fakeData = [
-      {
-        classification: 'A1',
-        counter: [{ year: '2015', cant: 5 }, { year: '2017', cant: 6 }]
-      },
-      {
-        classification: 'A',
-        counter: [{ year: '2015', cant: 12 }, { year: '2017', cant: 16 }]
-      },
-      {
-        classification: 'B',
-        counter: [{ year: '2015', cant: 23 }, { year: '2017', cant: 22 }]
-      },
-      {
-        classification: 'C',
-        counter: [{ year: '2015', cant: 26 }, { year: '2017', cant: 34 }]
-      },
-      {
-        classification: 'D',
-        counter: [{ year: '2015', cant: 15 }, { year: '2017', cant: 0 }]
-      },
-      {
-        classification: 'Reconocido',
-        counter: [{ year: '2015', cant: 1 }, { year: '2017', cant: 8 }]
-      }
-    ];
-
-    const pathFakeData = [
-      [
-        { year: '2015', cant: 5, classification: 'A1' },
-        { year: '2017', cant: 6, classification: 'A1' }
-      ],
-      [
-        { year: '2015', cant: 12, classification: 'A' },
-        { year: '2017', cant: 16, classification: 'A' }
-      ],
-      [
-        { year: '2015', cant: 23, classification: 'B' },
-        { year: '2017', cant: 22, classification: 'B' }
-      ],
-      [
-        { year: '2015', cant: 26, classification: 'C' },
-        { year: '2017', cant: 34, classification: 'C' }
-      ],
-      // [
-      //   { year: '2015', cant: 15, classification: 'D' },
-      //   { year: '2017', cant: 0, classification: 'D' }
-      // ],
-      [
-        { year: '2015', cant: 1, classification: 'Reconocido' },
-        { year: '2017', cant: 8, classification: 'Reconocido' }
-      ]
-    ];
-
     const classificationChart = svg
       .selectAll('.classification-chart')
-      .data(fakeData)
+      .data(dataArray)
       .enter()
       .append('g')
       .attr('class', 'classification-chart')
@@ -150,7 +96,7 @@ export default class AggregatedChart extends Component {
 
     const subchart = svg
       .selectAll('.classification-subchart')
-      .data(fakeData)
+      .data(dataArray)
       .enter()
       .append('g')
       .attr('class', 'classification-subchart');
@@ -171,13 +117,13 @@ export default class AggregatedChart extends Component {
       .attr('r', d => {
         return d.cant !== 0 ? radius(d.cant) : 0;
       })
-      .attr(
-        'cx',
-        d =>
+      .attr('cx', d => {
+        return (
           classificationScale(d.classification) +
           yearScale(d.year) +
           margin.left
-      )
+        );
+      })
       .attr('cy', d => yScale(d.cant))
       .attr('fill', d => color(d.cant));
 
@@ -224,7 +170,7 @@ export default class AggregatedChart extends Component {
     // GRADIENTS FOR POINT JOINING LINES
     svg
       .selectAll('defs')
-      .data(fakeData)
+      .data(dataArray)
       .enter()
       .append('defs')
       .append('linearGradient')
@@ -243,6 +189,20 @@ export default class AggregatedChart extends Component {
       .attr('stop-color', d => d.color);
 
     // DRAW JOINING LINES
+    const pathData = dataArray
+      .map(elem => {
+        return elem.counter.map(c => {
+          c.classification = elem.classification;
+          return c;
+        });
+      })
+      .filter(elem => {
+        if (elem[0].cant !== 0 && elem[1].cant !== 0) {
+          return true;
+        }
+        return false;
+      });
+
     const joiningLine = area()
       .x(d => {
         return (
@@ -257,7 +217,7 @@ export default class AggregatedChart extends Component {
 
     subchart
       .selectAll('path')
-      .data(pathFakeData)
+      .data(pathData)
       .enter()
       .append('path')
       .attr('fill', d => `url(#pathGradient${d[0].classification})`)
@@ -266,7 +226,7 @@ export default class AggregatedChart extends Component {
 
     // SEPARATE CLASSIFICATION REGIONS
     let linesData = [];
-    fakeData.forEach(elm => {
+    dataArray.forEach(elm => {
       linesData.push([
         [
           classificationScale(elm.classification) + classificationScale.step(),
