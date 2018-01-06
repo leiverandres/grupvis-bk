@@ -19,7 +19,7 @@ const cardsArray = [
     linkPath: '/grupviz/classification-group'
   },
   {
-    img: '/preview_viz_3.png',
+    img: '/grupviz/preview_viz_3.png',
     header: 'Cantidad de grupos de investigación agrupados por clasificación',
     description: 'Sin descripción',
     linkPath: '/grupviz/aggregated-groups'
