@@ -6,13 +6,13 @@ import './VizList.css';
 
 const cardsArray = [
   {
-    img: '/preview_viz_1.png',
+    img: '/grupviz/preview_viz_1.png',
     header: 'Grupos de investigación por gran área de conocimiento.',
     description: 'Sin descripción',
     linkPath: '/grupviz/big-area-viz'
   },
   {
-    img: '/preview_viz_2.png',
+    img: '/grupviz/preview_viz_2.png',
     header:
       'Comparación entre convocatorias 737 y 781 por grupo de investigación.',
     description: 'Sin descripción',

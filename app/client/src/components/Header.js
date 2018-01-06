@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Grid, Image, Icon } from 'semantic-ui-react';
 
-const background = '/particles.png';
-const logoWithText = '/logo_sirius_text.svg';
+const background = '/grupviz/particles.png';
+const logoWithText = '/grupviz/logo_sirius_text.svg';
 const utpLogo = 'UTP-logo.svg';
 
 const bannerStyle = {
