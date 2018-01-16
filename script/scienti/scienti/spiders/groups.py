@@ -17,9 +17,14 @@ class GroupsUTPSpider(scrapy.Spider):
         query = "table#grupos > tbody > tr[id^='grupos_row']"
         for group in response.css(query):
             group_data = {
-                'code': group.css('td::text')[0].extract(),
-                'leader': group.css('td > a::text')[1].extract(),
-                'classificationDate': group.css('td::text')[-1].extract()
+                'code':
+                group.css('td::text')[0].extract(),
+                'leader':
+                group.css('td > a::text')[1].extract(),
+                'classificationDate':
+                group.css('td::text')[-1].extract(),
+                'classification2017':
+                group.css('td::text')[2].extract().split(' ')[1].strip()
             }
             group_link = group.css(
                 'td > a[href*="visualiza/visualizagr"]::attr(href)'
@@ -32,14 +37,14 @@ class GroupsUTPSpider(scrapy.Spider):
                     'groupData': group_data
                 })
 
-        for group in MISSING_GROUPS:
-            group_data = {'code': group['code']}
-            yield response.follow(
-                group['link'],
-                callback=self.parse_single_group,
-                meta={
-                    'groupData': group_data
-                })
+        # for group in MISSING_GROUPS:
+        #     group_data = {'code': group['code']}
+        #     yield response.follow(
+        #         group['link'],
+        #         callback=self.parse_single_group,
+        #         meta={
+        #             'groupData': group_data
+        #         })
 
     def extract_with_css(self,
                          initial_selector,
@@ -87,9 +92,11 @@ class GroupsUTPSpider(scrapy.Spider):
                 data['bigKnowledgeArea'] = bigArea
                 data['knowledgeArea'] = area
             else:
-                json_name = FIELDS_MAP[field]
-                data[json_name] = value.strip() if value else ''
-
+                try:
+                    json_name = FIELDS_MAP[field]
+                    data[json_name] = value.strip() if value else ''
+                except KeyError:
+                    pass
         # SELECTORS
         avoid_header_query = 'tr > td:not([class="celdaEncabezado"])::text'
         instituciones_node = tables_selector[1]
