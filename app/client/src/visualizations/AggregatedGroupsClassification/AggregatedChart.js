@@ -27,7 +27,7 @@ export default class AggregatedChart extends Component {
       .range([chartHeight, margin.top]);
 
     const classificationScale = scaleBand()
-      .domain(['A1', 'A', 'B', 'C', 'D', 'Reconocido'])
+      .domain(['A1', 'A', 'B', 'C', 'D', 'reconocido'])
       .range([margin.left, margin.left + chartWidth])
       .padding(0.35);
 

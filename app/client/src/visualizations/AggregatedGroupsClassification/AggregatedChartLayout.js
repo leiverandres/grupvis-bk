@@ -26,7 +26,7 @@ class ChartLayout extends Component {
         B: [{ year: '2015', cant: 0 }, { year: '2017', cant: 0 }],
         C: [{ year: '2015', cant: 0 }, { year: '2017', cant: 0 }],
         D: [{ year: '2015', cant: 0 }, { year: '2017', cant: 0 }],
-        Reconocido: [{ year: '2015', cant: 0 }, { year: '2017', cant: 0 }]
+        reconocido: [{ year: '2015', cant: 0 }, { year: '2017', cant: 0 }]
       };
       counter = groups.reduce((acum, cur) => {
         if (cur.classification2015) {
