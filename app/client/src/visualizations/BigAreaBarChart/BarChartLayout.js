@@ -37,7 +37,7 @@ function summarizeClassifications(groups, year) {
     let classification = '';
     if (year === '2017') {
       classification = groupObj.classification2017
-        ? groupObj.classification2017 === 'Reconocido'
+        ? groupObj.classification2017 === 'reconocido'
           ? 'SC'
           : groupObj.classification2017
         : 'NP';
@@ -99,6 +99,7 @@ class BarChartLayout extends Component {
     if (!loading) {
       dataCount2015 = summarizeClassifications(groups, '2015');
       dataCount2017 = summarizeClassifications(groups, '2017');
+      console.log(dataCount2017);
     }
 
     return (
@@ -130,7 +131,7 @@ class BarChartLayout extends Component {
               </List>
             </div>
             <div style={{ marginTop: '4em' }}>
-              <Header size="Huge">Convocatoria 737 (2015)</Header>
+              <Header size="huge">Convocatoria 737 (2015)</Header>
               <BarChart
                 dataArray={dataCount2015}
                 classificationLabels={['A1', 'A', 'B', 'C', 'D', 'Reg']}
@@ -139,10 +140,10 @@ class BarChartLayout extends Component {
                 height={500}
                 style={styles.chartContainer}
               />
-              <Header size="Huge">Convocatoria 781 (2017)</Header>
+              <Header size="huge">Convocatoria 781 (2017)</Header>
               <BarChart
                 dataArray={dataCount2017}
-                classificationLabels={['A1', 'A', 'B', 'C', 'SC', 'NP']}
+                classificationLabels={['A1', 'A', 'B', 'C', 'D', 'SC']}
                 size={[500, 500]}
                 width={1200}
                 height={500}
