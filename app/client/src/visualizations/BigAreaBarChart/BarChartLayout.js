@@ -99,7 +99,6 @@ class BarChartLayout extends Component {
     if (!loading) {
       dataCount2015 = summarizeClassifications(groups, '2015');
       dataCount2017 = summarizeClassifications(groups, '2017');
-      console.log(dataCount2017);
     }
 
     return (
