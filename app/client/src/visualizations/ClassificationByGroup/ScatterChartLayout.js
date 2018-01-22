@@ -39,8 +39,10 @@ class BarChartLayout extends Component {
           text: element.name
         });
       });
-      if (selected) {
+      if (Object.getOwnPropertyNames(selected).length !== 0) {
         selectedData = groups.find(item => selected === item.code);
+      } else {
+        selectedData = groups[0];
       }
     }
 
@@ -62,7 +64,9 @@ class BarChartLayout extends Component {
               fluid
               onChange={this.handleOptionChange}
               loading={loading}
+              defaultOpen={true}
             />
+            {selectedData && <h2>{selectedData.name}</h2>}
             {selectedData && (
               <Scatterplot
                 data={selectedData}

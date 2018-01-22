@@ -32,7 +32,7 @@ export default class BarChart extends Component {
       }
     ];
     const { width, height } = this.props;
-    const classifications = ['A1', 'A', 'B', 'C', 'D', 'SC', 'Reconocido'];
+    const classifications = ['A1', 'A', 'B', 'C', 'D', 'reconocido', 'SC'];
     const margin = {
       top: 30,
       right: 20,
@@ -42,6 +42,8 @@ export default class BarChart extends Component {
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
     const svg = select(this.nodeRef);
+
+    svg.style('background', '#f5f5f5');
 
     // SCALES =================================================
     const xScale = scalePoint()
