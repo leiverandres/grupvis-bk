@@ -64,9 +64,10 @@ class GroupsTableLayout extends Component {
                   { Header: 'Facultad', accessor: 'faculty' },
                   { Header: 'Departamento', accessor: 'dependency' },
                   {
-                    Header: 'Clasificación (737)',
+                    Header: 'Convocatoria 737',
                     accessor: 'classification2015'
-                  }
+                  },
+                  { Header: 'Convocatoria 781', accessor: 'classification2017' }
                 ]}
                 nextText="Siguiente"
                 previousText="Anterior"
