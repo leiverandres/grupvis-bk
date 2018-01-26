@@ -24,7 +24,7 @@ class SidebarWrapper extends Component {
             <Icon name="table" />
             Reportes
           </Menu.Item>
-          <Menu.Item name="analisys" as={Link} to="/grupviz/under-construction">
+          <Menu.Item name="analisys" href="/grupviz/analysis">
             <Icon name="cubes" />
             Analisis
           </Menu.Item>

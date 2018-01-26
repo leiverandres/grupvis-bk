@@ -41,6 +41,10 @@ app.get('/grupviz/download-products', (req, res) => {
   res.download(filePath, 'reporte_productos.csv');
 });
 
+app.get('/grupviz/analysis', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'files', 'Comparación_737_781.html'));
+});
+
 app.get('/grupviz/*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
