@@ -42,7 +42,10 @@ function summarizeClassifications(groups, year) {
           : groupObj.classification2017
         : 'NP';
     } else {
-      classification = groupObj.classification2015 || 'Reg';
+      classification =
+        groupObj.classification2015 === 'reconocido'
+          ? 'Rec'
+          : groupObj.classification2015 || 'SC';
     }
     if (countByBigArea[bigKnowledgeArea]) {
       // already exist an big area object
@@ -133,7 +136,7 @@ class BarChartLayout extends Component {
               <Header size="huge">Convocatoria 737 (2015)</Header>
               <BarChart
                 dataArray={dataCount2015}
-                classificationLabels={['A1', 'A', 'B', 'C', 'D', 'Reg']}
+                classificationLabels={['A1', 'A', 'B', 'C', 'D', 'SC', 'Rec']}
                 size={[500, 500]}
                 width={1200}
                 height={500}
@@ -142,7 +145,7 @@ class BarChartLayout extends Component {
               <Header size="huge">Convocatoria 781 (2017)</Header>
               <BarChart
                 dataArray={dataCount2017}
-                classificationLabels={['A1', 'A', 'B', 'C', 'D', 'SC']}
+                classificationLabels={['A1', 'A', 'B', 'C', 'SC', 'NP']}
                 size={[500, 500]}
                 width={1200}
                 height={500}
