@@ -38,5 +38,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "http://sirius.utp.edu.co/grupviz"
+  "homepage": "https://sirius.utp.edu.co/grupviz"
 }
