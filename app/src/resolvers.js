@@ -3,7 +3,8 @@ const { MongoClient } = require('mongodb');
 const ENV = process.env.NODE_ENV || 'development';
 const mongoHost = ENV === 'production' ? 'mongo' : 'localhost';
 const mongoDBName = ENV === 'production' ? 'scienti' : 'scienti-test';
-const mongoURI = `mongodb://mongo:27017/scienti`;
+const mongoURI = `mongodb://${mongoHost}:27017/${mongoDBName}`;
+console.log(`Connecting to ${mongoURI}`);
 
 const resolvers = {
   Query: {
@@ -14,7 +15,7 @@ const resolvers = {
         const groups = await Groups.find({}).toArray();
         return groups;
       } catch (err) {
-        console.error('Some error: ', err);
+        console.error('Error getting groups: ', err);
       }
     },
     group: async (root, args) => {
@@ -24,7 +25,7 @@ const resolvers = {
         const group = await Groups.findOne({ code: args.code });
         return group;
       } catch (err) {
-        console.error('Some error: ', err);
+        console.error(`Error getting group with code ${args.code}: `, err);
       }
     },
     products: async () => {
@@ -38,7 +39,7 @@ const resolvers = {
         });
         return products;
       } catch (err) {
-        console.error('Some error: ', err);
+        console.error('Error getting products: ', err);
       }
     },
     product: async (root, args) => {
@@ -55,7 +56,7 @@ const resolvers = {
         });
         return products;
       } catch (err) {
-        console.error('Some error: ', err);
+        console.error('Error getting single product type from groups: ', err);
       }
     }
   }
