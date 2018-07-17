@@ -72,7 +72,8 @@ ITEM_PIPELINES = {
 
 # Mongodb constants
 MONGO_URI = 'mongodb://localhost:27017'
-MONGO_DATABASE = 'scienti-test'
+MONGO_DATABASE = 'scienti'
+MONGO_COLLECTION = 'groups'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
