@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 import ReactTable from 'react-table';
 import Spinner from 'react-spinkit';
+import Download from 'downloadjs';
 import { Button, Icon, Grid, Header } from 'semantic-ui-react';
 import 'react-table/react-table.css';
 
@@ -24,8 +25,20 @@ const groupsQuery = gql`
 `;
 
 class GroupsTableLayout extends Component {
+  dowloadReport = endpoint => {
+    window
+      .fetch(`${serverURL}/${endpoint}`)
+      .then(res => res.blob())
+      .then(blob => Download(blob, `${endpoint}.csv`, 'text/csv'))
+      .catch(err => {
+        console.log('Error while downloading:', err);
+      });
+  };
   render() {
-    const { data: { loading, groups } } = this.props;
+    const {
+      data: { loading, groups }
+    } = this.props;
+
     return (
       <Grid>
         <Grid.Row centered>
@@ -38,13 +51,13 @@ class GroupsTableLayout extends Component {
             <Button
               labelPosition="left"
               icon
-              href={`${serverURL}/download-report`}
+              onClick={() => this.dowloadReport('download-report')}
             >
               <Icon name="download" />
               Descargar información general
             </Button>
             <Button.Or text="o" />
-            <Button href={`${serverURL}/download-products`}>
+            <Button onClick={() => this.dowloadReport('download-products')}>
               Descargar productos de los grupos
             </Button>
           </Button.Group>

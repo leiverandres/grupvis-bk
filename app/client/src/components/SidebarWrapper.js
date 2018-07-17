@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Sidebar, Menu, Icon } from 'semantic-ui-react';
 
+import { serverURL } from '../config.json';
+
 class SidebarWrapper extends Component {
   render() {
     const { visible } = this.props;
@@ -24,7 +26,7 @@ class SidebarWrapper extends Component {
             <Icon name="table" />
             Reportes
           </Menu.Item>
-          <Menu.Item name="analisys" href="/grupviz/analysis">
+          <Menu.Item name="analysis" href={`${serverURL}/analysis-file`}>
             <Icon name="cubes" />
             Analisis
           </Menu.Item>

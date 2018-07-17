@@ -8,13 +8,14 @@ const compression = require('compression');
 
 const { schema } = require('./src/schema');
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(morgan('tiny'));
 app.use(compression());
 app.use(cors());
 app.use('/grupviz', express.static(path.resolve(__dirname, 'client', 'build')));
+app.use('/grupviz', express.static(path.resolve(__dirname, 'files')));
 
 app.use(
   '/grupviz/graphql',
@@ -32,16 +33,20 @@ app.use(
 );
 
 app.get('/grupviz/download-report', (req, res) => {
-  const filePath = './files/general_report.csv';
-  res.download(filePath, 'reporte_general.csv');
+  res.sendFile(
+    path.resolve(__dirname, 'files', 'general_report.csv'),
+    'reporte_general.csv'
+  );
 });
 
 app.get('/grupviz/download-products', (req, res) => {
-  const filePath = './files/products_report.csv';
-  res.download(filePath, 'reporte_productos.csv');
+  res.sendFile(
+    path.resolve(__dirname, 'files', 'products_report.csv'),
+    'reporte_productos.csv'
+  );
 });
 
-app.get('/grupviz/analysis', (req, res) => {
+app.get('/grupviz/analysis-file', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'files', 'Comparación_737_781.html'));
 });
 
