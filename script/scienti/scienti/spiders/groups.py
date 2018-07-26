@@ -1,50 +1,119 @@
 import scrapy
 import re
+import urllib.parse as parse
+from scrapy import Request
+
 from .constants import FIELDS_MAP, MISSING_GROUPS, SECTIONS
 from .handlers import HANDLERS
 
 
 class GroupsUTPSpider(scrapy.Spider):
-    name = "utp_research_groups"
-    # storing-the-scraped-data
-    start_urls = [
-        "http://scienti.colciencias.gov.co:8083/ciencia-war/busquedaGrupoXInstitucionGrupos.do?codInst=011600000880&sglPais=&sgDepartamento=&maxRows=100&grupos_tr_=true&grupos_p_=1&grupos_mr_=100"
-    ]
+    name = "research_groups"
+    allow_domains = ["scienti.colciencias.gov.co"]
+    base_url = 'http://scienti.colciencias.gov.co:8083/ciencia-war/busquedaGruposPorInstitucion.do?maxRows=100&all_grupos_ins_tr_=true&all_grupos_ins_mr_=100&all_grupos_ins_p_={}'
+    total_pages = 7  # for pages of 100 items each
 
-    def parse(self, response):
-        """ Extract list of groups with basic information
+    def start_requests(self):
+        urls = [
+            self.base_url.format(page)
+            for page in range(1, self.total_pages + 1)
+        ]
+        for url in urls:
+            yield Request(url, callback=self.parse_universities_list)
+
+    def parse_universities_list(self, response):
         """
-        query = "table#grupos > tbody > tr[id^='grupos_row']"
-        for group in response.css(query):
+        """
+        rows = response.xpath('//tr[contains(@id, "all_grupos_ins_row")]')
+        for row in rows:
+            university_name = row.xpath('td[1]/text()').extract_first()
+            university_link = row.xpath('td[2]/a/@href').extract_first()
+            # groups_qty = row.xpath('td[2]/a/*[1]/text()').extract_first()
+            url_params = {
+                'grupos_mr_': 100,
+                'grupos_p_': 1,
+                'grupos_tr_': True,
+                'maxRows': 100
+            }
+            university_link += '&' + parse.urlencode(url_params)
+            full_url = response.urljoin(university_link)
+            yield Request(
+                full_url,
+                callback=self.parse_groups_list,
+                meta={'universityName': university_name})
+
+    def parse_groups_list(self, response):
+        """
+        """
+        ## Get groups info in the current page
+        groups = response.xpath('//tr[starts-with(@id, "grupos_row")]')
+        for group in groups:
             group_data = {
                 'code':
-                group.css('td::text')[0].extract(),
+                group.xpath('td[2]/text()').extract_first(),
+                'groupName':
+                group.xpath('td[3]/a/text()').extract_first(),
+                'scientiLink':
+                group.xpath('td[3]/a/@href').extract_first(),
                 'leader':
-                group.css('td > a::text')[1].extract(),
-                'classificationDate':
-                group.css('td::text')[-1].extract(),
-                'classification2017':
-                group.css('td::text')[2].extract().split(' ')[1].strip()
+                group.xpath('td[4]/a/text()').extract_first(),
+                'Category':
+                group.xpath('td[7]/text()').extract_first().split(' ')[1]
+                .strip(),
+                'ClassifiedIn':
+                group.xpath('td[8]/text()').extract_first(),
+                'universityName':
+                response.meta['universityName']
             }
-            group_link = group.css(
-                'td > a[href*="visualiza/visualizagr"]::attr(href)'
-            ).extract_first()
+            yield group_data
+            ## TODO
+            ## Get into each group page and scrape it all
+        ## Generate next page link and follow it
+        next_button = response.xpath('//a/img[@alt="Página Siguiente"]')
+        if next_button:
+            parsed_url = parse.urlparse(response.request.url)
+            query_params = parse.parse_qs(parsed_url.query)
+            current_page = query_params['grupos_p_'][0]
+            query_params['grupos_p_'][0] = int(current_page) + 1
+            query_str = parse.urlencode(query_params, doseq=True)
+            next_page_url = parsed_url.geturl().split('?')[0] + '?' + query_str
+            yield Request(
+                next_page_url,
+                callback=self.parse_groups_list,
+                meta={'universityName': response.meta['universityName']})
 
-            yield response.follow(
-                group_link,
-                callback=self.parse_single_group,
-                meta={
-                    'groupData': group_data
-                })
+    # def parse(self, response):
+    #     """ Extract list of groups with basic information
+    #     """
+    #     query = "table#grupos > tbody > tr[id^='grupos_row']"
+    #     for group in response.css(query):
+    #         group_data = {
+    #             'code':
+    #             group.css('td::text')[0].extract(),
+    #             'leader':
+    #             group.css('td > a::text')[1].extract(),
+    #             'classificationDate':
+    #             group.css('td::text')[-1].extract(),
+    #             'classification2017':
+    #             group.css('td::text')[2].extract().split(' ')[1].strip()
+    #         }
+    #         group_link = group.css(
+    #             'td > a[href*="visualiza/visualizagr"]::attr(href)'
+    #         ).extract_first()
 
-        # for group in MISSING_GROUPS:
-        #     group_data = {'code': group['code']}
-        #     yield response.follow(
-        #         group['link'],
-        #         callback=self.parse_single_group,
-        #         meta={
-        #             'groupData': group_data
-        #         })
+    #         yield response.follow(
+    #             group_link,
+    #             callback=self.parse_single_group,
+    #             meta={'groupData': group_data})
+
+    # for group in MISSING_GROUPS:
+    #     group_data = {'code': group['code']}
+    #     yield response.follow(
+    #         group['link'],
+    #         callback=self.parse_single_group,
+    #         meta={
+    #             'groupData': group_data
+    #         })
 
     def extract_with_css(self,
                          initial_selector,
