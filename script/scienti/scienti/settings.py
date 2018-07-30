@@ -65,14 +65,14 @@ RANDOMIZE_DOWNLOAD_DELAY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'scienti.pipelines.addExtraData.AddExtraDataPipeline': 100,
-    'scienti.pipelines.jsonReports.JSONResporterPipeline': 200,
+    # 'scienti.pipelines.addExtraData.AddExtraDataPipeline': 100,
+    # 'scienti.pipelines.jsonReports.JSONResporterPipeline': 200,
     'scienti.pipelines.mongoInsertData.MongoPipeline': 400,
 }
 
 # Mongodb constants
 MONGO_URI = 'mongodb://localhost:27017'
-MONGO_DATABASE = 'scienti'
+MONGO_DATABASE = 'col-scienti-dev'
 MONGO_COLLECTION = 'groups'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
