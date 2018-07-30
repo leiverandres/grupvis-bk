@@ -53,7 +53,7 @@ class GroupsUTPSpider(scrapy.Spider):
                 group.xpath('td[2]/text()').extract_first(),
                 'groupName':
                 group.xpath('td[3]/a/text()').extract_first(),
-                'scientiLink':
+                'gruplacURL':
                 group.xpath('td[3]/a/@href').extract_first(),
                 'leader':
                 group.xpath('td[4]/a/text()').extract_first(),
@@ -66,8 +66,11 @@ class GroupsUTPSpider(scrapy.Spider):
                 response.meta['universityName']
             }
             yield group_data
-            ## TODO
             ## Get into each group page and scrape it all
+            yield Request(
+                group_data['gruplacURL'],
+                callback=self.parse_group_page,
+                meta={'group_data': group_data})
         ## Generate next page link and follow it
         next_button = response.xpath('//a/img[@alt="Página Siguiente"]')
         if next_button:
@@ -81,30 +84,6 @@ class GroupsUTPSpider(scrapy.Spider):
                 next_page_url,
                 callback=self.parse_groups_list,
                 meta={'universityName': response.meta['universityName']})
-
-    # def parse(self, response):
-    #     """ Extract list of groups with basic information
-    #     """
-    #     query = "table#grupos > tbody > tr[id^='grupos_row']"
-    #     for group in response.css(query):
-    #         group_data = {
-    #             'code':
-    #             group.css('td::text')[0].extract(),
-    #             'leader':
-    #             group.css('td > a::text')[1].extract(),
-    #             'classificationDate':
-    #             group.css('td::text')[-1].extract(),
-    #             'classification2017':
-    #             group.css('td::text')[2].extract().split(' ')[1].strip()
-    #         }
-    #         group_link = group.css(
-    #             'td > a[href*="visualiza/visualizagr"]::attr(href)'
-    #         ).extract_first()
-
-    #         yield response.follow(
-    #             group_link,
-    #             callback=self.parse_single_group,
-    #             meta={'groupData': group_data})
 
     # for group in MISSING_GROUPS:
     #     group_data = {'code': group['code']}
@@ -132,60 +111,58 @@ class GroupsUTPSpider(scrapy.Spider):
                     map(lambda item: item.strip(),
                         initial_selector.css(query).extract()))
 
-    def parse_single_group(self, response):
+    def parse_group_page(self, response):
         """ Extract detailed groups information, including research products
         """
-        group_name = response.xpath(
-            '//span[@class="celdaEncabezado"]/text()').extract_first()
-        data = {'grouplacURL': response.url, 'name': group_name}
-
-        # merging data with the data got in parser
-        data.update(response.meta['groupData'])
-        tables_selector = response.css("table")
-        basic_data = tables_selector[0]
-        for row in basic_data.css('tr')[1:]:
-            field = row.css('td.celdasTitulo::text').extract_first()
-            link = row.css('td.celdas2 > a')
+        # Recap data obtained before
+        group_data = response.meta['group_data'].copy()
+        tables = response.css("table")
+        basic_data_table = tables[0]
+        ## Take all info rows, except title of table
+        rows_with_info = basic_data_table.css('tr')[1:]
+        for info_row in rows_with_info:
+            field = info_row.css('td.celdasTitulo::text').extract_first()
+            link = info_row.css('td.celdas2 > a')
             value = ''
             if link:
                 value = link.css('::text').extract_first()
             else:
-                value = row.css('td.celdas2::text').extract_first()
+                value = info_row.css('td.celdas2::text').extract_first()
             ## Custom cases
             if field == "Departamento - Ciudad":
                 departament, city = map(lambda x: x.strip(), value.split('-'))
-                data['departament'] = departament
-                data['city'] = city
+                group_data['departament'] = departament
+                group_data['city'] = city
             elif field == "Área de conocimiento":
                 bigArea, area = map(lambda x: x.strip(), value.split('--'))
-                data['bigKnowledgeArea'] = bigArea
-                data['knowledgeArea'] = area
+                group_data['bigKnowledgeArea'] = bigArea
+                group_data['knowledgeArea'] = area
             else:
                 try:
                     json_name = FIELDS_MAP[field]
-                    data[json_name] = value.strip() if value else ''
+                    group_data[json_name] = value.strip() if value else ''
                 except KeyError:
                     pass
         # SELECTORS
         avoid_header_query = 'tr > td:not([class="celdaEncabezado"])::text'
-        instituciones_node = tables_selector[1]
-        plan_node = tables_selector[2]
-        lines_node = tables_selector[3]
-        sectores_node = tables_selector[4]
-        members_node = tables_selector[5].css('tr')[2:]
-        product_nodes = tables_selector[6:]
+        instituciones_node = tables[1]
+        plan_node = tables[2]
+        lines_node = tables[3]
+        sectores_node = tables[4]
+        members_node = tables[5].css('tr')[2:]
+        product_nodes = tables[6:]
         # EXTRACTION
-        data['institutions'] = self.extract_with_css(
+        group_data['institutions'] = self.extract_with_css(
             instituciones_node, avoid_header_query, split_dash=True)
-        data['strategicPlan'] = ''.join(
+        group_data['strategicPlan'] = ''.join(
             self.extract_with_css(plan_node, avoid_header_query))
-        data['researchLines'] = self.extract_with_css(
+        group_data['researchLines'] = self.extract_with_css(
             lines_node, avoid_header_query, split_dash=True)
-        data['applicationFields'] = self.extract_with_css(
+        group_data['applicationFields'] = self.extract_with_css(
             sectores_node, avoid_header_query, split_dash=True)
-        data['members'] = self.extract_members(members_node)
-        data['products'] = self.extract_products(product_nodes)
-        yield data
+        group_data['members'] = self.extract_members(members_node)
+        group_data['products'] = self.extract_products(product_nodes)
+        yield group_data
 
     def extract_members(self, member_list):
         members = []
@@ -213,9 +190,9 @@ class GroupsUTPSpider(scrapy.Spider):
             members.append(cur_member_data)
         return members
 
-    def extract_products(self, tablesList):
+    def extract_products(self, tables_list):
         products = []
-        for table in tablesList:
+        for table in tables_list:
             valid_rows_query = './tr[td[@class != "celdaEncabezado"]]'
             rows = table.xpath(valid_rows_query)
             title_query = './tr/td[@class = "celdaEncabezado"]/text()'
