@@ -8,10 +8,12 @@ from .handlers import HANDLERS
 
 
 class GroupsUTPSpider(scrapy.Spider):
+    '''
+    '''
     name = "research_groups"
     allow_domains = ["scienti.colciencias.gov.co"]
     base_url = 'http://scienti.colciencias.gov.co:8083/ciencia-war/busquedaGruposPorInstitucion.do?maxRows=100&all_grupos_ins_tr_=true&all_grupos_ins_mr_=100&all_grupos_ins_p_={}'
-    total_pages = 7  # for pages of 100 items each
+    total_pages = 7  # calculated for pages of 100 items each
 
     def start_requests(self):
         urls = [
@@ -85,15 +87,6 @@ class GroupsUTPSpider(scrapy.Spider):
                 callback=self.parse_groups_list,
                 meta={'universityName': response.meta['universityName']})
 
-    # for group in MISSING_GROUPS:
-    #     group_data = {'code': group['code']}
-    #     yield response.follow(
-    #         group['link'],
-    #         callback=self.parse_single_group,
-    #         meta={
-    #             'groupData': group_data
-    #         })
-
     def extract_with_css(self,
                          initial_selector,
                          query,
@@ -161,7 +154,7 @@ class GroupsUTPSpider(scrapy.Spider):
         group_data['applicationFields'] = self.extract_with_css(
             sectores_node, avoid_header_query, split_dash=True)
         group_data['members'] = self.extract_members(members_node)
-        group_data['products'] = self.extract_products(product_nodes)
+        group_data['products'] = self.process_products(product_nodes)
         yield group_data
 
     def extract_members(self, member_list):
@@ -190,34 +183,59 @@ class GroupsUTPSpider(scrapy.Spider):
             members.append(cur_member_data)
         return members
 
-    def extract_products(self, tables_list):
+    def extract_product_data(self, data_str, table_name):
+        '''
+            Extract data of each product
+        '''
+        custom_tags = ['un', 'urbanaenlinea.go.to']
+        for tag_name in custom_tags:
+            opening_tag = '<' + tag_name + '>'
+            closing_tag = '</' + tag_name + '>'
+            if opening_tag in data_str:
+                data_str = data_str.replace(opening_tag, '').replace(
+                    closing_tag, '')
+        data_node = scrapy.Selector(text=data_str)
+        unprocessed_data = data_node.xpath(
+            '//td[@class = "celdas0" or @class = "celdas1"]/text() | //td/strong/text()'
+        ).extract()
+        extractor = HANDLERS[table_name]
+        estructured_data = extractor(unprocessed_data)
+        return estructured_data
+
+    def process_products(self, tables_list):
         products = []
         for table in tables_list:
-            valid_rows_query = './tr[td[@class != "celdaEncabezado"]]'
-            rows = table.xpath(valid_rows_query)
-            title_query = './tr/td[@class = "celdaEncabezado"]/text()'
-            table_title = table.xpath(title_query).extract_first().strip()
-            if rows:
-                for row in rows:
-                    row_data = {}
-                    row_data['category'] = table_title
+            table_title = table.xpath(
+                './tr/td[@class = "celdaEncabezado"]/text()').extract_first(
+                ).strip()
+            valid_rows = table.xpath('./tr[td[@class != "celdaEncabezado"]]')
+            if valid_rows:
+                for row_idx, row in enumerate(valid_rows):
+                    row_data = {
+                        'category':
+                        table_title,
+                        'type':
+                        row.xpath(
+                            './td[@class = "celdas1" or @class = "celdas0"]/strong/text()'
+                        ).extract_first()
+                    }
                     approved_img = row.xpath(
                         './td[starts-with(@class, "celdas_")]/img')
                     row_data['isApproved'] = True if approved_img else False
-                    row_data['type'] = row.xpath(
-                        './td[@class = "celdas1" or @class = "celdas0"]/strong/text()'
-                    ).extract_first()
-                    info = row.xpath(
-                        './td[@class = "celdas0" or @class = "celdas1"]/text() | ./td/strong/text()'
-                    ).extract()
-                    row_data['rawData'] = ' '.join(
-                        map(lambda x: x.strip(), info))
-                    ## Extra data
+                    data_as_str = row.extract()
                     try:
-                        extractor = HANDLERS[table_title]
-                        result = extractor(info)
-                        row_data.update(result)
+                        processed_data = self.extract_product_data(
+                            data_as_str, table_title)
+                        row_data['rawData'] = ' '.join(
+                            map(lambda x: x.strip(), processed_data))
+                        row_data.update(processed_data)
+                        products.append(row_data)
                     except KeyError:
-                        pass
-                    products.append(row_data)
+                        self.logger.error(
+                            f'No handler especified for {table_title}')
+                    except IndexError as err:
+                        self.logger.error(err)
+                        self.logger.error(
+                            f'IndexError: {err}. This happend while processing row {row_idx+1}, of category "{table_title}"\n'
+                        )
         return products
