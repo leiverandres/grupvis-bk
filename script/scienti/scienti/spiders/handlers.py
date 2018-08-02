@@ -10,7 +10,7 @@ def articulos_publicados(data_extracted):
     row_data['title'] = data_extracted[2].strip()
     extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
     row_data['doi'] = data_extracted[5].strip()
-    row_data['authors'] = data_extracted[6].split(':')[1].strip(', ')
+    row_data['authors'] = data_extracted[6].split(':')[1].strip(', \n')
 
     ## get extra data
     match = extra_patter.match(extra)
@@ -32,7 +32,7 @@ def libros_publicados(data_extracted):
     row_data = {}
     row_data['type'] = data_extracted[1].strip()
     row_data['title'] = data_extracted[2].strip(': ')
-    row_data['authors'] = data_extracted[4].split(':')[1].strip(', ')
+    row_data['authors'] = data_extracted[4].split(':')[1].strip(', \n')
     extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
     extra = re.sub("[ \n]+", " ", extra)
     match = extra_patter.match(extra)
@@ -53,7 +53,7 @@ def capitulos_libro_publicado(data_extracted):
     row_data = {}
     row_data['type'] = data_extracted[1].strip()
     row_data['title'] = data_extracted[2].strip(': ')
-    row_data['authors'] = data_extracted[4].split(':')[1].strip(', ')
+    row_data['authors'] = data_extracted[4].split(':')[1].strip(', \n')
     extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
 
     match = extra_patter.match(extra)
@@ -75,7 +75,7 @@ def documentos_trabajo(data_extracted):
     row_data = {}
     row_data['type'] = data_extracted[1].strip()
     row_data['title'] = data_extracted[2].strip(': ')
-    row_data['authors'] = data_extracted[4].split(':')[1].strip(', ')
+    row_data['authors'] = data_extracted[4].split(':')[1].strip(', \n')
     extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
 
     match = extra_patter.match(extra)
@@ -94,7 +94,7 @@ def otra_publicacion_divulgativa(data_extracted):
     row_data = {}
     row_data['type'] = data_extracted[1].strip()
     row_data['title'] = data_extracted[2].strip(': ')
-    row_data['authors'] = data_extracted[4].split(':')[1].strip(', ')
+    row_data['authors'] = data_extracted[4].split(':')[1].strip(', \n')
     extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
     match = extra_patter.match(extra)
     if match:
@@ -113,7 +113,7 @@ def traducciones(data_extracted):
     languages = data_extracted[4].strip(',\n ').split(',')
     row_data['originalLanguage'] = languages[0].split(':')[1].strip()
     row_data['translationLanguage'] = languages[1].split(':')[1].strip()
-    row_data['authors'] = data_extracted[6].split(':')[1].strip(', ')
+    row_data['authors'] = data_extracted[6].split(':')[1].strip(', \n')
     first_extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
     match = extra_patter.match(first_extra)
     if match:
@@ -133,7 +133,7 @@ def otros_articulos_publicados(data_extracted):
     row_data = {}
     row_data['type'] = data_extracted[1].strip(': ')
     row_data['title'] = data_extracted[2].strip()
-    row_data['authors'] = data_extracted[4].split(':')[1].strip(', ')
+    row_data['authors'] = data_extracted[4].split(':')[1].strip(', \n')
     extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
 
     ## get extra data
@@ -156,7 +156,7 @@ def cartas_mapas_similares(data_extracted):
     row_data = {}
     row_data['type'] = data_extracted[1].strip()
     row_data['title'] = data_extracted[2].strip(': ')
-    row_data['authors'] = data_extracted[4].split(':')[1].strip(', ')
+    row_data['authors'] = data_extracted[4].split(':')[1].strip(', \n')
     extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
     match = extra_patter.match(extra)
     if match:
@@ -176,7 +176,7 @@ def consultorias(data_extracted):
     row_data['title'] = data_extracted[2].strip(': ')
     row_data['beneficiaryInstitution'] = data_extracted[4].split(':')[
         1].strip()
-    row_data['authors'] = data_extracted[5].split(':')[1].strip(', ')
+    row_data['authors'] = data_extracted[5].split(':')[1].strip(', \n')
     extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
     match = extra_patter.match(extra)
     if match:
@@ -199,7 +199,7 @@ def disenos_innovacion(data_extracted):
     row_data = {}
     row_data['type'] = data_extracted[1].strip()
     row_data['title'] = data_extracted[2].strip(': ')
-    row_data['authors'] = data_extracted[4].split(':')[1].strip(', ')
+    row_data['authors'] = data_extracted[4].split(':')[1].strip(', \n')
     extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
     match = extra_patter.match(extra)
     if match:
@@ -221,7 +221,7 @@ def plantas_piloto_otros_productos(data_extracted):
     row_data['type'] = data_extracted[1].strip()
     row_data['title'] = data_extracted[2].strip(': ')
     row_data['fundingInstitution'] = data_extracted[4].split(':')[1].strip()
-    row_data['authors'] = data_extracted[5].split(':')[1].strip(', ')
+    row_data['authors'] = data_extracted[5].split(':')[1].strip(', \n')
     extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
     match = extra_patter.match(extra)
     if match:
@@ -240,7 +240,7 @@ def regulaciones_normas(data_extracted):
     row_data['type'] = data_extracted[1].strip()
     row_data['title'] = data_extracted[2].strip(': ')
     row_data['fundingInstitution'] = data_extracted[4].split(':')[1].strip()
-    row_data['authors'] = data_extracted[5].split(':')[1].strip(', ')
+    row_data['authors'] = data_extracted[5].split(':')[1].strip(', \n')
     extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
     match = extra_patter.match(extra)
     if match:
@@ -278,7 +278,7 @@ def softwares(data_extracted):
     row_data['title'] = data_extracted[2].strip(': ')
     row_data['tradename'] = data_extracted[4].split(':')[1].strip()
     row_data['fundingInstitution'] = data_extracted[5].split(':')[1].strip()
-    row_data['authors'] = data_extracted[6].split(':')[1].strip(', ')
+    row_data['authors'] = data_extracted[6].split(':')[1].strip(', \n')
     extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
     match = extra_patter.match(extra)
     if match:
@@ -314,7 +314,7 @@ def ediciones(data_extracted):
     row_data = {}
     row_data['type'] = data_extracted[1].strip()
     row_data['title'] = data_extracted[2].strip(': ')
-    row_data['authors'] = data_extracted[4].split(':')[1].strip(', ')
+    row_data['authors'] = data_extracted[4].split(':')[1].strip(', \n')
     extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
     match = extra_patter.match(extra)
     if match:
