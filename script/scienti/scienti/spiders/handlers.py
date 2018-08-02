@@ -127,6 +127,9 @@ def traducciones(data_extracted):
 
 
 def otros_articulos_publicados(data_extracted):
+    '''
+    Table name in gruplac: "Otros artículos publicados"
+    '''
     extra_patter = re.compile(
         r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+)?, ?(?P<publisher>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)? ?ISSN: (?P<issn>\d{4}-\d{3}[\dx00X]|\d+)?, ?(?P<year>\d{4})? ?vol: ?(?P<vol>([aA][Ññ][oO] ?)?(\d+|N/A|n/a|[CMDIXLV]+))? ?fasc: ?(?P<fasc>(\d+|[Nn]/?7?[Aa]))? ?págs: (?P<pags>([\d\w]+|N/A|n/a)?[- ]*([\d\w]+|N/A|n/a)?)?,?'
     )
