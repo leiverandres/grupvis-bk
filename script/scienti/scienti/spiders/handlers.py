@@ -2,6 +2,10 @@ import re
 
 
 def articulos_publicados(data_extracted):
+    '''
+    Table name in gruolac: "Artículos publicados"
+    Products table index: 1
+    '''
     extra_patter = re.compile(
         r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+),[ ]*(?P<publisher>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)[ ]*ISSN: (?P<issn>\d{4}-\d{3}[\dx00X]|\d+)?, (?P<year>\d{4})?[ ]*vol: ?(?P<vol>([aA][Ññ][oO] ?)?(\d+|N/A|n/a|[CMDIXLV]+))?[ ]*fasc: (?P<fasc>(\d+|[Nn]/?7?[Aa]))?[ ]*págs: (?P<pags>([\d\w]+|N/A|n/a)?[- ]*([\d\w]+|N/A|n/a)?)?,?'
     )
@@ -26,6 +30,10 @@ def articulos_publicados(data_extracted):
 
 
 def libros_publicados(data_extracted):
+    '''
+    Table name in gruolac: "Libros publicados" and " Otros Libros publicados "
+    Products table index: 2 and 7
+    '''
     extra_patter = re.compile(
         r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+), ?(?P<year>\d{4})?, ?ISBN: (?P<isbn>[\d\- ]+) ?vol: (?P<vol>([aA][Ññ][oO] ?)?(\d+|N/A|n/a|[CMDIXLV]+))? ?págs: ?(?P<pags>([\d\w]+|N/A|n/a)?[- ]*([\d\w]+|N/A|n/a)?)?, ?Ed. ?(?P<editorial>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)'
     )
@@ -47,6 +55,10 @@ def libros_publicados(data_extracted):
 
 
 def capitulos_libro_publicado(data_extracted):
+    '''
+    Table name in gruolac: "Capítulos de libro publicados "
+    Products table index: 3
+    '''
     extra_patter = re.compile(
         r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+), ?(?P<year>\d{4})?, ?(?P<book>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+), ?ISBN: (?P<isbn>[\d\- ]+), ?Vol. (?P<vol>([aA][Ññ][oO] ?)?(\d+|N/A|n/a|[CMDIXLV]+))?, ?págs: ?(?P<pags>([\d\w]+|N/A|n/a)?[- ]*([\d\w]+|N/A|n/a)?)?, ?Ed. ?(?P<editorial>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)'
     )
@@ -69,6 +81,10 @@ def capitulos_libro_publicado(data_extracted):
 
 
 def documentos_trabajo(data_extracted):
+    '''
+    Table name in gruolac: "Documentos de trabajo"
+    Products table index: 4
+    '''
     extra_patter = re.compile(
         r'^(?P<year>\d{4}), Nro. Paginas: ?(?P<nro_pags>\d+)?, Instituciones participantes: ?(?P<institutions>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_,; ]+)?, URL: ?(?P<url>[\w:/.?=#$%-_]+)?, DOI: ?(?P<doi>[\w:/.?=#$%-]+)?'
     )
@@ -89,6 +105,10 @@ def documentos_trabajo(data_extracted):
 
 
 def otra_publicacion_divulgativa(data_extracted):
+    '''
+    Table name in gruolac: "Otra publicación divulgativa"
+    Products table index: 5
+    '''
     extra_patter = re.compile(
         r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+), ?(?P<year>\d{4})?,.*')
     row_data = {}
@@ -103,32 +123,10 @@ def otra_publicacion_divulgativa(data_extracted):
     return row_data
 
 
-def traducciones(data_extracted):
-    extra_patter = re.compile(
-        r'^(?P<year>\d{4}), ?Revista: ?(?P<magazine>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)? ?ISSN ?(?P<issn>\d{4}-\d{3}[\dx00X]|\d+)?, ?Libro: ?(?P<book>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)? ?ISBN ?(?P<isbn>[\d\- ]+)?, ?Medio de divulgación: ?(?P<media>[\wáéíóúñÁÉÍÓÚÑ ]+)?'
-    )
-    row_data = {}
-    row_data['type'] = data_extracted[1].strip()
-    row_data['title'] = data_extracted[2].strip(': ')
-    languages = data_extracted[4].strip(',\n ').split(',')
-    row_data['originalLanguage'] = languages[0].split(':')[1].strip()
-    row_data['translationLanguage'] = languages[1].split(':')[1].strip()
-    row_data['authors'] = data_extracted[6].split(':')[1].strip(', \n')
-    first_extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
-    match = extra_patter.match(first_extra)
-    if match:
-        row_data['year'] = match.group('year')
-        row_data['magazine'] = match.group('magazine')
-        row_data['issn'] = match.group('issn')
-        row_data['book'] = match.group('book')
-        row_data['isbn'] = match.group('isbn')
-        row_data['media'] = match.group('media')
-    return row_data
-
-
 def otros_articulos_publicados(data_extracted):
     '''
     Table name in gruplac: "Otros artículos publicados"
+    Products table index: 6
     '''
     extra_patter = re.compile(
         r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+)?, ?(?P<publisher>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)? ?ISSN: (?P<issn>\d{4}-\d{3}[\dx00X]|\d+)?, ?(?P<year>\d{4})? ?vol: ?(?P<vol>([aA][Ññ][oO] ?)?(\d+|N/A|n/a|[CMDIXLV]+))? ?fasc: ?(?P<fasc>(\d+|[Nn]/?7?[Aa]))? ?págs: (?P<pags>([\d\w]+|N/A|n/a)?[- ]*([\d\w]+|N/A|n/a)?)?,?'
@@ -152,7 +150,38 @@ def otros_articulos_publicados(data_extracted):
     return row_data
 
 
+def traducciones(data_extracted):
+    '''
+    Table name in gruolac: "Traducciones"
+    Products table index: 8
+    '''
+    extra_patter = re.compile(
+        r'^(?P<year>\d{4}), ?Revista: ?(?P<magazine>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)? ?ISSN ?(?P<issn>\d{4}-\d{3}[\dx00X]|\d+)?, ?Libro: ?(?P<book>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)? ?ISBN ?(?P<isbn>[\d\- ]+)?, ?Medio de divulgación: ?(?P<media>[\wáéíóúñÁÉÍÓÚÑ ]+)?'
+    )
+    row_data = {}
+    row_data['type'] = data_extracted[1].strip()
+    row_data['title'] = data_extracted[2].strip(': ')
+    languages = data_extracted[4].strip(',\n ').split(',')
+    row_data['originalLanguage'] = languages[0].split(':')[1].strip()
+    row_data['translationLanguage'] = languages[1].split(':')[1].strip()
+    row_data['authors'] = data_extracted[6].split(':')[1].strip(', \n')
+    first_extra = re.sub("[ \n]+", " ", data_extracted[3]).strip()
+    match = extra_patter.match(first_extra)
+    if match:
+        row_data['year'] = match.group('year')
+        row_data['magazine'] = match.group('magazine')
+        row_data['issn'] = match.group('issn')
+        row_data['book'] = match.group('book')
+        row_data['isbn'] = match.group('isbn')
+        row_data['media'] = match.group('media')
+    return row_data
+
+
 def cartas_mapas_similares(data_extracted):
+    '''
+    Table name in gruolac: "Cartas, mapas o similares"
+    Products table index: 10
+    '''
     extra_patter = re.compile(
         r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+), ?(?P<year>\d{4})?, ?Institución financiadora: ?(?P<financing_institution>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_,; ]+)?, ?Tema: ?(?P<topic>[\wáéíóúñÁÉÍÓÚÑ ]+)?'
     )
@@ -171,6 +200,10 @@ def cartas_mapas_similares(data_extracted):
 
 
 def consultorias(data_extracted):
+    '''
+    Table name in gruolac: "Consultorías científico tecnológicas e Informes técnicos"
+    Products table index: 11
+    '''
     extra_patter = re.compile(
         r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+), ?(?P<year>\d{4})?, ?Idioma: ?(?P<language>[\wáéíóúñÁÉÍÓÚÑ ]+)?, ?Disponibilidad: ?(?P<availability>[\wáéíóúñÁÉÍÓÚÑ ]+)?, ?Número del contrato: ?(?P<contract_number>[\wáéíóúñÁÉÍÓÚÑ°.:\- ]+)?'
     )
@@ -193,8 +226,8 @@ def consultorias(data_extracted):
 
 def disenos_innovacion(data_extracted):
     '''
-    Esta función se puede aplicar a 'Diseños industriales',
-    'Innovaciones en Procesos y Procedimientos' y 'Prototipos'
+    Table name in gruolac: "Diseños industriales", 'Innovaciones en Procesos y Procedimientos' y 'Prototipos'
+    Products table index: 12
     '''
     extra_patter = re.compile(
         r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+), ?(?P<year>\d{4})?, ?Disponibilidad: ?(?P<availability>[\wáéíóúñÁÉÍÓÚÑ ]+)?, ?Institución financiadora: ?(?P<funding_institution>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_,; ]+)?'
@@ -412,7 +445,8 @@ def contenido_multimedia(data_extracted):
     first_extra_patter = re.compile(
         r'^(?P<year>\d{4})?, ?(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+)?, ?Idioma: ?(?P<language>[\wáéíóúñÁÉÍÓÚÑ ]+)?'
     )
-    second_extra_patter = re.compile(r'^Medio de divulgación: ?(?P<media>.+)?, ?Sitio web: ?(?P<web>.+)?')
+    second_extra_patter = re.compile(
+        r'^Medio de divulgación: ?(?P<media>.+)?, ?Sitio web: ?(?P<web>.+)?')
     third_extra_patter = re.compile(
         r'^ Emisora: ?(?P<emitter>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)?, ?Instituciones participantes: (?P<institutions>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_,; ]+)?'
     )
@@ -590,6 +624,9 @@ def trabajos_dirigidos(data_extracted):
 
 
 def jurado_evaluadores_trabajos(data_extracted):
+    '''
+    Table name in gruplac: "Jurado/Comisiones evaluadoras de trabajo de grado"
+    '''
     first_extra_patter = re.compile(
         r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+)?, ?(?P<year>\d{4})?, ?Idioma: ?(?P<language>[\wáéíóúñÁÉÍÓÚÑ ]+)?, ?Medio de divulgación: ?(?P<media>[\wáéíóúñÁÉÍÓÚÑ ]+)?'
     )
