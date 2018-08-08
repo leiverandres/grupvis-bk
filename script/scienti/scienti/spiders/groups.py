@@ -154,7 +154,8 @@ class GroupsUTPSpider(scrapy.Spider):
         group_data['applicationFields'] = self.extract_with_css(
             sectores_node, avoid_header_query, split_dash=True)
         group_data['members'] = self.extract_members(members_node)
-        group_data['products'] = self.process_products(product_nodes)
+        group_data['products'] = self.process_products(
+            product_nodes, group_data['gruplacURL'])
         yield group_data
 
     def extract_members(self, member_list):
@@ -202,7 +203,7 @@ class GroupsUTPSpider(scrapy.Spider):
         estructured_data = extractor(unprocessed_data)
         return estructured_data
 
-    def process_products(self, tables_list):
+    def process_products(self, tables_list, gruplac_url):
         products = []
         for table in tables_list:
             table_title = table.xpath(
@@ -232,10 +233,10 @@ class GroupsUTPSpider(scrapy.Spider):
                         products.append(row_data)
                     except KeyError:
                         self.logger.error(
-                            f'No handler especified for {table_title}')
-                    except IndexError as err:
-                        self.logger.error(err)
-                        self.logger.error(
-                            f'IndexError: {err}. This happend while processing row {row_idx+1}, of category "{table_title}"\n'
+                            f'While scraping <{gruplac_url}>\nNo handler especified for {table_title}'
                         )
+                    except IndexError as err:
+                        self.logger.error(f"""While scraping <{gruplac_url}>\n
+                            IndexError: {err}. This happend while processing row {row_idx+1}, of category "{table_title}"\n
+                            ... Item Skipped""")
         return products
