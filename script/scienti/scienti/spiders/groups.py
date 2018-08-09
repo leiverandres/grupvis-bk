@@ -184,7 +184,7 @@ class GroupsUTPSpider(scrapy.Spider):
             members.append(cur_member_data)
         return members
 
-    def extract_product_data(self, data_str, table_name):
+    def extract_product_data(self, data_as_str, table_name):
         '''
             Extract data of each product
         '''
@@ -192,10 +192,10 @@ class GroupsUTPSpider(scrapy.Spider):
         for tag_name in custom_tags:
             opening_tag = '<' + tag_name + '>'
             closing_tag = '</' + tag_name + '>'
-            if opening_tag in data_str:
-                data_str = data_str.replace(opening_tag, '').replace(
+            if opening_tag in data_as_str:
+                data_as_str = data_as_str.replace(opening_tag, '').replace(
                     closing_tag, '')
-        data_node = scrapy.Selector(text=data_str)
+        data_node = scrapy.Selector(text=data_as_str)
         unprocessed_data = data_node.xpath(
             '//td[@class = "celdas0" or @class = "celdas1"]/text() | //td/strong/text()'
         ).extract()
