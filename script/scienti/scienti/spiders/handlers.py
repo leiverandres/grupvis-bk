@@ -226,9 +226,10 @@ def consultorias(extracted_data):
 
 def disenos_innovacion(extracted_data):
     '''
-    Table name in gruolac: "Diseños industriales", "Innovaciones en Procesos y Procedimientos", 
+    Table name in gruolac: "Diseños industriales", "Esquemas de trazados de circuito integrado", 
+                           "Innovaciones en Procesos y Procedimientos", 
                            "Innovaciones generadas en la Gestión Empresarial" and "Prototipos"
-    Products table index: 12, 14, 15 and 20
+    Products table index: 12, 13, 14, 15 and 20
     '''
     extra_data_patter = re.compile(
         r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+), ?(?P<year>\d{4})?, ?Disponibilidad: ?(?P<availability>[\wáéíóúñÁÉÍÓÚÑ ]+)?, ?Institución financiadora: ?(?P<funding_institution>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_,;& ]+)?'
@@ -243,6 +244,24 @@ def disenos_innovacion(extracted_data):
         row_data['country'] = match.group('country')
         row_data['year'] = match.group('year')
         row_data['availability'] = match.group('availability')
+        row_data['fundingInstitution'] = match.group('funding_institution')
+    return row_data
+
+
+def nuevas_variedades_animal(extracted_data):
+    extra_data_patter = re.compile(
+        r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+), ?(?P<year>\d{4})?, ?Acto administrativo del ICA: ?(?P<ica_admin_act>[\wáéíóúñÁÉÍÓÚÑ ]+)?, ?Institución financiadora: ?(?P<funding_institution>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_,;& ]+)?'
+    )
+    row_data = {}
+    row_data['type'] = extracted_data[1].strip()
+    row_data['title'] = extracted_data[2].strip(': ')
+    row_data['authors'] = extracted_data[4].split(':')[1].strip(', \n')
+    extra = re.sub("[ \n]+", " ", extracted_data[3]).strip()
+    match = extra_data_patter.match(extra)
+    if match:
+        row_data['country'] = match.group('country')
+        row_data['year'] = match.group('year')
+        row_data['ICAAdminAct'] = match.group('ica_admin_act')
         row_data['fundingInstitution'] = match.group('funding_institution')
     return row_data
 
@@ -294,13 +313,14 @@ def plantas_piloto_otros_productos(extracted_data):
 
 def regulaciones_normas_guias(extracted_data):
     '''
-    Table name in gruplac: "Regulaciones y Normas" and "Guias de práctica clínica"
-    Products table index: 21 and 23
+    Table name in gruplac: "Regulaciones y Normas", "Guias de práctica clínica"and "Proyectos de ley"
+    Products table index: 21, 23 and 24
     '''
     extra_data_patter = re.compile(
         r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+), ?(?P<year>\d{4})?, ?Ambito: ?(?P<ambit>[\wáéíóúñÁÉÍÓÚÑ ]+)?, Fecha de publicación: ?(?P<publish_date>[\d:\-. ]+)?, ?Objeto: ?(?P<purpose>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_,;& ]+)?'
     )
     row_data = {}
+    row_data['type'] = extracted_data[1].strip()
     row_data['title'] = extracted_data[2].strip(': ')
     row_data['fundingInstitution'] = extracted_data[4].split(':')[1].strip(
         ', \n')
@@ -796,8 +816,13 @@ HANDLERS = {
     consultorias,
     'Diseños industriales':
     disenos_innovacion,
+    'Esquemas de trazados de circuito integrado': disenos_innovacion,
     'Innovaciones en Procesos y Procedimientos':
     disenos_innovacion,
+    'Innovaciones generadas en la Gestión Empresarial':
+    disenos_innovacion,
+    'Nuevas variedades animal':
+    nuevas_variedades_animal,
     'Nuevas variedades vegetal':
     nuevas_variedades_vegetal,
     'Plantas piloto':
@@ -811,6 +836,8 @@ HANDLERS = {
     'Reglamentos técnicos':
     reglamentos_tecnicos,
     'Guias de práctica clínica':
+    regulaciones_normas_guias,
+    'Proyectos de ley':
     regulaciones_normas_guias,
     'Signos distintivos':
     signos_distintivos,
@@ -840,7 +867,6 @@ HANDLERS = {
     espacios_participacion,
     'Participación Ciudadana en Proyectos de CTI':
     estrategias,
-    # missing
     'Asesorías al Programa Ondas':
     asesorias_programa_ondas,
     'Curso de Corta Duración Dictados':
