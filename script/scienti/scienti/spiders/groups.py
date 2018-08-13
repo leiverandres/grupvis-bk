@@ -184,10 +184,12 @@ class GroupsUTPSpider(scrapy.Spider):
             members.append(cur_member_data)
         return members
 
-    def extract_product_data(self, data_as_str, table_name):
+    def extract_product_data(self, row, table_name):
         '''
-            Extract data of each product
+        This function is useful for transforming the html text before perform
+        data extraction of each product
         '''
+        data_as_str = row.extract()
         custom_tags = ['un', 'urbanaenlinea.go.to']
         for tag_name in custom_tags:
             opening_tag = '<' + tag_name + '>'
@@ -206,37 +208,61 @@ class GroupsUTPSpider(scrapy.Spider):
     def process_products(self, tables_list, gruplac_url):
         products = []
         for table in tables_list:
-            table_title = table.xpath(
+            product_table_name = table.xpath(
                 './tr/td[@class = "celdaEncabezado"]/text()').extract_first(
                 ).strip()
-            valid_rows = table.xpath('./tr[td[@class != "celdaEncabezado"]]')
-            if valid_rows:
-                for row_idx, row in enumerate(valid_rows):
-                    row_data = {
-                        'category':
-                        table_title,
-                        'type':
-                        row.xpath(
-                            './td[@class = "celdas1" or @class = "celdas0"]/strong/text()'
-                        ).extract_first()
-                    }
-                    approved_img = row.xpath(
-                        './td[starts-with(@class, "celdas_")]/img')
-                    row_data['isApproved'] = True if approved_img else False
-                    data_as_str = row.extract()
-                    try:
+            if product_table_name == "Producción en arte, arquitectura y diseño":
+                ## something special
+                rows = table.xpath('tr')
+                cur_product_category = product_table_name
+                for row in rows:
+                    is_heading = row.xpath('td[@class="celdaEncabezado"]')
+                    if is_heading:
+                        cur_product_category = is_heading.xpath(
+                            'text()').extract_first()
+                        print(cur_product_category)
+                    else:
+                        row_data = {
+                            'category': product_table_name,
+                            'type': cur_product_category
+                        }
                         processed_data = self.extract_product_data(
-                            data_as_str, table_title)
+                            row, cur_product_category)
                         row_data['rawData'] = ' '.join(
                             map(lambda x: x.strip(), processed_data))
                         row_data.update(processed_data)
                         products.append(row_data)
-                    except KeyError:
-                        self.logger.error(
-                            f'While scraping <{gruplac_url}>\nNo handler especified for {table_title}'
-                        )
-                    except IndexError as err:
-                        self.logger.error(f"""While scraping <{gruplac_url}>\n
-                            IndexError: {err}. This happend while processing row {row_idx+1}, of category "{table_title}"\n
-                            ... Item Skipped""")
+            else:
+                valid_rows = table.xpath(
+                    './tr[td[@class != "celdaEncabezado"]]')
+                if valid_rows:
+                    for row_idx, row in enumerate(valid_rows):
+                        row_data = {
+                            'category':
+                            product_table_name,
+                            'type':
+                            row.xpath(
+                                './td[@class = "celdas1" or @class = "celdas0"]/strong/text()'
+                            ).extract_first()
+                        }
+                        approved_img = row.xpath(
+                            './td[starts-with(@class, "celdas_")]/img')
+                        row_data[
+                            'isApproved'] = True if approved_img else False
+                        try:
+                            processed_data = self.extract_product_data(
+                                row, product_table_name)
+                            row_data['rawData'] = ' '.join(
+                                map(lambda x: x.strip(), processed_data))
+                            row_data.update(processed_data)
+                            products.append(row_data)
+                        except KeyError:
+                            self.logger.error(
+                                f'While scraping <{gruplac_url}>\nNo handler especified for {product_table_name}'
+                            )
+                        except IndexError as err:
+                            self.logger.error(
+                                f"""While scraping <{gruplac_url}>\n
+                                IndexError: {err}. This happend while processing row {row_idx+1}, of category "{product_table_name}"\n
+                                ... Item Skipped""")
         return products
