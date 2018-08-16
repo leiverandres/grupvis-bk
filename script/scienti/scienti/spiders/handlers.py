@@ -7,7 +7,7 @@ def articulos_publicados(unprocessed_data):
     Products table index: 1
     '''
     mixed_data_regex = re.compile(
-        r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+),[ ]*(?P<publisher>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)[ ]*ISSN: (?P<issn>\d{4}-\d{3}[\dx00X]|\d+)?, (?P<year>\d{4})?[ ]*vol: ?(?P<vol>([aA][Ññ][oO] ?)?(\d+|N/A|n/a|[CMDIXLV]+))?[ ]*fasc: (?P<fasc>(\d+|[Nn]/?7?[Aa]))?[ ]*págs: (?P<pags>([\d\w]+|N/A|n/a)?[- ]*([\d\w]+|N/A|n/a)?)?,?'
+        r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+), ?(?P<publisher>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+) ?ISSN: (?P<issn>\d{4}-\d{3}[\dx00X]|\d+)?, ?(?P<year>\d{4})? ?vol: ?(?P<vol>([aA][Ññ][oO] ?)?(\d+|N/A|n/a|[CMDIXLV]+))? ?fasc: (?P<fasc>(\d+|[Nn]/?7?[Aa]))? ?págs: (?P<pags>([\d\w]+|N/A|n/a)?[- ]*([\d\w]+|N/A|n/a)?)?,?'
     )
     data = {}
     data['type'] = unprocessed_data[1].strip(': ')
