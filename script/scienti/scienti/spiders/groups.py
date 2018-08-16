@@ -13,7 +13,7 @@ class GroupsUTPSpider(scrapy.Spider):
     name = "research_groups"
     allow_domains = ["scienti.colciencias.gov.co"]
     base_url = 'http://scienti.colciencias.gov.co:8083/ciencia-war/busquedaGruposPorInstitucion.do?maxRows=100&all_grupos_ins_tr_=true&all_grupos_ins_mr_=100&all_grupos_ins_p_={}'
-    total_pages = 7  # calculated for pages of 100 items each
+    total_pages = 8  # calculated for pages of 100 items each
 
     def start_requests(self):
         urls = [
@@ -206,6 +206,7 @@ class GroupsUTPSpider(scrapy.Spider):
         return estructured_data
 
     def process_products(self, tables_list, gruplac_url):
+        keyerror_msg = 'While scraping <{}>\nThis may due to missing handler especified for {} or an error in handler function'
         products = []
         for table in tables_list:
             product_table_name = table.xpath(
@@ -220,18 +221,23 @@ class GroupsUTPSpider(scrapy.Spider):
                     if is_heading:
                         cur_product_category = is_heading.xpath(
                             'text()').extract_first()
-                        print(cur_product_category)
                     else:
                         row_data = {
                             'category': product_table_name,
                             'type': cur_product_category
                         }
-                        processed_data = self.extract_product_data(
-                            row, cur_product_category)
-                        row_data['rawData'] = ' '.join(
-                            map(lambda x: x.strip(), processed_data))
-                        row_data.update(processed_data)
-                        products.append(row_data)
+                        try:
+                            processed_data = self.extract_product_data(
+                                row, cur_product_category)
+                            row_data['rawData'] = ' '.join(
+                                map(lambda x: x.strip(), processed_data))
+                            row_data.update(processed_data)
+                            products.append(row_data)
+                        except KeyError:
+                            self.logger.error(
+                                keyerror_msg.format(gruplac_url,
+                                                    cur_product_category),
+                                exc_info=True)
             else:
                 valid_rows = table.xpath(
                     './tr[td[@class != "celdaEncabezado"]]')
@@ -258,8 +264,9 @@ class GroupsUTPSpider(scrapy.Spider):
                             products.append(row_data)
                         except KeyError:
                             self.logger.error(
-                                f'While scraping <{gruplac_url}>\nNo handler especified for {product_table_name}'
-                            )
+                                keyerror_msg.format(gruplac_url,
+                                                    product_table_name),
+                                exec_info=True)
                         except IndexError as err:
                             self.logger.error(
                                 f"""While scraping <{gruplac_url}>\n
