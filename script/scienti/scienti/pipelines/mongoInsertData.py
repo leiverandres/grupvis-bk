@@ -1,36 +1,23 @@
 # -*- coding: utf-8 -*-
 import pymongo
+from scrapy.conf import settings
 from datetime import datetime
 
 
 class MongoPipeline(object):
-    collection_name = 'groups'
-
-    def __init__(self, mongo_uri, mongo_db):
-        self.mongo_uri = mongo_uri
-        self.mongo_db = mongo_db
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        '''
-        pull in information from settings.py
-        '''
-        return cls(
-            mongo_uri=crawler.settings.get('MONGO_URI'),
-            mongo_db=crawler.settings.get('MONGO_DATABASE'))
-
     def open_spider(self, spider):
         '''
         Open the db connection after the spider started
         '''
-        self.client = pymongo.MongoClient(self.mongo_uri)
-        self.db = self.client[self.mongo_db]
+        self.client_connection = pymongo.MongoClient(settings['MONGO_URI'])
+        self.db = self.client_connection[settings['MONGO_DATABASE']]
+        self.collection = self.db[settings['MONGO_COLLECTION']]
 
     def close_spider(self, spider):
         '''
         Close the DB connection
         '''
-        self.client.close()
+        self.client_connection.close()
 
     def process_item(self, item, spider):
         ''' 
@@ -38,8 +25,5 @@ class MongoPipeline(object):
         already exist
         '''
         item['updatedAt'] = datetime.now()
-        self.db[self.collection_name].update(
-            {
-                'code': item['code']
-            }, dict(item), upsert=True)
+        self.collection.update({'code': item['code']}, dict(item), upsert=True)
         return item
