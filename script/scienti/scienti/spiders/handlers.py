@@ -7,7 +7,7 @@ def articulos_publicados(unprocessed_data):
     Products table index: 1
     '''
     mixed_data_regex = re.compile(
-        r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+),[ ]*(?P<publisher>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+)[ ]*ISSN: (?P<issn>\d{4}-\d{3}[\dx00X]|\d+)?, (?P<year>\d{4})?[ ]*vol: ?(?P<vol>([aA][Ññ][oO] ?)?(\d+|N/A|n/a|[CMDIXLV]+))?[ ]*fasc: (?P<fasc>(\d+|[Nn]/?7?[Aa]))?[ ]*págs: (?P<pags>([\d\w]+|N/A|n/a)?[- ]*([\d\w]+|N/A|n/a)?)?,?'
+        r'^(?P<country>[\wáéíóúñÁÉÍÓÚÑ ]+), ?(?P<publisher>[\wáéíóúñÁÉÍÓÚÑ:.\-()\'"_ ]+) ?ISSN: (?P<issn>\d{4}-\d{3}[\dx00X]|\d+)?, ?(?P<year>\d{4})? ?vol: ?(?P<vol>([aA][Ññ][oO] ?)?(\d+|N/A|n/a|[CMDIXLV]+))? ?fasc: (?P<fasc>(\d+|[Nn]/?7?[Aa]))? ?págs: (?P<pags>([\d\w]+|N/A|n/a)?[- ]*([\d\w]+|N/A|n/a)?)?,?'
     )
     data = {}
     data['type'] = unprocessed_data[1].strip(': ')
@@ -599,7 +599,7 @@ def espacios_participacion(unprocessed_data):
     return data
 
 
-def obras_procutos(unprocessed_data):
+def obras_productos(unprocessed_data):
     '''
     This is a subtable of: "Producción en arte, arquitectura y diseño"
     SubTable name in gruplac: "Obras o productos"
@@ -610,7 +610,7 @@ def obras_procutos(unprocessed_data):
     )
     data = {}
     data['title'] = unprocessed_data[0].split(':')[1].strip(',\n ')
-    mixed_data_line = re.sub("[ \n]+", " ", data[1]).strip()
+    mixed_data_line = re.sub("[ \n]+", " ", unprocessed_data[1]).strip()
     match = mixed_data_regex.match(mixed_data_line)
     if match:
         data['year'] = match.group('year')
@@ -656,8 +656,8 @@ def eventos_artisticos(unprocessed_data):
     )
     data = {}
     data['title'] = unprocessed_data[0].split(':')[1].strip('\n ')
-    data['description'] = [2].split(':')[1].strip('\n ')
-    mixed_data_line = re.sub("[ \n]+", " ", data[1]).strip()
+    data['description'] = unprocessed_data[2].split(':')[1].strip('\n ')
+    mixed_data_line = re.sub("[ \n]+", " ", unprocessed_data[1]).strip()
     match = dates_regex.match(mixed_data_line)
     if match:
         data['startDate'] = match.group('start_date')
@@ -665,13 +665,35 @@ def eventos_artisticos(unprocessed_data):
     return data
 
 
-# def talleres_creacion(unprocessed_data):
-#     '''
-#     This is a subtable of: "Producción en arte, arquitectura y diseño"
-#     SubTable name in gruplac: "Talleres de Creación"
-#     Products table index: 40.4
-#     '''
-#     pass
+def talleres_creacion(unprocessed_data):
+    '''
+    This is a subtable of: "Producción en arte, arquitectura y diseño"
+    SubTable name in gruplac: "Talleres de Creación"
+    Products table index: 40.4
+    '''
+    first_mixed_data_regex = re.compile(r'^Nombre del taller: ?(?P<title>.+) ?,Tipo de taller: ?(?P<workshop_type>.+)?,Participación: (?P<participation>.+)? ')
+    second_mixed_data_regex = re.compile(r'^Fecha de inicio: ?(?P<start_date>[\d:\-. ]+)?, ?Fecha de finalización: ?(?P<end_date>[\d:\-. ]+)?')
+    third_mixed_data_regex = re.compile(r'^Ámbito: ?(?P<ambit>[\wáéíóúñÁÉÍÓÚÑ ]+)?,Distinción obtenida: ?(?P<obtained_distinction>.+)?, ?Mecanismo de selección: ?(?P<selection_mechanism>.+)?')
+    data = {}
+    data['place'] = unprocessed_data[2].split(':')[1].strip()
+    mixed_data_line_1 = re.sub("[ \n]+", " ", unprocessed_data[0]).strip()
+    mixed_data_line_2 = re.sub("[ \n]+", " ", unprocessed_data[1]).strip()
+    mixed_data_line_3 = re.sub("[ \n]+", " ", unprocessed_data[3]).strip()
+    first_match = first_mixed_data_regex.match(mixed_data_line_1)
+    second_match = second_mixed_data_regex.match(mixed_data_line_2)
+    third_match = third_mixed_data_regex.match(mixed_data_line_3)
+    if first_match:
+        data['title'] = first_match.group('title')
+        data['workshopType'] = first_match.group('workshop_type')
+        data['participation'] = first_match.group('participation')
+    if second_match:
+        data['startDate'] = second_match.group('start_date')
+        data['endDate'] = second_match.group('end_date')
+    if third_match:
+        data['ambit'] = third_match.group('ambit')
+        data['obtainedDistinction'] = third_match.group('obtained_distinction')
+        data['selectionMechanism'] = third_match.group('selection_mechanism')
+    return data
 
 
 def asesorias_programa_ondas(unprocessed_data):
@@ -941,13 +963,13 @@ HANDLERS = {
     'Participación Ciudadana en Proyectos de CTI':
     estrategias,
     'Obras o productos':
-    obras_procutos,
+    obras_productos,
     'Industrias creativas y culturales':
     industrias_creativas_culturales,
     'Eventos Artísticos':
     eventos_artisticos,
-    # 'Talleres de Creación':
-    # talleres_creacion,
+    'Talleres de Creación':
+    talleres_creacion,
     'Asesorías al Programa Ondas':
     asesorias_programa_ondas,
     'Curso de Corta Duración Dictados':
