@@ -14,6 +14,7 @@ class GroupsUTPSpider(scrapy.Spider):
     allow_domains = ["scienti.colciencias.gov.co"]
     base_url = 'http://scienti.colciencias.gov.co:8083/ciencia-war/busquedaGruposPorInstitucion.do?maxRows=100&all_grupos_ins_tr_=true&all_grupos_ins_mr_=100&all_grupos_ins_p_={}'
     total_pages = 8  # calculated for pages of 100 items each
+    codes_set = set() # set to avoid scrapyin many times same page
 
     def start_requests(self):
         urls = [
@@ -30,7 +31,7 @@ class GroupsUTPSpider(scrapy.Spider):
         for row in rows:
             university_name = row.xpath('td[1]/text()').extract_first()
             university_link = row.xpath('td[2]/a/@href').extract_first()
-            # groups_qty = row.xpath('td[2]/a/*[1]/text()').extract_first()
+        #     # groups_qty = row.xpath('td[2]/a/*[1]/text()').extract_first()
             url_params = {
                 'grupos_mr_': 100,
                 'grupos_p_': 1,
@@ -59,7 +60,7 @@ class GroupsUTPSpider(scrapy.Spider):
                 group.xpath('td[3]/a/@href').extract_first(),
                 'leader':
                 group.xpath('td[4]/a/text()').extract_first(),
-                'Category':
+                'category':
                 group.xpath('td[7]/text()').extract_first().split(' ')[1]
                 .strip(),
                 'ClassifiedIn':
@@ -67,12 +68,13 @@ class GroupsUTPSpider(scrapy.Spider):
                 'universityName':
                 response.meta['universityName']
             }
-            yield group_data
             ## Get into each group page and scrape it all
-            yield Request(
-                group_data['gruplacURL'],
-                callback=self.parse_group_page,
-                meta={'group_data': group_data})
+            if not group_data['code'] in self.codes_set:
+                self.codes_set.add(group_data['code'])
+                yield Request(
+                    group_data['gruplacURL'],
+                    callback=self.parse_group_page,
+                    meta={'group_data': group_data})
         ## Generate next page link and follow it
         next_button = response.xpath('//a/img[@alt="Página Siguiente"]')
         if next_button:
@@ -269,7 +271,10 @@ class GroupsUTPSpider(scrapy.Spider):
                                 exec_info=True)
                         except IndexError as err:
                             self.logger.error(
-                                f"""While scraping <{gruplac_url}>\n
-                                IndexError: {err}. This happend while processing row {row_idx+1}, of category "{product_table_name}"\n
-                                ... Item Skipped""")
+                                "While scraping <{}>\n"
+                                "IndexError: {}. This happend while processing row {}, of category \"{}\"\n"
+                                "... Item Skipped".format(gruplac_url, err, row_idx+1, product_table_name))
         return products
+
+    def closed(self, reason):
+        self.logger.info('unique codes found: {}'.format(self.codes_set.__len__()))
