@@ -1,5 +1,26 @@
 from pymongo import MongoClient
 import pandas as pd
+from progress.bar import Bar
+from functools import reduce
+import logging
+
+logger = logging.getLogger(__name__)
+
+MONGO_URI = 'mongodb://localhost:27017'
+MONGO_DATABASE = 'col-scienti-dev'
+MONGO_COLLECTION = 'groups'
+
+VALID_PRODUCT_TYPES = [
+    'Artículos publicados', 'Libros publicados',
+    'Capítulos de libro publicados'
+]
+
+
+def connect_to_db():
+    client = MongoClient(MONGO_URI)
+    db = client[MONGO_DATABASE]
+    groups_collection = db[MONGO_COLLECTION]
+    return groups_collection
 
 
 def get_and_clean(object, key, default_val='Not found'):
@@ -10,53 +31,57 @@ def get_and_clean(object, key, default_val='Not found'):
     return value
 
 
-MONGO_URI = 'mongodb://localhost:27017'
-MONGO_DATABASE = 'col-scienti-dev'
-MONGO_COLLECTION = 'groups'
+if __name__ == '__main__':
+    groups_collection = connect_to_db()
 
-client = MongoClient(MONGO_URI)
-db = client[MONGO_DATABASE]
-groups_colletion = db[MONGO_COLLECTION]
+    query = {"products.category": {'$in': VALID_PRODUCT_TYPES}}
+    projection = {
+        'knowledgeArea': 1,
+        'universityName': 1,
+        'Category': 1,
+        'products': 1,
+        'groupName': 1,
+        'gruplacURL': 1
+    }
 
-valid_products = [
-    'Artículos publicados', 'Libros publicados',
-    'Capítulos de libro publicados'
-]
-query = {"products.category": {'$in': valid_products}}
-projection = {
-    'knowledgeArea': 1,
-    'universityName': 1,
-    'Category': 1,
-    'products': 1,
-    'groupName': 1,
-    'gruplacURL': 1
-}
+    groups_result = groups_collection.find(query, projection)
+    total_products_to_scan = reduce(
+        lambda acum, group: acum + len(group['products']),
+        groups_result.__copy__(), 0)
+    total_products = 0
+    total_valid_products = 0
+    valid_products = []
 
-groups_result = groups_colletion.find(query, projection)
-total_products = 0
-total_valid_products = 0
-# print(groups_result[0])
-for group in groups_result:
-    for product in group['products']:
-        total_products += 1
-        if product['category'].strip() in valid_products:
-            total_valid_products += 1
-            product_data = {
-                'university': get_and_clean(group, 'universityName'),
-                'groupName': get_and_clean(group, 'groupName'),
-                'groupKnowledgeArea': get_and_clean(group, 'knowledgeArea'),
-                'groupClassification': get_and_clean(group, 'Category'),
-                'productType': get_and_clean(product, 'category'),
-                'productTitle': get_and_clean(product, 'title'),
-                'productYear': get_and_clean(product, 'year'),
-                'approved': get_and_clean(product, 'isApproved')
-            }
-            if not product_data['productTitle']:
-                print(product)
-                print(group['gruplacURL'])
-            valid_products.append(product_data)
-report_df = pd.DataFrame(valid_products)
-report_df.to_csv('products_resport2.csv', index=False)
+    bar = Bar('Processing', max=total_products_to_scan)
+    for group in groups_result:
+        for product in group['products']:
+            if product['category'].strip() in VALID_PRODUCT_TYPES:
+                total_valid_products += 1
+                product_data = {
+                    'university': get_and_clean(group, 'universityName'),
+                    'groupName': get_and_clean(group, 'groupName'),
+                    'groupKnowledgeArea': get_and_clean(
+                        group, 'knowledgeArea'),
+                    'groupClassification': get_and_clean(group, 'Category'),
+                    'productType': get_and_clean(product, 'category'),
+                    'productTitle': get_and_clean(product, 'title'),
+                    'productYear': get_and_clean(product, 'year'),
+                    'approved': get_and_clean(product, 'isApproved')
+                }
+                if not product_data['productTitle']:
+                    logging.error(
+                        '\nFollowing product has not name: %s.\nGroup link: %s',
+                        product, group['gruplacURL'])
+                valid_products.append(product_data)
+            total_products += 1
+            bar.next()
+    bar.finish()
+    columns = [
+        'university', 'groupName', 'groupKnowledgeArea', 'groupClassification',
+        'productType', 'productTitle', 'productYear', 'approved'
+    ]
+    report_df = pd.DataFrame(valid_products, columns=columns)
+    report_df.to_csv('products_resport.csv', index=False)
 
-print(f'Total scanned products: {total_products}')
-print(f'Total valid products: {total_valid_products}')
+    logging.info(f'Total scanned products: {total_products}')
+    logging.info(f'Total valid products: {total_valid_products}')
