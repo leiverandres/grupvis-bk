@@ -169,4 +169,7 @@ typings/
 # dotenv environment variables file
 .env
 
+# Project
 .vscode/
+dump*
+.~lock*
