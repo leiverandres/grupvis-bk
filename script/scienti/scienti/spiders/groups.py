@@ -12,9 +12,9 @@ class GroupsUTPSpider(scrapy.Spider):
     '''
     name = "research_groups"
     allow_domains = ["scienti.colciencias.gov.co"]
-    base_url = 'http://scienti.colciencias.gov.co:8083/ciencia-war/busquedaGruposPorInstitucion.do?maxRows=100&all_grupos_ins_tr_=true&all_grupos_ins_mr_=100&all_grupos_ins_p_={}'
+    base_url = 'https://scienti.colciencias.gov.co:8083/ciencia-war/busquedaGruposPorInstitucion.do?maxRows=100&all_grupos_ins_tr_=true&all_grupos_ins_p_={}&all_grupos_ins_mr_=100'
     total_pages = 8  # calculated for pages of 100 items each
-    codes_set = set() # set to avoid scrapyin many times same page
+    codes_set = set()  # set to avoid scrapyin many times same page
 
     def start_requests(self):
         urls = [
@@ -31,7 +31,7 @@ class GroupsUTPSpider(scrapy.Spider):
         for row in rows:
             university_name = row.xpath('td[1]/text()').extract_first()
             university_link = row.xpath('td[2]/a/@href').extract_first()
-        #     # groups_qty = row.xpath('td[2]/a/*[1]/text()').extract_first()
+            #     # groups_qty = row.xpath('td[2]/a/*[1]/text()').extract_first()
             url_params = {
                 'grupos_mr_': 100,
                 'grupos_p_': 1,
@@ -273,8 +273,11 @@ class GroupsUTPSpider(scrapy.Spider):
                             self.logger.error(
                                 "While scraping <{}>\n"
                                 "IndexError: {}. This happend while processing row {}, of category \"{}\"\n"
-                                "... Item Skipped".format(gruplac_url, err, row_idx+1, product_table_name))
+                                "... Item Skipped".format(
+                                    gruplac_url, err, row_idx + 1,
+                                    product_table_name))
         return products
 
     def closed(self, reason):
-        self.logger.info('unique codes found: {}'.format(self.codes_set.__len__()))
+        self.logger.info('unique codes found: {}'.format(
+            self.codes_set.__len__()))
