@@ -72,7 +72,7 @@ ITEM_PIPELINES = {
 
 # Mongodb constants
 MONGO_URI = 'mongodb://localhost:27017'
-MONGO_DATABASE = 'col-scienti-dev'
+MONGO_DATABASE = 'col-scienti'
 MONGO_COLLECTION = 'groups'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
