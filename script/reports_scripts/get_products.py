@@ -36,6 +36,7 @@ if __name__ == '__main__':
 
     query = {"products.category": {'$in': VALID_PRODUCT_TYPES}}
     projection = {
+        'code': 1,
         'knowledgeArea': 1,
         'universityName': 1,
         'Category': 1,
@@ -59,6 +60,7 @@ if __name__ == '__main__':
                 total_valid_products += 1
                 product_data = {
                     'university': get_and_clean(group, 'universityName'),
+                    'groupCode': get_and_clean(group, 'code'),
                     'groupName': get_and_clean(group, 'groupName'),
                     'groupKnowledgeArea': get_and_clean(
                         group, 'knowledgeArea'),
@@ -77,8 +79,9 @@ if __name__ == '__main__':
             bar.next()
     bar.finish()
     columns = [
-        'university', 'groupName', 'groupKnowledgeArea', 'groupClassification',
-        'productType', 'productTitle', 'productYear', 'approved'
+        'university', 'groupCode', 'groupName', 'groupKnowledgeArea',
+        'groupClassification', 'productType', 'productTitle', 'productYear',
+        'approved'
     ]
     report_df = pd.DataFrame(valid_products, columns=columns)
     report_df.to_csv('products_resport.csv', index=False)
