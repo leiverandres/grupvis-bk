@@ -228,6 +228,10 @@ class GroupsUTPSpider(scrapy.Spider):
                             'category': product_table_name,
                             'type': cur_product_category
                         }
+                        approved_img = row.xpath(
+                            './td[starts-with(@class, "celdas_")]/img')
+                        row_data[
+                            'isApproved'] = True if approved_img else False
                         try:
                             processed_data = self.extract_product_data(
                                 row, cur_product_category)
