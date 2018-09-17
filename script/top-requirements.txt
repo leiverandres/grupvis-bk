@@ -10,3 +10,5 @@ scrapy
 yapf
 pylint
 progress
+bson
+sklearn
