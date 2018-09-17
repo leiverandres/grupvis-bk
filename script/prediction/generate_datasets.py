@@ -8,7 +8,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 MONGO_URI = 'mongodb://localhost:27017'
-MONGO_DATABASE = 'col-scienti'
+MONGO_DATABASE = 'col-scienti-dev'
 MONGO_COLLECTION = 'groups'
 PRODUCT_TYPES = [
     'Artículos publicados', 'Libros publicados',
@@ -38,6 +38,9 @@ PRODUCT_TYPES = [
     'Producción en arte, arquitectura y diseño'
 ]
 
+PRODUCT_TYPES_COLS = [field + ' sin aprobar'
+                      for field in PRODUCT_TYPES] + PRODUCT_TYPES
+
 ADITIONAL_FIELDS = ['code', 'knowledgeArea', 'category', 'bigKnowledgeArea']
 
 
@@ -58,7 +61,7 @@ def get_and_clean(object, key, default_val='Not found'):
 
 def init_counter():
     init_val = 0
-    counter = Counter({p: init_val for p in PRODUCT_TYPES})
+    counter = Counter({p: init_val for p in PRODUCT_TYPES_COLS})
     return counter
 
 
@@ -67,15 +70,23 @@ if __name__ == '__main__':
     all_groups = groups_collection.find()
     total_groups = copy.copy(all_groups).count()
     bar = Bar('Processing products', max=total_groups)
-    df = pd.DataFrame(columns=[*ADITIONAL_FIELDS, *PRODUCT_TYPES])
+    df = pd.DataFrame(columns=[*ADITIONAL_FIELDS, *PRODUCT_TYPES_COLS])
     for group in all_groups:
         products_counter = init_counter()
-        arr_types = map(lambda p: p['category'], group['products'])
-        products_counter.update(arr_types)
+        not_approved_types = list(
+            map(lambda p: p['category'] + ' sin aprobar',
+                filter(lambda p: not p['isApproved'], group['products'])))
+        approved_types = list(
+            map(lambda p: p['category'],
+                filter(lambda p: p['isApproved'], group['products'])))
+        assert len(not_approved_types) + len(approved_types) == len(
+            group['products']
+        ), 'Problem when filtering approved and not approved products'
+        products_counter.update(approved_types + not_approved_types)
         aditional = {key: group[key] for key in ADITIONAL_FIELDS}
         row_data = {**dict(products_counter), **aditional}
         df = df.append(row_data, ignore_index=True)
         bar.next()
     bar.finish()
-    df.to_csv('dataset.csv')
+    df.to_csv('dataset.csv', index=False)
     print('DONE')
