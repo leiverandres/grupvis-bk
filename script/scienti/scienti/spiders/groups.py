@@ -9,12 +9,15 @@ from .handlers import HANDLERS
 
 class GroupsUTPSpider(scrapy.Spider):
     '''
+    We need to check if the gruplac of certain group has been visited before
+    due to a Colciencias bug in the groups list, where sometimes replicates
+    same group several times.
     '''
     name = "research_groups"
     allow_domains = ["scienti.colciencias.gov.co"]
     base_url = 'https://scienti.colciencias.gov.co:8083/ciencia-war/busquedaGruposPorInstitucion.do?maxRows=100&all_grupos_ins_tr_=true&all_grupos_ins_p_={}&all_grupos_ins_mr_=100'
     total_pages = 8  # calculated for pages of 100 items each
-    codes_set = set()  # set to avoid scrapyin many times same page
+    codes_set = set()  # set for checking if group has been visited
 
     def start_requests(self):
         urls = [
@@ -26,29 +29,32 @@ class GroupsUTPSpider(scrapy.Spider):
 
     def parse_universities_list(self, response):
         """
+        This takes the list of universities and follow the link where is each
+        university research groups list
         """
         rows = response.xpath('//tr[contains(@id, "all_grupos_ins_row")]')
         for row in rows:
-            university_name = row.xpath('td[1]/text()').extract_first()
-            university_link = row.xpath('td[2]/a/@href').extract_first()
-            #     # groups_qty = row.xpath('td[2]/a/*[1]/text()').extract_first()
+            institution_name = row.xpath('td[1]/text()').extract_first()
+            institution_url = row.xpath('td[2]/a/@href').extract_first()
             url_params = {
                 'grupos_mr_': 100,
                 'grupos_p_': 1,
                 'grupos_tr_': True,
                 'maxRows': 100
             }
-            university_link += '&' + parse.urlencode(url_params)
-            full_url = response.urljoin(university_link)
+            institution_url += '&' + parse.urlencode(url_params)
+            full_url = response.urljoin(institution_url)
             yield Request(
                 full_url,
                 callback=self.parse_groups_list,
-                meta={'universityName': university_name})
+                meta={'institutionName': institution_name})
 
     def parse_groups_list(self, response):
         """
+        Gets the basic group information located in the groups list of each
+        university and follows the link to each group gruplac. Also if
+        there is next page follows its link and continue scraping
         """
-        ## Get groups info in the current page
         groups = response.xpath('//tr[starts-with(@id, "grupos_row")]')
         for group in groups:
             group_data = {
@@ -60,22 +66,24 @@ class GroupsUTPSpider(scrapy.Spider):
                 group.xpath('td[3]/a/@href').extract_first(),
                 'leader':
                 group.xpath('td[4]/a/text()').extract_first(),
-                'category':
+                'profilesURL':
+                group.xpath('td[5]/a/@href').extract_first(),
+                'classification':
                 group.xpath('td[7]/text()').extract_first().split(' ')[1]
                 .strip(),
-                'ClassifiedIn':
+                'ClassifiedOn':
                 group.xpath('td[8]/text()').extract_first(),
-                'universityName':
-                response.meta['universityName']
+                'institution':
+                response.meta['institutionName']
             }
-            ## Get into each group page and scrape it all
+            ## Go into each group page and scrape it all
             if not group_data['code'] in self.codes_set:
                 self.codes_set.add(group_data['code'])
                 yield Request(
                     group_data['gruplacURL'],
                     callback=self.parse_group_page,
                     meta={'group_data': group_data})
-        ## Generate next page link and follow it
+        ## Generate next page link and follows it
         next_button = response.xpath('//a/img[@alt="Página Siguiente"]')
         if next_button:
             parsed_url = parse.urlparse(response.request.url)
@@ -136,8 +144,11 @@ class GroupsUTPSpider(scrapy.Spider):
                 try:
                     json_name = FIELDS_MAP[field]
                     group_data[json_name] = value.strip() if value else ''
-                except KeyError:
-                    pass
+                except KeyError as key_error:
+                    self.logger.error(
+                        'Error getting field for group: {}.\n{}.\nGruplac url: {}'.
+                        format(group_data['groupName'], key_error,
+                               group_data['gruplacURL']))
         # SELECTORS
         avoid_header_query = 'tr > td:not([class="celdaEncabezado"])::text'
         instituciones_node = tables[1]
@@ -158,7 +169,11 @@ class GroupsUTPSpider(scrapy.Spider):
         group_data['members'] = self.extract_members(members_node)
         group_data['products'] = self.process_products(
             product_nodes, group_data['gruplacURL'])
-        yield group_data
+        # Continue with profiles and propagate the data obtained so far
+        yield Request(
+            url=group_data['profilesURL'],
+            callback=self.parse_group_profiles,
+            meta={'group_data': group_data})
 
     def extract_members(self, member_list):
         members = []
@@ -282,6 +297,25 @@ class GroupsUTPSpider(scrapy.Spider):
                                     product_table_name))
         return products
 
+    def parse_group_profiles(self, response):
+        group_data = response.meta['group_data'].copy()
+        results_table = response.xpath('/html/body/table[2]')
+        valid_rows = results_table[4:]
+        self.logger.info(results_table.xpath('').extract())
+        profiles_tables_index = {}
+        # perfil integrantes
+        members_profile_table = results_table.xpath('tr[6]')
+        # perfil colaboración
+        collaboration_profile_table = results_table.xpath('tr[9]')
+        # perfil nuevo conocimiento
+        new_knowledge_profile_table = results_table.xpath('tr[12]')
+        # perfil innovación y desarrollo tecnologico
+        innovation_profile_table = results_table.xpath('tr[15]')
+        # perfil apropiación social
+        appropriation_profile_table = results_table.xpath('tr[18]')
+        # perfil formación recurso humano
+        training_profile_table = results_table.xpath('tr[21]')
+
     def closed(self, reason):
-        self.logger.info('unique codes found: {}'.format(
+        self.logger.info('unique group codes found: {}'.format(
             self.codes_set.__len__()))
