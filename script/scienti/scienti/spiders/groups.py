@@ -5,6 +5,7 @@ from scrapy import Request
 
 from .constants import FIELDS_MAP, MISSING_GROUPS, SECTIONS
 from .handlers import HANDLERS
+from .profiles_handlers import parse_profile_table
 
 
 class GroupsUTPSpider(scrapy.Spider):
@@ -300,21 +301,21 @@ class GroupsUTPSpider(scrapy.Spider):
     def parse_group_profiles(self, response):
         group_data = response.meta['group_data'].copy()
         results_table = response.xpath('/html/body/table[2]')
-        valid_rows = results_table[4:]
-        self.logger.info(results_table.xpath('').extract())
-        profiles_tables_index = {}
-        # perfil integrantes
-        members_profile_table = results_table.xpath('tr[6]')
-        # perfil colaboración
-        collaboration_profile_table = results_table.xpath('tr[9]')
-        # perfil nuevo conocimiento
-        new_knowledge_profile_table = results_table.xpath('tr[12]')
-        # perfil innovación y desarrollo tecnologico
-        innovation_profile_table = results_table.xpath('tr[15]')
-        # perfil apropiación social
-        appropriation_profile_table = results_table.xpath('tr[18]')
-        # perfil formación recurso humano
-        training_profile_table = results_table.xpath('tr[21]')
+        profiles_tables_idx = {
+            'members_profile_table': 6,
+            'collaboration_profile_table': 9,
+            'new_knowledge_profile_table': 12,
+            'innovation_profile_table': 15,
+            'appropriation_profile_table': 18,
+            'training_profile_table': 21,
+        }
+        profiles = {}
+        for key, value in profiles_tables_idx.items():
+            profile_table = results_table.xpath(
+                'tr[{}]/td/table'.format(value))
+            profiles[key] = parse_profile_table(profile_table)
+        group_data['profiles'] = profiles
+        yield group_data
 
     def closed(self, reason):
         self.logger.info('unique group codes found: {}'.format(
