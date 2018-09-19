@@ -41,7 +41,9 @@ PRODUCT_TYPES = [
 PRODUCT_TYPES_COLS = [field + ' sin aprobar'
                       for field in PRODUCT_TYPES] + PRODUCT_TYPES
 
-ADITIONAL_FIELDS = ['code', 'knowledgeArea', 'category', 'bigKnowledgeArea']
+ADITIONAL_FIELDS = [
+    'code', 'knowledgeArea', 'classification', 'bigKnowledgeArea'
+]
 
 
 def connect_to_db():
