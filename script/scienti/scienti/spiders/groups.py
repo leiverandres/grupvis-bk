@@ -72,7 +72,7 @@ class GroupsUTPSpider(scrapy.Spider):
                 'classification':
                 group.xpath('td[7]/text()').extract_first().split(' ')[1]
                 .strip(),
-                'ClassifiedOn':
+                'classifiedOn':
                 group.xpath('td[8]/text()').extract_first(),
                 'institution':
                 response.meta['institutionName']
