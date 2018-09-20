@@ -88,7 +88,7 @@ class GroupsUTPSpider(scrapy.Spider):
                     meta={'group_data': group_data})
         ## Generate next page link and follows it
         next_button = response.xpath('//a/img[@alt="Página Siguiente"]')
-        if next_button is not None:
+        if next_button:
             parsed_url = parse.urlparse(response.request.url)
             query_params = parse.parse_qs(parsed_url.query)
             current_page = query_params['grupos_p_'][0]
