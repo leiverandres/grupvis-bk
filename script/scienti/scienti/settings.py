@@ -18,7 +18,7 @@ NEWSPIDER_MODULE = 'scienti.spiders'
 #USER_AGENT = 'scienti (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -72,7 +72,7 @@ ITEM_PIPELINES = {
 
 # Mongodb constants
 MONGO_URI = 'mongodb://localhost:27017'
-MONGO_DATABASE = 'col-scienti'
+MONGO_DATABASE = 'col-scienti-dev'
 MONGO_COLLECTION = 'groups'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
