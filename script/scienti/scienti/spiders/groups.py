@@ -12,13 +12,14 @@ class GroupsUTPSpider(scrapy.Spider):
     '''
     We need to check if the gruplac of certain group has been visited before
     due to a Colciencias bug in the groups list, where sometimes replicates
-    same group several times.
+    same group several times in groups list of an university.
     '''
     name = "research_groups"
     allow_domains = ["scienti.colciencias.gov.co"]
     base_url = 'https://scienti.colciencias.gov.co:8083/ciencia-war/busquedaGruposPorInstitucion.do?maxRows=100&all_grupos_ins_tr_=true&all_grupos_ins_p_={}&all_grupos_ins_mr_=100'
     total_pages = 8  # calculated for pages of 100 items each
     codes_set = set()  # set for checking if group has been visited
+    total_universities = 0
 
     def start_requests(self):
         urls = [
@@ -35,13 +36,14 @@ class GroupsUTPSpider(scrapy.Spider):
         """
         rows = response.xpath('//tr[contains(@id, "all_grupos_ins_row")]')
         for row in rows:
+            self.total_universities += 1
             institution_name = row.xpath('td[1]/text()').extract_first()
             institution_url = row.xpath('td[2]/a/@href').extract_first()
             url_params = {
-                'grupos_mr_': 100,
-                'grupos_p_': 1,
+                'maxRows': 100,
                 'grupos_tr_': True,
-                'maxRows': 100
+                'grupos_p_': 1,
+                'grupos_mr_': 100,
             }
             institution_url += '&' + parse.urlencode(url_params)
             full_url = response.urljoin(institution_url)
@@ -86,17 +88,20 @@ class GroupsUTPSpider(scrapy.Spider):
                     meta={'group_data': group_data})
         ## Generate next page link and follows it
         next_button = response.xpath('//a/img[@alt="Página Siguiente"]')
-        if next_button:
+        if next_button is not None:
             parsed_url = parse.urlparse(response.request.url)
             query_params = parse.parse_qs(parsed_url.query)
             current_page = query_params['grupos_p_'][0]
             query_params['grupos_p_'][0] = int(current_page) + 1
             query_str = parse.urlencode(query_params, doseq=True)
             next_page_url = parsed_url.geturl().split('?')[0] + '?' + query_str
+            self.logger.info(
+                '=========================== entering next button ================================'
+                'to the page {}'.format(next_page_url))
             yield Request(
                 next_page_url,
                 callback=self.parse_groups_list,
-                meta={'universityName': response.meta['universityName']})
+                meta={'institutionName': response.meta['institutionName']})
 
     def extract_with_css(self,
                          initial_selector,
@@ -120,7 +125,7 @@ class GroupsUTPSpider(scrapy.Spider):
         """
         # Recap data obtained before
         group_data = response.meta['group_data'].copy()
-        tables = response.css("table")
+        tables = response.css("body > table")
         basic_data_table = tables[0]
         ## Take all info rows, except title of table
         rows_with_info = basic_data_table.css('tr')[1:]
@@ -145,11 +150,10 @@ class GroupsUTPSpider(scrapy.Spider):
                 try:
                     json_name = FIELDS_MAP[field]
                     group_data[json_name] = value.strip() if value else ''
-                except KeyError as key_error:
-                    self.logger.error(
-                        'Error getting field for group: {}.\n{}.\nGruplac url: {}'.
-                        format(group_data['groupName'], key_error,
-                               group_data['gruplacURL']))
+                except KeyError:
+                    pass
+                    # In my tests this only occurred with field clasificaciòn
+                    # And as this field is already got then there is not handler in FIELDS_MAP
         # SELECTORS
         avoid_header_query = 'tr > td:not([class="celdaEncabezado"])::text'
         instituciones_node = tables[1]
@@ -320,3 +324,5 @@ class GroupsUTPSpider(scrapy.Spider):
     def closed(self, reason):
         self.logger.info('unique group codes found: {}'.format(
             self.codes_set.__len__()))
+        self.logger.info('total universities visited {}'.format(
+            self.total_universities))
