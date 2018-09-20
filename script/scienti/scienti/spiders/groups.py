@@ -221,7 +221,7 @@ class GroupsUTPSpider(scrapy.Spider):
                     closing_tag, '')
         data_node = scrapy.Selector(text=data_as_str)
         unprocessed_data = data_node.xpath(
-            '//td[@class = "celdas0" or @class = "celdas1"]/text() | //td/strong/text()'
+            '//td[@class = "celdas0" or @class = "celdas1"]/text() | //td/strong/text() | //td/b/text()'
         ).extract()
         extractor = HANDLERS[table_name]
         estructured_data = extractor(unprocessed_data)
