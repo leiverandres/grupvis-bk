@@ -671,9 +671,15 @@ def talleres_creacion(unprocessed_data):
     SubTable name in gruplac: "Talleres de Creación"
     Products table index: 40.4
     '''
-    first_mixed_data_regex = re.compile(r'^Nombre del taller: ?(?P<title>.+) ?,Tipo de taller: ?(?P<workshop_type>.+)?,Participación: (?P<participation>.+)? ')
-    second_mixed_data_regex = re.compile(r'^Fecha de inicio: ?(?P<start_date>[\d:\-. ]+)?, ?Fecha de finalización: ?(?P<end_date>[\d:\-. ]+)?')
-    third_mixed_data_regex = re.compile(r'^Ámbito: ?(?P<ambit>[\wáéíóúñÁÉÍÓÚÑ ]+)?,Distinción obtenida: ?(?P<obtained_distinction>.+)?, ?Mecanismo de selección: ?(?P<selection_mechanism>.+)?')
+    first_mixed_data_regex = re.compile(
+        r'^Nombre del taller: ?(?P<title>.+) ?,Tipo de taller: ?(?P<workshop_type>.+)?,Participación: (?P<participation>.+)? '
+    )
+    second_mixed_data_regex = re.compile(
+        r'^Fecha de inicio: ?(?P<start_date>[\d:\-. ]+)?, ?Fecha de finalización: ?(?P<end_date>[\d:\-. ]+)?'
+    )
+    third_mixed_data_regex = re.compile(
+        r'^Ámbito: ?(?P<ambit>[\wáéíóúñÁÉÍÓÚÑ ]+)?,Distinción obtenida: ?(?P<obtained_distinction>.+)?, ?Mecanismo de selección: ?(?P<selection_mechanism>.+)?'
+    )
     data = {}
     data['place'] = unprocessed_data[2].split(':')[1].strip()
     mixed_data_line_1 = re.sub("[ \n]+", " ", unprocessed_data[0]).strip()
