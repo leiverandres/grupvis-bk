@@ -31,16 +31,16 @@ def get_and_clean(object, key, default_val='Not found'):
 
 if __name__ == '__main__':
     groups_collection = connect_to_db()
-    group = groups_collection.find_one({"code": SIRIUS_CODE})
-    total_products = len(group['products'])
+    sirius = groups_collection.find_one({"code": SIRIUS_CODE})
+    total_products = len(sirius['products'])
     bar = Bar('Processing products', max=total_products)
     processed_products = []
     import json
-    json_data = dumps(group['products'])
+    json_data = dumps(sirius['products'])
     print(type(json_data))
     with open('sirius.json', 'w') as json_file:
         json.dump(json.loads(json_data), json_file)
-    for product in group['products']:
+    for product in sirius['products']:
         product_data = {
             'type': get_and_clean(product, 'category'),
             'subtype': get_and_clean(product, 'type'),
