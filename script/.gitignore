@@ -3,3 +3,6 @@
 # Scrapy
 *.seen
 *.state
+
+# Reports
+*.csv
