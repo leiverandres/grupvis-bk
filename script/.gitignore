@@ -1,1 +1,5 @@
 *.zip
+
+# Scrapy
+*.seen
+*.state
