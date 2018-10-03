@@ -35,9 +35,10 @@ class GroupsUTPSpider(scrapy.Spider):
         university research groups list
         """
         rows = response.xpath('//tr[contains(@id, "all_grupos_ins_row")]')
+        self.total_universities += len(rows.extract())
         for row in rows:
-            self.total_universities += 1
-            institution_name = row.xpath('td[1]/text()').extract_first()
+            institution_name = row.xpath(
+                'td[1]/text()').extract_first().strip()
             institution_url = row.xpath('td[2]/a/@href').extract_first()
             url_params = {
                 'maxRows': 100,
@@ -47,10 +48,13 @@ class GroupsUTPSpider(scrapy.Spider):
             }
             institution_url += '&' + parse.urlencode(url_params)
             full_url = response.urljoin(institution_url)
-            yield Request(
-                full_url,
-                callback=self.parse_groups_list,
-                meta={'institutionName': institution_name})
+            if institution_name:
+                yield Request(
+                    full_url,
+                    callback=self.parse_groups_list,
+                    meta={
+                        'institutionName': institution_name,
+                    })
 
     def parse_groups_list(self, response):
         """
@@ -80,12 +84,17 @@ class GroupsUTPSpider(scrapy.Spider):
                 response.meta['institutionName']
             }
             ## Go into each group page and scrape it all
+            yield Request(
+                group_data['gruplacURL'],
+                callback=self.parse_group_page,
+                meta={'group_data': group_data})
             if not group_data['code'] in self.codes_set:
                 self.codes_set.add(group_data['code'])
-                yield Request(
-                    group_data['gruplacURL'],
-                    callback=self.parse_group_page,
-                    meta={'group_data': group_data})
+            else:
+                self.logger.warning(
+                    'Duplicated code found: {} in institution: {}, url: {}'.
+                    format(group_data['code'], group_data['institution'],
+                           response.request.url))
         ## Generate next page link and follows it
         next_button = response.xpath('//a/img[@alt="Página Siguiente"]')
         if next_button:
