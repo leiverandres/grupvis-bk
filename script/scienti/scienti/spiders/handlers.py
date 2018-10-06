@@ -448,6 +448,7 @@ def eventos_cientificos(unprocessed_data):
         data['city'] = match.group('city')
         data['startDate'] = match.group('start_date')
         data['endDate'] = match.group('end_date')
+        data['year'] = data['endDate'].split('-')[0] if data['endDate'] else ''
         data['ambit'] = match.group('ambit')
         data['participationType'] = match.group('participation_type')
     return data
@@ -483,6 +484,7 @@ def redes_conocimiento(unprocessed_data):
         data['city'] = match.group('city')
         data['startDate'] = match.group('start_date')
         data['endDate'] = match.group('end_date')
+        data['year'] = data['endDate'].split('-')[0] if data['endDate'] else ''
     return data
 
 
@@ -502,6 +504,7 @@ def contenido_impreso(unprocessed_data):
     second_match = second_mixed_data_regex.match(mixed_data_line_2)
     if match:
         data['date'] = match.group('date')
+        data['year'] = data['date'].split('-')[0] if data['date'] else ''
         data['ambit'] = match.group('ambit')
         data['media'] = match.group('media')
     if second_match:
@@ -554,6 +557,7 @@ def contenido_virtual(unprocessed_data):
     match = mixed_data_regex.match(mixed_data_line)
     if match:
         data['date'] = match.group('date')
+        data['year'] = data['date'].split('-')[0] if data['date'] else ''
         data['entities'] = match.group('entities')
         data['web'] = match.group('web')
     return data
@@ -594,6 +598,7 @@ def espacios_participacion(unprocessed_data):
     if match:
         data['startDate'] = match.group('start_date')
         data['endDate'] = match.group('end_date')
+        data['year'] = data['endDate'].split('-')[0] if data['endDate'] else ''
         data['nroParticipants'] = match.group('nro_participants')
         data['web'] = match.group('web')
     return data
@@ -641,6 +646,8 @@ def industrias_creativas_culturales(unprocessed_data):
         data['nit'] = first_match.group('nit')
     if second_match:
         data['registrationDate'] = second_match.group('registration_date')
+        data['year'] = data['registrationDate'].split('-')[0] if data[
+            'registrationDate'] else ''
         data['hasProduct'] = second_match.group('has_product')
     return data
 
@@ -662,6 +669,7 @@ def eventos_artisticos(unprocessed_data):
     if match:
         data['startDate'] = match.group('start_date')
         data['endDate'] = match.group('end_date')
+        data['year'] = data['endDate'].split('-')[0] if data['endDate'] else ''
     return data
 
 
@@ -695,6 +703,7 @@ def talleres_creacion(unprocessed_data):
     if second_match:
         data['startDate'] = second_match.group('start_date')
         data['endDate'] = second_match.group('end_date')
+        data['year'] = data['endDate'].split('-')[0] if data['endDate'] else ''
     if third_match:
         data['ambit'] = third_match.group('ambit')
         data['obtainedDistinction'] = third_match.group('obtained_distinction')
