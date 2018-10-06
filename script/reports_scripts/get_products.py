@@ -34,12 +34,12 @@ def get_and_clean(object, key, default_val='Not found'):
 if __name__ == '__main__':
     groups_collection = connect_to_db()
 
-    query = {"products.category": {'$in': VALID_PRODUCT_TYPES}}
+    query = {"institution": "Universidad Tecnológica De Pereira - Utp"}
     projection = {
         'code': 1,
         'knowledgeArea': 1,
         'universityName': 1,
-        'Category': 1,
+        'classification': 1,
         'products': 1,
         'groupName': 1,
         'gruplacURL': 1
@@ -59,12 +59,13 @@ if __name__ == '__main__':
             if product['category'].strip() in VALID_PRODUCT_TYPES:
                 total_valid_products += 1
                 product_data = {
-                    'university': get_and_clean(group, 'universityName'),
+                    # 'university': get_and_clean(group, 'institution'),
                     'groupCode': get_and_clean(group, 'code'),
                     'groupName': get_and_clean(group, 'groupName'),
                     'groupKnowledgeArea': get_and_clean(
                         group, 'knowledgeArea'),
-                    'groupClassification': get_and_clean(group, 'Category'),
+                    'groupClassification': get_and_clean(
+                        group, 'classification'),
                     'productType': get_and_clean(product, 'category'),
                     'productTitle': get_and_clean(product, 'title'),
                     'productYear': get_and_clean(product, 'year'),
