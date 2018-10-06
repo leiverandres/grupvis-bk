@@ -16,7 +16,7 @@ class GroupsUTPSpider(scrapy.Spider):
     '''
     name = "research_groups"
     allow_domains = ["scienti.colciencias.gov.co"]
-    base_url = 'https://scienti.colciencias.gov.co:8083/ciencia-war/busquedaGruposPorInstitucion.do?maxRows=100&all_grupos_ins_tr_=true&all_grupos_ins_p_={}&all_grupos_ins_mr_=100'
+    base_url = 'https://scienti.colciencias.gov.co/ciencia-war/busquedaGruposPorInstitucion.do?maxRows=100&all_grupos_ins_tr_=true&all_grupos_ins_p_={}&all_grupos_ins_mr_=100'
     total_pages = 8  # calculated for pages of 100 items each
     codes_set = set()  # set for checking if group has been visited
     total_universities = 0
