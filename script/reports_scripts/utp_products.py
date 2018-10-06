@@ -8,7 +8,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 MONGO_URI = 'mongodb://localhost:27017'
-MONGO_DATABASE = 'col-scienti'
+MONGO_DATABASE = 'col-scienti-dev'
 MONGO_COLLECTION = 'groups'
 
 BASE_FIELDS = [
@@ -75,7 +75,7 @@ def init_counter():
 def filter_year(product):
     try:
         product_year = product['year']
-        if product_year is None:
+        if not product_year:
             return False
         return int(product_year) >= 2012 and int(product_year) <= 2016
     except KeyError:
