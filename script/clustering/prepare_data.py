@@ -12,14 +12,14 @@ COLUMNS = [
     'IS', 'I', 'IJ', 'ED', 'EM', 'JI', 'EP', 'IVD', 'IVM', 'IVP', 'IVE', 'IV',
     'IC', 'ICOOP', 'ART_A', 'ART_D', 'LIB', 'CAP', 'PAT', 'VV', 'AAD', 'TEC',
     'EMP', 'RNL', 'CON', 'MR', 'PCI', 'EPF', 'CCO', 'CCE', 'TD', 'TM', 'TG',
-    'PID', 'PF', 'PERS', 'AP', 'APO', 'classification'
+    'PID', 'PF', 'PERS', 'AP', 'APO', 'knowledgeArea','classification', 'code'
 ]
 dataset = pd.DataFrame(columns=COLUMNS)
 total_groups = groups_collection.count_documents({})
 bar = Bar('Processing groups', max=total_groups)
 for group in groups_collection.find({}):
     profiles = group['profiles']
-    row_data = {'classification': group['classification']}
+    row_data = {'classification': group['classification'], 'code': group['code'], 'knowledgeArea': group['bigKnowledgeArea']}
     for profile_name in profiles.keys():
         cur_profile = profiles[profile_name]
         for row in cur_profile['rows_values']:
