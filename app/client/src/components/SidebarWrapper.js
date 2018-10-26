@@ -26,6 +26,10 @@ class SidebarWrapper extends Component {
             <Icon name="table" />
             Reportes
           </Menu.Item>
+          <Menu.Item name="model" as={Link} to="/grupviz/model">
+            <Icon name="coffee" />
+            Model
+          </Menu.Item>
           <Menu.Item name="analysis" href={`${serverURL}/analysis-file`}>
             <Icon name="cubes" />
             Analisis
