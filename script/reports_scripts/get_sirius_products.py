@@ -53,5 +53,5 @@ if __name__ == '__main__':
     bar.finish()
     columns = ['type', 'subtype', 'name', 'year', 'approved']
     report_df = pd.DataFrame(processed_products, columns=columns)
-    report_df.to_csv('sirius_products_resport.csv')
+    report_df.to_csv('sirius_products_report.csv')
     print('DONE')

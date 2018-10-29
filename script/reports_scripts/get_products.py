@@ -12,7 +12,30 @@ MONGO_COLLECTION = 'groups'
 
 VALID_PRODUCT_TYPES = [
     'Artículos publicados', 'Libros publicados',
-    'Capítulos de libro publicados'
+    'Capítulos de libro publicados', 'Documentos de trabajo',
+    'Otra publicación divulgativa', 'Otros artículos publicados',
+    'Otros Libros publicados', 'Traducciones', 'Cartas, mapas o similares',
+    'Consultorías científico tecnológicas e Informes técnicos',
+    'Diseños industriales', 'Esquemas de trazados de circuito integrado',
+    'Innovaciones en Procesos y Procedimientos',
+    'Innovaciones generadas en la Gestión Empresarial',
+    'Nuevas variedades animal', 'Nuevas variedades vegetal', 'Plantas piloto',
+    'Otros productos tecnológicos', 'Prototipos', 'Regulaciones y Normas',
+    'Reglamentos técnicos', 'Guias de práctica clínica', 'Proyectos de ley',
+    'Signos distintivos', 'Softwares', 'Empresas de base tecnológica',
+    'Ediciones', 'Eventos Científicos', 'Informes de investigación',
+    'Redes de Conocimiento Especializado', 'Generación de Contenido Impreso',
+    'Generación de Contenido Multimedia', 'Generación de Contenido Virtual',
+    'Estrategias de Comunicación del Conocimiento',
+    'Estrategias Pedagógicas para el fomento a la CTI',
+    'Espacios de Participación Ciudadana',
+    'Participación Ciudadana en Proyectos de CTI', 'Obras o productos',
+    'Industrias creativas y culturales', 'Eventos Artísticos',
+    'Talleres de Creación', 'Asesorías al Programa Ondas',
+    'Curso de Corta Duración Dictados', 'Trabajos dirigidos/turorías',
+    'Jurado/Comisiones evaluadoras de trabajo de grado',
+    'Participación en comités de evaluación', 'Demás trabajos', 'Proyectos',
+    'Producción en arte, arquitectura y diseño'
 ]
 
 
@@ -37,8 +60,7 @@ if __name__ == '__main__':
     query = {"institution": "Universidad Tecnológica De Pereira - Utp"}
     projection = {
         'code': 1,
-        'knowledgeArea': 1,
-        'universityName': 1,
+        'bigKnowledgeArea': 1,
         'classification': 1,
         'products': 1,
         'groupName': 1,
@@ -59,17 +81,22 @@ if __name__ == '__main__':
             if product['category'].strip() in VALID_PRODUCT_TYPES:
                 total_valid_products += 1
                 product_data = {
-                    # 'university': get_and_clean(group, 'institution'),
-                    'groupCode': get_and_clean(group, 'code'),
-                    'groupName': get_and_clean(group, 'groupName'),
-                    'groupKnowledgeArea': get_and_clean(
-                        group, 'knowledgeArea'),
-                    'groupClassification': get_and_clean(
-                        group, 'classification'),
-                    'productType': get_and_clean(product, 'category'),
-                    'productTitle': get_and_clean(product, 'title'),
-                    'productYear': get_and_clean(product, 'year'),
-                    'approved': get_and_clean(product, 'isApproved')
+                    'groupCode':
+                    get_and_clean(group, 'code'),
+                    'groupName':
+                    get_and_clean(group, 'groupName'),
+                    'groupKnowledgeArea':
+                    get_and_clean(group, 'bigKnowledgeArea'),
+                    'groupClassification':
+                    get_and_clean(group, 'classification'),
+                    'productType':
+                    get_and_clean(product, 'category'),
+                    'productTitle':
+                    get_and_clean(product, 'title'),
+                    'productYear':
+                    get_and_clean(product, 'year'),
+                    'approved':
+                    get_and_clean(product, 'isApproved')
                 }
                 if not product_data['productTitle']:
                     logging.error(
@@ -80,12 +107,11 @@ if __name__ == '__main__':
             bar.next()
     bar.finish()
     columns = [
-        'university', 'groupCode', 'groupName', 'groupKnowledgeArea',
-        'groupClassification', 'productType', 'productTitle', 'productYear',
-        'approved'
+        'groupCode', 'groupName', 'groupKnowledgeArea', 'groupClassification',
+        'productType', 'productTitle', 'productYear', 'approved'
     ]
     report_df = pd.DataFrame(valid_products, columns=columns)
-    report_df.to_csv('products_resport.csv', index=False)
+    report_df.to_csv('products_report.csv', index=False)
 
     logging.info(f'Total scanned products: {total_products}')
     logging.info(f'Total valid products: {total_valid_products}')
