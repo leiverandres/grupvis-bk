@@ -20,15 +20,15 @@
     ]
   },
   "dependencies": {
-    "apollo-server-express": "^1.2.0",
+    "apollo-server-express": "^2.1.0",
     "body-parser": "^1.18.2",
     "compression": "^1.7.1",
     "cors": "^2.8.4",
-    "express": "^4.16.2",
+    "express": "^4.16.4",
     "graphql": "^0.13.2",
     "graphql-server-express": "^1.2.0",
     "graphql-tools": "^3.0.5",
-    "mongodb": "^3.1.1",
+    "mongodb": "^3.1.8",
     "morgan": "^1.9.0",
     "pm2": "^3.0.0"
   },
