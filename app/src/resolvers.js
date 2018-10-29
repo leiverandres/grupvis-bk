@@ -4,15 +4,18 @@ const ENV = process.env.NODE_ENV || 'development';
 const mongoHost = ENV === 'production' ? 'mongo' : 'localhost';
 const mongoDBName = ENV === 'production' ? 'scienti' : 'scienti-test';
 const mongoURI = `mongodb://${mongoHost}:27017/${mongoDBName}`;
+const client = new MongoClient(mongoURI);
 console.log(`Connecting to ${mongoURI}`);
 
 const resolvers = {
   Query: {
     groups: async () => {
       try {
-        const DB = await MongoClient.connect(mongoURI);
-        const Groups = DB.collection('groups');
-        const groups = await Groups.find({}).toArray();
+        console.log('Hi');
+        const conection = await client.connect({});
+        const db = conection.db(mongoDBName);
+        const groupsCollection = db.collection('groups');
+        const groups = await groupsCollection.find({}).toArray();
         return groups;
       } catch (err) {
         console.error('Error getting groups: ', err);
