@@ -13,6 +13,7 @@ import UnderConstruction from './components/UnderConstruction';
 import BarChartLayout from './visualizations/BigAreaBarChart/BarChartLayout';
 import ScatterChartLayout from './visualizations/ClassificationByGroup/ScatterChartLayout';
 import AggregatedChartLayout from './visualizations/AggregatedGroupsClassification/AggregatedChartLayout';
+import ModelView from './modelView/wrapper'
 import GroupsTable from './groupsTable/groupsTableLayout';
 import Analysis from './components/Analysis';
 import { serverURL } from './config.json';
@@ -60,6 +61,7 @@ class App extends Component {
                 path="/grupviz/aggregated-groups"
                 component={AggregatedChartLayout}
               />
+              <Route exact path="/grupviz/model" component={ModelView} />
               <Route path="/grupviz/analysis" component={Analysis} />
 
               <Route path="/grupviz/groups-table" component={GroupsTable} />
