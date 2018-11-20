@@ -20,11 +20,38 @@ const typeDefs = gql`
     year: String
   }
 
+  type MembersProfile {
+    memberType: String
+    abbreviation: String
+    value: Int
+  }
+
+  type ProfileItem {
+    profileName: String
+    abbreviation: String
+    value: Float
+  }
+
+  type ProductCountItem {
+    productType: String
+    approvedCount: Int
+    noApprovedCount: Int
+  }
+
+  type Report {
+    comparedClassification: String
+    comparedKnowledgeArea: String
+    comparedValues: [Float]
+    diff: [Float]
+    order: [String]
+  }
+
   type Group {
     code: String!
     groupName: String!
     grouplacURL: String
     leader: String
+    institution: String
     profilesURL: String
     classification: String
     classifiedOn: String
@@ -44,10 +71,15 @@ const typeDefs = gql`
     applicationFields: [String]
     members: [Member]
     products: [Product]
+    membersProfile: [MembersProfile]
+    productsCount: [ProductCountItem]
+    profiles: [ProfileItem]
+    report: Report
   }
 
   type Query {
     groups: [Group]
+    groupsByInstitution(institution: String!): [Group]
     group(code: String!): Group
     products: [Product]
     product(category: String): [Product]

@@ -1,17 +1,17 @@
 const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const morgan = require('morgan');
 const compression = require('compression');
+const { ApolloServer } = require('apollo-server-express');
 
-const { schemak, typeDefs } = require('./src/schema');
+const { typeDefs } = require('./src/schema');
 const { resolvers } = require('./src/resolvers');
 
 const PORT = process.env.PORT || 5000;
 const server = new ApolloServer({ typeDefs, resolvers });
 const app = express();
+server.applyMiddleware({ app });
 
 app.use(morgan('tiny'));
 app.use(compression());
@@ -41,8 +41,8 @@ app.get('/grupviz/*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
 
-server.applyMiddleware({ app });
 app.listen(PORT, () => {
-  console.info(`Running on port ${PORT}`);
-  console.log(server.graphqlPath);
+  console.log(
+    `🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`
+  );
 });
