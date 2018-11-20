@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
+import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
-import ApolloClient from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import './App.css';
@@ -13,14 +11,14 @@ import UnderConstruction from './components/UnderConstruction';
 import BarChartLayout from './visualizations/BigAreaBarChart/BarChartLayout';
 import ScatterChartLayout from './visualizations/ClassificationByGroup/ScatterChartLayout';
 import AggregatedChartLayout from './visualizations/AggregatedGroupsClassification/AggregatedChartLayout';
-import ModelView from './modelView/wrapper'
+import ModelView from './modelView/wrapper';
+import GroupDashboard from './modelView/groupDashboard';
 import GroupsTable from './groupsTable/groupsTableLayout';
 import Analysis from './components/Analysis';
 import { serverURL } from './config.json';
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: `${serverURL}/graphql` }),
-  cache: new InMemoryCache().restore(window.__APOLLO_STATE__ || {})
+  uri: `${serverURL}/graphql`
 });
 
 class App extends Component {
@@ -62,6 +60,10 @@ class App extends Component {
                 component={AggregatedChartLayout}
               />
               <Route exact path="/grupviz/model" component={ModelView} />
+              <Route
+                path="/grupviz/dashboard/:code"
+                component={GroupDashboard}
+              />
               <Route path="/grupviz/analysis" component={Analysis} />
 
               <Route path="/grupviz/groups-table" component={GroupsTable} />
