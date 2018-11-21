@@ -113,7 +113,22 @@ if __name__ == '__main__':
                 filter(filter_approved, group['products'])))
         products_counter = init_counter()
         products_counter.update(approved_types + not_approved_types)
-        row_data.update(dict(products_counter))
-        dataset = dataset.append(row_data, ignore_index=True)
+        products_count = []
+        for product_type in PRODUCT_TYPES:
+            approved_count = products_counter[product_type]
+            no_approved_count = products_counter[product_type + ' sin aprobar']
+            new_row = {
+                "productType": product_type,
+                "approvedCount": approved_count,
+                "noApprovedCount": no_approved_count
+            }
+            products_count.append(new_row)
+        groups_collection.update({
+            "_id": group["_id"]
+        }, {"$set": {
+            "productsCount": products_count
+        }})
+        # row_data.update(dict(products_counter))
+        # dataset = dataset.append(row_data, ignore_index=True)
     bar.finish()
-    dataset.to_csv('utp_products_resport.csv', index=False)
+    # dataset.to_csv('utp_products_resport.csv', index=False)
