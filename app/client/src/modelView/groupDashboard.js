@@ -5,9 +5,7 @@ import {
   List,
   Container,
   Header,
-  Loader,
-  Modal,
-  Button
+  Loader
 } from 'semantic-ui-react';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
@@ -112,7 +110,7 @@ function Dashboard(props) {
               />
               <br />
               <Container>
-                {data.classification == 'A1' ? justA1Text : regularText}
+                {data.classification === 'A1' ? justA1Text : regularText}
               </Container>
             </Segment>
           </Grid.Column>
@@ -176,7 +174,7 @@ function Dashboard(props) {
               <h1
                 style={{ marginBottom: '2em' }}
               >{`Diferencia de perfiles con respecto al ${
-                data.classification == 'A1' ? 'promedio' : 'grupo más cercano'
+                data.classification === 'A1' ? 'promedio' : 'grupo más cercano'
               } de la categoria ${data.report.comparedClassification}`}</h1>
               <ReportList reportData={data.report} />
             </Segment>

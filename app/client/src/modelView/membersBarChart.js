@@ -6,7 +6,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   Label
 } from 'recharts';
 import { profilesMapping } from './reportMapping';
