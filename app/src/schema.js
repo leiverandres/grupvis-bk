@@ -77,8 +77,17 @@ const typeDefs = gql`
     report: Report
   }
 
+  type ProfileSumary {
+    meanValues: [Float]
+    order: [String]
+  }
+
   type Query {
     groups: [Group]
+    profileSummary(
+      classification: String!
+      knowledgeArea: String!
+    ): ProfileSumary
     groupsByInstitution(institution: String!): [Group]
     group(code: String!): Group
     products: [Product]

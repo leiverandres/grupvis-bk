@@ -33,7 +33,6 @@ const resolvers = {
       return members;
     },
     profiles: parent => {
-      console.log('hi');
       const { profiles } = parent;
       const aggregated_profiles = [];
       for (let value of Object.values(profiles)) {
@@ -66,8 +65,8 @@ const resolvers = {
           code: parent.code
         });
         const profileReport = group.closestGroupInfo;
-        const diff = group.closestGroupInfo.closestValues.map((val, idx) =>
-          Math.abs(val - Number(groupSummary[idx]))
+        const diff = group.closestGroupInfo.closestValues.map(
+          (val, idx) => val - Number(groupSummary[idx])
         );
         profileReport['diff'] = diff;
         return profileReport || [];
@@ -91,6 +90,23 @@ const resolvers = {
           .limit(100)
           .toArray();
         return groups;
+      } catch (err) {
+        console.error('Error getting groups: ', err);
+      }
+      client.close();
+    },
+    profileSummary: async (_, args) => {
+      const client = new MongoClient(mongoURI, { useNewUrlParser: true });
+      try {
+        await client.connect();
+        console.log('Connected correctly to server');
+        const db = client.db(mongoDBName);
+        const profilesCollection = db.collection('summaryProfiles');
+        const summary = await profilesCollection.findOne({
+          classification: args.classification,
+          bigKnowledgeArea: args.knowledgeArea
+        });
+        return summary;
       } catch (err) {
         console.error('Error getting groups: ', err);
       }

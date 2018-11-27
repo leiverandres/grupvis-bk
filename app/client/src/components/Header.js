@@ -40,7 +40,7 @@ class Header extends Component {
                   src={logoWithText}
                   alt="Logo Grupo de Investigación Sirius"
                   size="medium"
-                  href="/grupviz"
+                  href="/grupviz/model"
                   centered
                 />
               </Grid.Column>

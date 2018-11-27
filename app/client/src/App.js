@@ -14,7 +14,7 @@ import AggregatedChartLayout from './visualizations/AggregatedGroupsClassificati
 import ModelView from './modelView/wrapper';
 import GroupDashboard from './modelView/groupDashboard';
 import GroupsTable from './groupsTable/groupsTableLayout';
-import Analysis from './components/Analysis';
+import GlobalAnalysis from './globalReport/globalReportView';
 import { serverURL } from './config.json';
 
 const client = new ApolloClient({
@@ -37,7 +37,7 @@ class App extends Component {
           <SidebarWrapper visible={visible}>
             <div className="App">
               <Header handleToggleVisibility={this.toggleVisibility} />
-              <Route exact path="/grupviz" component={VizList} />
+              <Route exact path="/grupviz/" component={VizList} />
               <Route
                 exact
                 path="/grupviz/under-construction"
@@ -64,7 +64,7 @@ class App extends Component {
                 path="/grupviz/dashboard/:code"
                 component={GroupDashboard}
               />
-              <Route path="/grupviz/analysis" component={Analysis} />
+              <Route path="/grupviz/analysis" component={GlobalAnalysis} />
 
               <Route path="/grupviz/groups-table" component={GroupsTable} />
             </div>

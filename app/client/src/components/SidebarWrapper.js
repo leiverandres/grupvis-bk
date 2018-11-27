@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Sidebar, Menu, Icon } from 'semantic-ui-react';
 
-import { serverURL } from '../config.json';
-
 class SidebarWrapper extends Component {
   render() {
     const { visible } = this.props;
@@ -18,21 +16,21 @@ class SidebarWrapper extends Component {
           vertical
           inverted
         >
-          <Menu.Item name="home" as={Link} to="/grupviz">
+          {/* <Menu.Item name="home" as={Link} to="/grupviz">
             <Icon name="grid layout" />
             Inicio
-          </Menu.Item>
-          <Menu.Item name="reports" as={Link} to="/grupviz/groups-table">
+          </Menu.Item> */}
+          {/* <Menu.Item name="reports" as={Link} to="/grupviz/groups-table">
             <Icon name="table" />
             Reportes
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item name="model" as={Link} to="/grupviz/model">
-            <Icon name="coffee" />
-            Model
+            <Icon name="searchengin" />
+            Buscador
           </Menu.Item>
-          <Menu.Item name="analysis" href={`${serverURL}/analysis-file`}>
+          <Menu.Item name="analysis" as={Link} to="/grupviz/analysis">
             <Icon name="cubes" />
-            Analisis
+            Analisis global
           </Menu.Item>
           <Menu.Item name="gamepad">
             <Menu.Header>Enlaces de interes</Menu.Header>
