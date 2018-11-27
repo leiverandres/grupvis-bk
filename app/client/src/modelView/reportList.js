@@ -7,23 +7,7 @@ import {
   List,
   Container
 } from 'semantic-ui-react';
-import {
-  profilesMapping,
-  membersProfile,
-  colaborationProfile,
-  productSubtypes
-} from './reportMapping';
-
-function buildMessage(abbreviatedProfile) {
-  const mappedProfileName = profilesMapping[abbreviatedProfile];
-  if (membersProfile.includes(abbreviatedProfile)) {
-    return `Incrementar la cantidad de miembros tipo ${mappedProfileName}`;
-  } else if (colaborationProfile.includes(abbreviatedProfile)) {
-    return `Aumentar el ${mappedProfileName}`;
-  } else {
-    return `Aumentar la producción de ${mappedProfileName}`;
-  }
-}
+import { profilesMapping, productSubtypes } from './reportMapping';
 
 class ReportList extends Component {
   state = {
@@ -49,43 +33,58 @@ class ReportList extends Component {
       .sort((a, b) => {
         return b.diffValue - a.diffValue;
       });
-    const reportList = aggregatedList.slice(0, max).map((item, idx) => {
-      const mappedProfileName = profilesMapping[item.name];
-      if (item.diffValue !== 0) {
-        const ROW = (
-          <Table.Row key={idx}>
-            <Table.Cell>
-              <Header as="h4">
-                <Header.Content>{mappedProfileName}</Header.Content>
-              </Header>
-            </Table.Cell>
+    const reportList = aggregatedList
+      .slice(0, max)
+      .filter(item => item.diffValue > 0)
+      .map((item, idx) => {
+        const mappedProfileName = profilesMapping[item.name];
+        const additionalList = productSubtypes[item.name];
+        return (
+          <Table.Row key={`report-row-${item.name}`}>
+            {additionalList ? (
+              <Popup
+                trigger={
+                  <Table.Cell>
+                    <Header as="h4">
+                      <Header.Content>{`${mappedProfileName} (${
+                        item.name
+                      })`}</Header.Content>
+                    </Header>
+                  </Table.Cell>
+                }
+                key={`report-row-${idx}`}
+              >
+                <Popup.Content>
+                  <List bulleted>
+                    {additionalList.map((additionalMsg, idx) => (
+                      <List.Item key={`sub-msg-${item.name}-${idx}`}>
+                        {additionalMsg}
+                      </List.Item>
+                    ))}
+                  </List>
+                </Popup.Content>
+              </Popup>
+            ) : (
+              <Table.Cell>
+                <Header as="h4">
+                  <Header.Content>{`${mappedProfileName} (${
+                    item.name
+                  })`}</Header.Content>
+                </Header>
+              </Table.Cell>
+            )}
             <Table.Cell>{item.diffValue.toFixed(3)}</Table.Cell>
           </Table.Row>
         );
-        const additionalList = productSubtypes[item.name];
-        if (additionalList) {
-          return (
-            <Popup trigger={ROW}>
-              <Popup.Content>
-                <List bulleted>
-                  {additionalList.map(additionalMsg => (
-                    <List.Item>{additionalMsg}</List.Item>
-                  ))}
-                </List>
-              </Popup.Content>
-            </Popup>
-          );
-        } else {
-          return ROW;
-        }
-      }
-    });
+      });
     return (
       <Container>
         <Table basic="very" celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Perfiles</Table.HeaderCell>
+              <Table.HeaderCell>
+                Nombre del perfil (abreviatura)
+              </Table.HeaderCell>
               <Table.HeaderCell>Diferencia</Table.HeaderCell>
             </Table.Row>
           </Table.Header>

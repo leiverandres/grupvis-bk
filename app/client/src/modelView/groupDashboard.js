@@ -1,19 +1,12 @@
 import React from 'react';
-import {
-  Grid,
-  Image,
-  Segment,
-  List,
-  Container,
-  Divider
-} from 'semantic-ui-react';
+import { Grid, Segment, List, Container, Header } from 'semantic-ui-react';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
 import MembersBarChart from './membersBarChart';
 import ProductsBarChart from './productsBarChart';
 import ReportList from './reportList';
-import im from '../parallel.png';
+import ParallelCoordinates from './parallelCoordinatesChart';
 
 export default function GroupDashboard({ match }) {
   const groupDataQuery = gql`
@@ -37,8 +30,13 @@ export default function GroupDashboard({ match }) {
         }
         report {
           comparedClassification
+          comparedValues
           order
           diff
+        }
+        profiles {
+          abbreviation
+          value
         }
       }
     }
@@ -46,7 +44,7 @@ export default function GroupDashboard({ match }) {
   return (
     <Query query={groupDataQuery} variables={{ groupCode: match.params.code }}>
       {({ loading, error, data }) => {
-        if (loading) return <h3>Loading ...</h3>;
+        if (loading) return <h3>Cargando analisis ...</h3>;
         if (error) return `Error!: ${error}`;
 
         return <Dashboard data={data.group} />;
@@ -57,116 +55,123 @@ export default function GroupDashboard({ match }) {
 
 function Dashboard(props) {
   let { data } = props;
-  const BasicInfo = (
-    <Container textAlign="left">
-      <h3>Estado actual del grupo</h3>
-      <List>
-        <List.Item>
-          <List.Header>Clasifición actual</List.Header>
-          {data.classification}
-        </List.Item>
-        <List.Item>
-          <List.Header>Gran area</List.Header>
-          {data.bigKnowledgeArea}
-        </List.Item>
-        <List.Item>
-          <List.Header>Area</List.Header>
-          {data.knowledgeArea}
-        </List.Item>
-        <List.Item>
-          <List.Header>Institución</List.Header>
-          {data.institution}
-        </List.Item>
-      </List>
-    </Container>
-  );
+
+  const parallelData = data.profiles.map((val, idx) => {
+    return {
+      profileName: val['abbreviation'],
+      value: val['value'],
+      comparisonValue: data.report.comparedValues[idx].toFixed(3)
+    };
+  });
+
+  const justA1Text = `En la gráfica anterior se observan dos curvas: la curva roja representa los valores de los perfiles para el grupo de investigación analizado  y la curva  verde representa el valor promedio de los perfiles dentro de la clasificación ${
+    data.report.comparedClassification
+  } en el área de ${data.bigKnowledgeArea}.
+  `;
+  const regularText = `En la gráfica anterior se observan cuatro curvas: la curva roja
+  representa los valores de los perfiles para el grupo de
+  investigación analizado. La curva verde y la amarilla representan el
+  valor promedio de los perfiles dentro de la clasificación ${
+    data.report.comparedClassification
+  } y ${data.classification}
+  respectivamente en el área de ${data.bigKnowledgeArea}. Finalmente la
+  curva azul representa los valores en los perfiles para un
+  grupo en la categoría ${
+    data.report.comparedClassification
+  } que sería el más cercano al que se
+  presenta en este caso.`;
+
   return (
     <Container fluid>
-      <h1>{`${data.groupName} (${data.code})`}</h1>
-      <Grid padded celled>
+      <Header style={{ fontSize: '2.5em' }}>{data.groupName}</Header>
+      <Grid padded>
+        <Grid.Row>
+          <Grid.Column width={12}>
+            <Segment raised>
+              <h1>Comparación por perfiles</h1>
+              <ParallelCoordinates
+                classification={data.classification}
+                knowledgeArea={data.bigKnowledgeArea}
+                data={parallelData}
+              />
+              <br />
+              <Container>
+                {data.classification == 'A1' ? justA1Text : regularText}
+              </Container>
+            </Segment>
+          </Grid.Column>
+          <Grid.Column width={4}>
+            <Segment>
+              <h1>Estado del grupo</h1>
+              <br />
+              <List divided>
+                <List.Item>
+                  <List.Header as="h2">Código</List.Header>
+                  <List.Description as="h3">{data.code}</List.Description>
+                </List.Item>
+
+                <br />
+                <List.Item>
+                  <List.Header as="h2">Clasifición actual</List.Header>
+                  <List.Description as="h3">
+                    {data.classification}
+                  </List.Description>
+                </List.Item>
+
+                <br />
+                <List.Item>
+                  <List.Header as="h2">Gran area</List.Header>
+                  <List.Description as="h3">
+                    {data.bigKnowledgeArea}
+                  </List.Description>
+                </List.Item>
+
+                <br />
+                <List.Item>
+                  <List.Header as="h2">Area</List.Header>
+                  <List.Description as="h3">
+                    {data.knowledgeArea}
+                  </List.Description>
+                </List.Item>
+
+                <br />
+                <List.Item>
+                  <List.Header as="h2">Institución</List.Header>
+                  <List.Description as="h3">
+                    {data.institution}
+                  </List.Description>
+                </List.Item>
+              </List>
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+
         <Grid.Row columns={2}>
+          <Grid.Column width={7}>
+            <Segment padded raised>
+              <h1
+                style={{ marginBottom: '2em' }}
+              >{`Diferencia de perfiles con respecto al ${
+                data.classification == 'A1' ? 'promedio' : 'grupo más cercano'
+              } de la categoria ${data.report.comparedClassification}`}</h1>
+              <ReportList reportData={data.report} />
+            </Segment>
+          </Grid.Column>
+
           <Grid.Column width={9}>
             <Grid.Row>
               <Segment padded raised>
-                <h2>Integrantes del grupo</h2>
+                <h1>Integrantes del grupo</h1>
                 <MembersBarChart membersData={data.membersProfile} />
               </Segment>
             </Grid.Row>
             <br />
             <Grid.Row>
               <Segment textAlign="center" raised>
-                <h3>Producción 2012 - 2018</h3>
+                <h1>Producción 2012 - 2018</h1>
                 <ProductsBarChart productsCount={data.productsCount} />
               </Segment>
             </Grid.Row>
-          </Grid.Column>
-
-          <Grid.Column width={7}>
-            <Segment padded raised>
-              <h2>Reporte</h2>
-              <Grid padded>
-                <h3>Estado del grupo</h3>
-                <Grid.Row textAlign="left" columns="equal">
-                  <Grid.Column>
-                    <List>
-                      <List.Item>
-                        <List.Header>Clasifición actual</List.Header>
-                        {data.classification}
-                      </List.Item>
-                      <List.Item>
-                        <List.Header>Gran area</List.Header>
-                        {data.bigKnowledgeArea}
-                      </List.Item>
-                    </List>
-                  </Grid.Column>
-
-                  <Grid.Column>
-                    <List>
-                      <List.Item>
-                        <List.Header>Area</List.Header>
-                        {data.knowledgeArea}
-                      </List.Item>
-                      <List.Item>
-                        <List.Header>Institución</List.Header>
-                        {data.institution}
-                      </List.Item>
-                    </List>
-                  </Grid.Column>
-                </Grid.Row>
-
-                <Divider />
-
-                <Grid.Row>
-                  <h3
-                  >{`Diferencia de perfiles con respecto al grupo más cercano de la categoria ${
-                    data.report.comparedClassification
-                  }`}</h3>
-                </Grid.Row>
-
-                <Grid.Row>
-                  <ReportList reportData={data.report} />
-                </Grid.Row>
-              </Grid>
-            </Segment>
-          </Grid.Column>
-        </Grid.Row>
-
-        <Grid.Row>
-          <Grid.Column>
-            <Segment raised>
-              <Image centered src={im} size="huge" />
-              <p>
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                blanditiis praesentium voluptatum deleniti atque corrupti quos
-                dolores et quas molestias excepturi sint occaecati cupiditate
-                non provident, similique sunt in culpa qui officia deserunt
-                mollitia animi, id est laborum et dolorum fuga. Et harum quidem
-                rerum facilis est et expedita distinctio. Nam libero tempore,
-                cum soluta nobis est eligendi optio cumque nihil impedit quo
-                minus id quod maxime placeat facere possimus, omnis voluptas
-                assumenda est, omnis dolor repellendus.
-              </p>
-            </Segment>
           </Grid.Column>
         </Grid.Row>
       </Grid>

@@ -1,6 +1,6 @@
 import Fuse from 'fuse.js';
 import React, { Component } from 'react';
-import { Search, Container, Label } from 'semantic-ui-react';
+import { Search, Container, Label, Header } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 
 const initialState = {
@@ -56,18 +56,26 @@ export default class GroupsSearchBox extends Component {
       return <Redirect to={`/grupviz/dashboard/${selection}`} />;
     }
     return (
-      <Container style={{ position: 'relative', top: '20%' }}>
-        <h1 style={{ fontSize: '3em' }}>
-          Buscar grupo por código o por nombre
-        </h1>
-        <Search
-          fluid
-          onResultSelect={this.handleResultSelect}
-          onSearchChange={this.handleSearchChange}
-          resultRenderer={GroupRowResult}
-          results={results}
-          value={value}
-        />
+      <Container style={{ position: 'relative' }}>
+        <Header style={{ fontSize: '2em' }}>
+          Clasificación Colciencias de grupos de investigación, desarrollo
+          tecnológico o innovación, convocatoria 781.
+        </Header>
+        <Container text style={{ marginTop: '20%' }}>
+          <Header>
+            <Header.Subheader>
+              Buscar grupo por código o nombre
+            </Header.Subheader>
+          </Header>
+          <Search
+            fluid
+            onResultSelect={this.handleResultSelect}
+            onSearchChange={this.handleSearchChange}
+            resultRenderer={GroupRowResult}
+            results={results}
+            value={value}
+          />
+        </Container>
       </Container>
     );
   }
