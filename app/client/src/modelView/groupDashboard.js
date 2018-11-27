@@ -1,5 +1,14 @@
 import React from 'react';
-import { Grid, Segment, List, Container, Header } from 'semantic-ui-react';
+import {
+  Grid,
+  Segment,
+  List,
+  Container,
+  Header,
+  Loader,
+  Modal,
+  Button
+} from 'semantic-ui-react';
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
 
@@ -7,6 +16,7 @@ import MembersBarChart from './membersBarChart';
 import ProductsBarChart from './productsBarChart';
 import ReportList from './reportList';
 import ParallelCoordinates from './parallelCoordinatesChart';
+import RequirementsModal from './requirementsModal';
 
 export default function GroupDashboard({ match }) {
   const groupDataQuery = gql`
@@ -44,9 +54,15 @@ export default function GroupDashboard({ match }) {
   return (
     <Query query={groupDataQuery} variables={{ groupCode: match.params.code }}>
       {({ loading, error, data }) => {
-        if (loading) return <h3>Cargando analisis ...</h3>;
+        if (loading)
+          return (
+            <Container style={{ height: '100vh', position: 'relative' }}>
+              <Loader size="massive" active>
+                Cargando análisis
+              </Loader>
+            </Container>
+          );
         if (error) return `Error!: ${error}`;
-
         return <Dashboard data={data.group} />;
       }}
     </Query>
@@ -140,6 +156,14 @@ function Dashboard(props) {
                   <List.Description as="h3">
                     {data.institution}
                   </List.Description>
+                </List.Item>
+
+                <br />
+                <List.Item>
+                  <RequirementsModal
+                    classification={data.classification}
+                    targetClassification={data.report.comparedClassification}
+                  />
                 </List.Item>
               </List>
             </Segment>
