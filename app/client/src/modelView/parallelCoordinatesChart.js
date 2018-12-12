@@ -45,24 +45,28 @@ const ParallelCoordinates = ({
         stroke="#f44336"
         activeDot={{ r: 9 }}
       />
-      <Line
-        type="monotoneX"
-        name="Valor grupo comparado"
-        dataKey="comparisonValue"
-        stroke="#2196f3"
-      />
+      {classification !== targetClassification && (
+        <Line
+          type="monotoneX"
+          name="Valor grupo comparado"
+          dataKey="comparisonValue"
+          stroke="#2196f3"
+        />
+      )}
       <Line
         type="monotoneX"
         name={`Promedio para ${classification}`}
         dataKey="meanValue"
         stroke="#ff9800"
       />
-      <Line
-        type="monotoneX"
-        name={`Promedio para ${targetClassification}`}
-        dataKey="comparisonMeanValue"
-        stroke="#4caf50"
-      />
+      {classification !== targetClassification && (
+        <Line
+          type="monotoneX"
+          name={`Promedio para ${targetClassification}`}
+          dataKey="comparisonMeanValue"
+          stroke="#4caf50"
+        />
+      )}
     </LineChart>
   );
 };
