@@ -7,9 +7,11 @@ import {
   Tooltip,
   Bar,
   Label,
-  ResponsiveContainer
+  ResponsiveContainer,
+  Cell
 } from 'recharts';
 import { Container, Header } from 'semantic-ui-react';
+import { interpolateRdPu } from 'd3-scale-chromatic';
 
 import { profilesMapping } from '../modelView/reportMapping';
 
@@ -59,7 +61,7 @@ function GlobalReportChart(props) {
   return (
     <Container style={{ height: '100vh' }}>
       <Header style={{ fontSize: '2.5em' }}>
-        Analisis global de los perfiles
+        Análisis global de los perfiles
       </Header>
       <div style={{ height: '50%' }}>
         <ResponsiveContainer ratio={2.4} width="100%">
@@ -97,7 +99,16 @@ function GlobalReportChart(props) {
               fill="url(#colorCount)"
               animationDuration={1500}
               animationEasing="ease-out"
-            />
+              barSize={20}
+            >
+              {data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={interpolateRdPu(entry.count / 38)}
+                  strokeWidth={4}
+                />
+              ))}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
